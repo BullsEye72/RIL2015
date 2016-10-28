@@ -23,3 +23,4 @@ public/uploads
 public/assets/**
 .byebug_history
 /*.iml
+/railways.cache
