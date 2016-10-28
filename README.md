@@ -1,39 +1,20 @@
-Rails Sandbox
-=============
+Madera
+======
 
-Easy sandbox to start projects, administration and site architecture provided
+## Application de réalisation de devis pour des maisons modulaire en bois.
+
+Principales Gems utilisés :
 
 - rollincode rails admin theme
 - nested sortable
 - ancestry
-- image and attachment uploader
-- admin + user multi account
-- page handle & seo optimization
-- froala v2 + file and images manager
-- block system on dashboard
-- ... many others
+- carrierwave
+- devise (pour les modèles user & admin)
+- froala v2 (WYSIWYG)+ file and images manager
 
-page link example
+
+Exemple de lien avec une page :
 
 ```erb
 <%= page_path(@page.slug) %>
 ```
-
-Block on dashboard
-integration example in model:
-```ruby
-included do
-  rails_admin do
-    navigation_label 'Page'
-    navigation_icon 'fa fa-book'
-    label_plural 'Pages'
-```
-navigation_icon and label_plural are optional
-
-![DASHBOARD](http://i.imgur.com/iWnBkEu.png, "block system")
-
-![DASHBOARD](http://i.imgur.com/GJGfXVO.png, "view")
-
-### TODO ###
-
-- [ ] Clean up
