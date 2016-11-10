@@ -24,6 +24,7 @@
 #
 
 class User < ActiveRecord::Base
+  rolify
   include RailsAdmin::UserAdmin
 
   # Include default devise modules. Others available are:

@@ -41,6 +41,8 @@ gem 'ancestry'
 gem 'rails_admin_nestable', '~> 0.3.2'
 gem 'rails_admin_rollincode', '~> 1.1'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git', branch: 'master'
+gem 'cancancan', '~> 1.10'
+gem 'rolify'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
