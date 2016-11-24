@@ -43,6 +43,7 @@ gem 'rails_admin_rollincode', '~> 1.1'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git', branch: 'master'
 gem 'cancancan', '~> 1.10'
 gem 'rolify'
+gem 'faker'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
