@@ -1,9 +1,51 @@
+<!-- Modal -->
+<div class="modal fade" id="userSelectionModal" tabindex="-1" role="dialog" aria-labelledby="userSelectionModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Choix d'un utilisateur</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <th><input type="text" id="customer_firstname" placeholder="Prénom"></th>
+            <th><input type="text" id="customer_lastname" placeholder="Nom"></th>
+            <th><input type="number" id="customer_phone" placeholder="Téléphone"></th>
+          </thead>
+          <tbody>
+            <% 50.times do %>
+              <% first_name = Faker::Name.first_name %>
+              <% last_name = Faker::Name.last_name %>
+              <% phone = "0#{Faker::Number.number(9)}" %>
+              <tr
+                data-firstname="<%= first_name %>"
+                data-lastname="<%= last_name %>"
+                data-phone="<%= phone %>"
+              >
+                <td class="customer_firstname"><%= first_name %></td>
+                <td class="customer_lastname"><%= last_name%></td>
+                <td class="customer_phone"><%= phone %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>Project - Création</h1>
 <div class="row">
   <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-body">
-        <a href="#">Créer devis</a>
+        <div class="panel-heading">
+          <a href="#" class="btn btn-primary">Créer devis</a>
+        </div>
         <p>Devis du projet :</p>
         <ul class="list-group">
           <li class="list-group-item">Aucun devis</li>
@@ -19,19 +61,24 @@
           <div class="form-group">
             <label for="customer" class="col-sm-3 control-label">Client</label>
             <div class="col-sm-9">
-              <input class="form-control" type="text" id="customer" placeholder="Nom du client">
+              <div class="input-group">
+                <input type="text" id="customer" placeholder="Nom du client" disabled>
+                <div class="input-group-btn">
+                  <button type="button" id="chooseCustomerButton" data-target="#userSelectionModal">Choisir le client</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group">
             <label for="project_number" class="col-sm-3 control-label">Numéro du projet</label>
             <div class="col-sm-9">
-              <p class="form-control-static" id="project_number">5434354</p>
+              <p class="form-control-static" id="project_number"><%= Faker::Number.number(5) %></p>
             </div>
           </div>
           <div class="form-group">
             <label for="creation_date" class="col-sm-3 control-label">Date de création</label>
             <div class="col-sm-9">
-              <p class="form-control-static" id="creation_date">11/05/2016</p>
+              <p class="form-control-static" id="creation_date"><%= Date.today.strftime('%d-%m-%Y') %></p>
             </div>
           </div>
           <div class="form-group">
@@ -41,13 +88,54 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="project_name" class="col-sm-3 control-label">Client</label>
+            <label for="project_name" class="col-sm-3 control-label">Nom du projet</label>
             <div class="col-sm-9">
-              <input class="form-control" type="text" id="project_name" placeholder="Nom du projet">
+              <input type="text" id="project_name" placeholder="Nom du projet">
             </div>
           </div>
         </div>
+        <button type="submit" class="pull-right">Créer le projet</button>
+
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+
+  var $modalElt = $('#userSelectionModal');
+
+  $('#chooseCustomerButton').on('click', function() {
+    $modalElt.modal();
+  });
+
+  $('#userSelectionModal tbody tr').on('click', function() {
+    $('#customer').val($(this).data('firstname')+' '+$(this).data('lastname'));
+    $modalElt.modal('hide');
+  });
+
+  $modalElt.find('thead input').on('input', applyFilter);
+
+  function applyFilter() {
+    var firstNameFilterContent = clean($modalElt.find('#customer_firstname').val());
+    var lastNameFilterContent = clean($modalElt.find('#customer_lastname').val());
+    var phoneFilterContent = clean($modalElt.find('#customer_phone').val());
+    var $tr = $modalElt.find('tbody tr');
+
+    $tr.show();
+    $tr.each(function(index, trElt) {
+      var currentElt = $(trElt);
+      if (
+          clean(currentElt.find('.customer_firstname').text()).indexOf(firstNameFilterContent) == -1 ||
+          clean(currentElt.find('.customer_lastname').text()).indexOf(lastNameFilterContent) == -1   ||
+          clean(currentElt.find('.customer_phone').text()).indexOf(phoneFilterContent) == -1
+
+      ) currentElt.hide();
+    });
+  }
+
+  function clean(string) {
+    return string.split(' ').join().toLowerCase()
+  }
+
+</script>

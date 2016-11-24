@@ -22,10 +22,11 @@
 @import 'font-awesome';
 @import 'colors';
 @import 'mixins';
+@import 'form';
 
 body {
   height: 100vh;
-  color: black;
+  color: $black;
   background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
 }
 
