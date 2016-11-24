@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   # HOME
   root to: 'home#index'
+  
+  # COMMERCIAL
+  resource :commercials
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'
