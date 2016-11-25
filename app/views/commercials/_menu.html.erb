@@ -3,24 +3,26 @@
     
     <div class="row">
       <div class="col-md-6">
-      <button class="btn btn-primary">Créer projet</button>
+      <%= link_to 'Créer projet', new_projects_path, class: 'btn btn-primary' %>
       </div>
       <div class="row"><div class="col-md-6">
-        <button class="btn btn-primary">Créer client</button>
+        <%= link_to 'Créer client', '#', class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
   </div>
   <div class="panel-body">
-  <div class="panel-body">
     <div class="panel panel-default">
       <div class="panel-heading">Devis récents :</div>
-        <table class="table">
-          <tr>
-            <th>Date</th>
-            <th>Num. projet</th>
-            <th>Nom client</th>
-          </tr>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Num. projet</th>
+              <th>Nom client</th>
+            </tr>
+          </thead>
+          <tbody>
           <% 7.times do |i| %>
             <tr>
                <td>01/02/2017</td>
@@ -28,8 +30,8 @@
                <td>Fox Mulder</td>
              </tr>
           <% end %>
+          </tbody>
         </table>
       </div>
-    </div>
   </div>
 </div>

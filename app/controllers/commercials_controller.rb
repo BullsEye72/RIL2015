@@ -1,4 +1,4 @@
 class CommercialsController < ApplicationController
-  def show
+  def index
   end
 end

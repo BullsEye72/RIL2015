@@ -1,29 +1,30 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    
-    <div class="row"><div class="col-md-9">
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="elementRecherche">Recherche</label>
-        <input type="text" class="form-control" id="elementRecherche" placeholder="Nom de client / Num. du projet / ...">
+
+    <div class="row">
+      <div class="col-md-9">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="elementRecherche">Recherche</label>
+            <input type="text" class="form-control" id="elementRecherche" placeholder="Nom de client / Num. du projet / ...">
+          </div>
+          <button type="submit" class="btn btn-primary">Rechercher</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Rechercher</button>
-    </form>
+      <div class="col-md-3">
+        <select id="triResultat" class="form-control">
+          <option selected disabled>Tri</option>
+          <option>Nom de client</option>
+          <option>Numéro de projet</option>
+          <option>Date de projet</option>
+        </select>
+      </div>
     </div>
-    <div class="col-md-3">
-    <select id="triResultat" class="form-control">
-      <option selected disabled>Tri</option>
-      <option>Nom de client</option>
-      <option>Numéro de projet</option>
-      <option>Date de projet</option>
-    </select>
-    </div>
-  </div>
   </div>
   <div class="panel-body">
     <div class="panel panel-default">
       <div class="panel-heading">Résultats de la recherche :</div>
-      
+
       <table class="table">
         <tr>
           <th>Date</th>
@@ -31,15 +32,15 @@
           <th>Nom client</th>
         </tr>
         <% 7.times do |i| %>
-          <tr>
-             <td>01/02/2017</td>
-             <td><%= i*3 %></td>
-             <td>Fox Mulder</td>
-           </tr>
+            <tr>
+              <td>01/02/2017</td>
+              <td><%= i*3 %></td>
+              <td>Fox Mulder</td>
+            </tr>
         <% end %>
       </table>
     </div>
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" class="text-center">
       <ul class="pagination">
         <li>
           <a href="#" aria-label="Previous">
@@ -47,7 +48,7 @@
           </a>
         </li>
         <% (1..7).each do |i| %>
-          <li><a href="#"><%= i %></a></li>
+            <li><a href="#"><%= i %></a></li>
         <% end %>
         <li>
           <a href="#" aria-label="Next">

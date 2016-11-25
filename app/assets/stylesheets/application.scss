@@ -27,9 +27,29 @@
 body {
   height: 100vh;
   color: $black;
-  background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
+  background: linear-gradient( -20deg, white, $khaki );
 }
+
 
 .navbar-brand {
   padding-top: 12px;
+}
+
+
+header {
+  h1 {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: gray;
+    margin: 0 auto;
+    @extend .pull-right !optional;
+    strong {
+      font-size: 1.7em;
+      color: $black;
+    }
+  }
+  .breadcrumb {
+    @extend .pull-left !optional;
+    margin: 0 auto;
+  }
 }

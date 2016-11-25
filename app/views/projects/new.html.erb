@@ -1,3 +1,7 @@
+<% provide(:title, 'Projet') %>
+<% provide(:subtitle, 'Création') %>
+
+
 <!-- Modal -->
 <div class="modal fade" id="userSelectionModal" tabindex="-1" role="dialog" aria-labelledby="userSelectionModal">
   <div class="modal-dialog" role="document">
@@ -38,14 +42,13 @@
   </div>
 </div>
 
-<h1>Project - Création</h1>
 <div class="row">
   <div class="col-sm-4">
     <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= link_to 'Créer devis', '#', class: 'btn btn-primary' %>
+      </div>
       <div class="panel-body">
-        <div class="panel-heading">
-          <a href="#" class="btn btn-primary">Créer devis</a>
-        </div>
         <p>Devis du projet :</p>
         <ul class="list-group">
           <li class="list-group-item">Aucun devis</li>

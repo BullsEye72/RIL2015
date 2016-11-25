@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
 
-  resource :projects
-
   # USERS & ADMINISTRATION
   devise_for :admins
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # HOME
-  root to: 'home#index'
+  root to: 'commercials#index'
   
-  # COMMERCIAL
+  # RESSOURCE
   resource :commercials
+  resource :projects
+
+
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'
