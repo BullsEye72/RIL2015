@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'clients/new'
+  get 'customers/new'
 
-  get 'clients/create'
+  get 'customers/create'
 
-  get 'clients/update'
+  get 'customers/update'
 
-  get 'clients/edit'
+  get 'customers/edit'
 
-  get 'clients/destroy'
+  get 'customers/destroy'
 
-  get 'clients/index'
+  get 'customers/index'
 
-  get 'clients/show'
+  get 'customers/show'
 
   # USERS & ADMINISTRATION
   devise_for :admins
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # RESSOURCE
   resource :commercials
   resource :projects
-
+  resource :clients
 
 
   # PAGE
