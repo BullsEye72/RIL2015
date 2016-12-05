@@ -1,2 +1,47 @@
-<h1>Customers#new</h1>
-<p>Find me in app/views/customers/new.html.erb</p>
+<% provide(:title, 'Client') %>
+<% provide(:subtitle, 'Création') %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- Formulaire de création d'un client -->
+          <form class="form-horizontal">
+              <!-- Première colonne -->
+              <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                      <label for="newCustomersFirstName" class="col-xs-4 col-md-3 control-label">Prénom :</label>
+                      <div class="col-xs-8 col-md-9">
+                        <input type="text" class="form-control" id="newCustomersFirstName" name="newCustomersFirstName" placeholder="Prénom" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="newCustomersLastName" class="col-xs-4 col-md-3 control-label">Nom :</label>
+                      <div class="col-xs-8 col-md-9">
+                        <input type="text" class="form-control" id="newCustomersLastName" name="newCustomersLastName" placeholder="Nom" required>
+                      </div>
+                  </div>
+              </div>
+              <!-- /.Première colonne -->
+              <!-- Deuxième colonne -->
+              <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                      <label for="newCustomersMail" class="col-xs-4 col-md-3 control-label">E-Mail :</label>
+                      <div class="col-xs-8 col-md-9">
+                        <input type="text" class="form-control" id="newCustomersMail" name="newCustomersMail" placeholder="E-Mail" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="newCustomersPhone" class="col-xs-4 col-md-3 control-label">Téléphone :</label>
+                      <div class="col-xs-8 col-md-9">
+                        <input type="text" class="form-control" id="newCustomersPhone" name="newCustomersPhone" placeholder="Téléphone" required>
+                      </div>
+                  </div>
+                  <button class="btn btn-success btn-form-valid" type="submit" name="newCustomersSubmit">Valider</button>
+              </div>
+              <!-- /.Deuxième colonne -->
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
