@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # RESSOURCE
   resource :commercials
   resource :projects
-
+  resource :customers
 
 
   # PAGE
