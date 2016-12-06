@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # HOME
-  root to: 'commercials#index'
+  root to: 'home#index'
   
-  # RESSOURCE
-  resource :commercials
-  resource :projects
+  # RESSOURCES
+  resources :commercials
+  resources :projects
 
 
 
