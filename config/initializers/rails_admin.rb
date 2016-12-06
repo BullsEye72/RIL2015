@@ -36,5 +36,5 @@ RailsAdmin.config do |config|
     nestable
   end
 
-  config.main_app_name = ['APP-TITLE', '']
+  config.main_app_name = ['MADERA', '']
 end
