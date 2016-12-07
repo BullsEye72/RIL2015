@@ -240,3 +240,5 @@ fr:
       last_word_connector: " et "
       two_words_connector: " et "
       words_connector: ", "
+  unauthorized:
+    default: "Vous n'avez pas les autorisations nécessaires."
