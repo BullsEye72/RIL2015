@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207210958) do
+ActiveRecord::Schema.define(version: 20161209122637) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20161207210958) do
   end
 
   add_index "contents", ["code"], name: "index_contents_on_code", unique: true
+
+  create_table "create_projects", force: :cascade do |t|
+    t.datetime "project_date"
+    t.string   "description"
+    t.integer  "customer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "create_projects", ["customer_id"], name: "index_create_projects_on_customer_id"
 
   create_table "customers", force: :cascade do |t|
     t.string   "firstname"
@@ -84,6 +94,26 @@ ActiveRecord::Schema.define(version: 20161207210958) do
   end
 
   add_index "parameters", ["code"], name: "index_parameters_on_code", unique: true
+
+  create_table "projects", force: :cascade do |t|
+    t.datetime "project_date"
+    t.string   "description"
+    t.integer  "customer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "projects", ["customer_id"], name: "index_projects_on_customer_id"
+
+  create_table "quotes", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
+  add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

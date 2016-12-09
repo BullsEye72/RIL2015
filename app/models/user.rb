@@ -27,6 +27,9 @@
 #
 
 class User < ActiveRecord::Base
+
+  has_many :quotes
+
   rolify
   include RailsAdmin::UserAdmin
 
