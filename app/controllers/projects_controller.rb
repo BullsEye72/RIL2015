@@ -5,18 +5,22 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-
   end
 
   # POST /projects/new
   def create
     @project = Project.new(project_params)
     if @project.save
-      redirect_to new_project_path, notice: 'Le projet à bien été créé.'
+      redirect_to commercials_path, notice: 'Le projet à bien été créé.'
       # redirect_to @project, notice: 'Le projet à bien été créé.'
     else
       render :new
     end
+  end
+
+  # GET /projects/
+  def index
+    redirect_to commercials_path if current_user.has_role? :commercial
   end
 
   private
