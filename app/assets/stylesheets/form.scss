@@ -5,6 +5,10 @@ input[type="number"],
 input[type="email"] {
   @extend .form-control !optional;
 }
+input[type="submit"] {
+  @extend .btn !optional;
+  @extend .btn-primary !optional;
+}
 
 button {
   @extend .btn !optional;
