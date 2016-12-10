@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20161209122637) do
   add_index "contents", ["code"], name: "index_contents_on_code", unique: true
 
   create_table "create_projects", force: :cascade do |t|
-    t.datetime "project_date"
     t.string   "description"
     t.integer  "customer_id"
     t.datetime "created_at",   null: false

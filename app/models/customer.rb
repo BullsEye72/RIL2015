@@ -14,5 +14,7 @@
 class Customer < ActiveRecord::Base
 
   has_many :projects
+
+  validates_presence_of :firstname, :lastname, :phone_number, :address
   
 end

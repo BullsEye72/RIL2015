@@ -28,6 +28,6 @@ commercial.save!
       lastname:     Faker::Name.last_name,
       address:      "#{Faker::Address.street_address},
                      #{Faker::Address.postcode} #{Faker::Address.city}",
-      phone_number: Faker::Number.number(5)
+      phone_number: "0#{Faker::Number.number(9)}"
   )
 end

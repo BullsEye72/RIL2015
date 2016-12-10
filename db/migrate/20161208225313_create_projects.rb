@@ -1,7 +1,6 @@
 class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
-      t.datetime :project_date
       t.string :description
       t.references :customer, index: true, foreign_key: true
 

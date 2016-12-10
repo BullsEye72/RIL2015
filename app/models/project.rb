@@ -19,4 +19,9 @@ class Project < ActiveRecord::Base
   belongs_to :customer
   has_many :quotes
 
+  validates_presence_of :customer, :description
+
+
+  accepts_nested_attributes_for :customer
+
 end

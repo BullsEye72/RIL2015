@@ -18,18 +18,15 @@
             <th><input type="number" id="customer_phone" placeholder="Téléphone"></th>
           </thead>
           <tbody>
-            <% 50.times do %>
-              <% first_name = Faker::Name.first_name %>
-              <% last_name = Faker::Name.last_name %>
-              <% phone = "0#{Faker::Number.number(9)}" %>
+            <% @customers.each do |c| %>
               <tr
-                data-firstname="<%= first_name %>"
-                data-lastname="<%= last_name %>"
-                data-phone="<%= phone %>"
+                data-firstname="<%= c.firstname %>"
+                data-lastname="<%= c.lastname %>"
+                data-customer-id="<%= c.id %>"
               >
-                <td class="customer_firstname"><%= first_name %></td>
-                <td class="customer_lastname"><%= last_name%></td>
-                <td class="customer_phone"><%= phone %></td>
+                <td class="customer_firstname"><%= c.firstname %></td>
+                <td class="customer_lastname"><%= c.lastname%></td>
+                <td class="customer_phone"><%= c.phone_number %></td>
               </tr>
             <% end %>
           </tbody>
@@ -46,7 +43,7 @@
   <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <%= link_to 'Créer devis', '#', class: 'btn btn-primary' %>
+        <%= link_to 'Créer devis', '#', class: 'btn btn-primary disabled' %>
       </div>
       <div class="panel-body">
         <p>Devis du projet :</p>
@@ -60,44 +57,52 @@
   <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="form-horizontal">
-          <div class="form-group">
-            <label for="customer" class="col-sm-3 control-label">Client</label>
-            <div class="col-sm-9">
-              <div class="input-group">
-                <input type="text" id="customer" placeholder="Nom du client" disabled>
-                <div class="input-group-btn">
-                  <button type="button" id="chooseCustomerButton" data-target="#userSelectionModal">Choisir le client</button>
+
+        <%= simple_form_for(@project, wrapper: :horizontal_form) do |p| %>
+
+          <%= p.error_notification %>
+
+          <div class="form-horizontal">
+
+            <div class="form-group">
+              <label for="customer" class="col-sm-3 control-label">Client *</label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <input type="text" id="customer" placeholder="Nom du client" disabled required="required">
+                  <div class="input-group-btn">
+                    <button type="button" id="chooseCustomerButton" data-target="#userSelectionModal">Choisir le client</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="project_number" class="col-sm-3 control-label">Numéro du projet</label>
-            <div class="col-sm-9">
-              <p class="form-control-static" id="project_number"><%= Faker::Number.number(5) %></p>
+
+            <div class="form-group">
+              <label for="project_number" class="col-sm-3 control-label">Numéro du projet</label>
+              <div class="col-sm-9">
+                <p class="form-control-static" id="project_number">-</p>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="creation_date" class="col-sm-3 control-label">Date de création</label>
-            <div class="col-sm-9">
-              <p class="form-control-static" id="creation_date"><%= Date.today.strftime('%d-%m-%Y') %></p>
+
+            <div class="form-group">
+              <label for="creation_date" class="col-sm-3 control-label">Date de création</label>
+              <div class="col-sm-9">
+                <p class="form-control-static" id="creation_date"><%= Date.today.strftime('%d-%m-%Y') %></p>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="modification_date" class="col-sm-3 control-label">Date de modification</label>
-            <div class="col-sm-9">
-              <p class="form-control-static" id="modification_date">-</p>
+
+            <div class="form-group">
+              <label for="modification_date" class="col-sm-3 control-label">Date de modification</label>
+              <div class="col-sm-9">
+                <p class="form-control-static" id="modification_date">-</p>
+              </div>
             </div>
+
+            <%= p.input :customer_id, as: :hidden %>
+            <%= p.input :description %>
+
           </div>
-          <div class="form-group">
-            <label for="project_name" class="col-sm-3 control-label">Nom du projet</label>
-            <div class="col-sm-9">
-              <input type="text" id="project_name" placeholder="Nom du projet">
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="pull-right">Créer le projet</button>
+          <%= p.submit 'Créer le projet', class: 'pull-right' %>
+        <% end %>
 
       </div>
     </div>
@@ -113,6 +118,7 @@
   });
 
   $('#userSelectionModal tbody tr').on('click', function() {
+    $('#project_customer_id').val($(this).data('customer-id'));
     $('#customer').val($(this).data('firstname')+' '+$(this).data('lastname'));
     $modalElt.modal('hide');
   });
