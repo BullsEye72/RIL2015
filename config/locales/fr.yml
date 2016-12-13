@@ -242,3 +242,10 @@ fr:
       words_connector: ", "
   unauthorized:
     default: "Vous n'avez pas les autorisations nécessaires."
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
+      truncate: "&hellip;"

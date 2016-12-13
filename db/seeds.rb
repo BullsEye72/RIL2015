@@ -21,8 +21,9 @@ commercial = User.new(
 commercial.add_role :commercial
 commercial.save!
 
-# Customers
-20.times do
+
+2000.times do
+  # Customers
   Customer.create!(
       firstname:    Faker::Name.first_name,
       lastname:     Faker::Name.last_name,
@@ -30,4 +31,11 @@ commercial.save!
                      #{Faker::Address.postcode} #{Faker::Address.city}",
       phone_number: "0#{Faker::Number.number(9)}"
   )
+  
+  # Projects
+  Project.create!(
+      description:    'Projet test',
+      customer:     Customer.last
+  )
 end
+
