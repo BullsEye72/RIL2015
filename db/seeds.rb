@@ -22,7 +22,7 @@ commercial.add_role :commercial
 commercial.save!
 
 
-2000.times do
+200.times do
   # Customers
   Customer.create!(
       firstname:    Faker::Name.first_name,

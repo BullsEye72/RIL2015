@@ -42,8 +42,8 @@
 
         <% @projects.each do |p| %>
             <tr>
-              <td><%= p.created_at %></td>
-              <td><%= p.id %></td>
+              <td><%= format_date(p.created_at) %></td>
+              <td><%= link_to p.id, project_path(p.id) %></td>
               <td><%= p.customer.fullname %></td>
             </tr>
         <% end %>

@@ -5,7 +5,6 @@ class CommercialsController < ApplicationController
     @param_page = {name: "page", value: params[:page]}
     @param_sort = {name: "sort", value: params[:sort]}
     
-    puts 'SORT => ' + params[:sort]
     case params[:sort]
     when '1'
       @projects = Project.joins(:customer).order('customers.lastname DESC').page @param_page[:value]
@@ -16,9 +15,9 @@ class CommercialsController < ApplicationController
     when '4'
       @projects = Project.order('id DESC').page @param_page[:value]
     when '5'
-      @projects = Project.order('created_at DESC').page @param_page[:value]
+      @projects = Project.order('updated_at DESC').page @param_page[:value]
     when '6'
-      @projects = Project.order('created_at ASC').page @param_page[:value]
+      @projects = Project.order('updated_at ASC').page @param_page[:value]
     else
       @projects = Project.joins(:customer).order('customers.lastname DESC').page @param_page[:value]
     end
