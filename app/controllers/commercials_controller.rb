@@ -1,7 +1,9 @@
 class CommercialsController < ApplicationController
   authorize_resource :class => false
-
+  add_breadcrumb "Commercial", :commercials_path
+  
   def index
+    
     @param_page = {name: "page", value: params[:page]}
     @param_sort = {name: "sort", value: params[:sort]}
     
