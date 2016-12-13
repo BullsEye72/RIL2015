@@ -9,9 +9,12 @@
 #  phone_number :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  deleted_at   :datetime
 #
 
 class Customer < ActiveRecord::Base
+
+  default_scope { where(:deleted_at => nil) }
 
   has_many :projects
 

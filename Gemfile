@@ -44,6 +44,7 @@ gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git', branch: 'ma
 gem 'cancancan', '~> 1.10'
 gem 'rolify'
 gem 'faker'
+gem 'permanent_records', '~> 4.2', '>= 4.2.7'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

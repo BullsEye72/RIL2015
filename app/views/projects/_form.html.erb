@@ -1,0 +1,122 @@
+<h1><%= action %></h1>
+
+<!-- Modal -->
+<% if action == :new || action == :edit %>
+  <div class="modal fade" id="userSelectionModal" tabindex="-1" role="dialog" aria-labelledby="userSelectionModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Choix d'un utilisateur</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+            <th><input type="text" id="customer_firstname" placeholder="Prénom"></th>
+            <th><input type="text" id="customer_lastname" placeholder="Nom"></th>
+            <th><input type="number" id="customer_phone" placeholder="Téléphone"></th>
+            </thead>
+            <tbody>
+            <% @customers.each do |c| %>
+                <tr
+                data-firstname="<%= c.firstname %>"
+                data-lastname="<%= c.lastname %>"
+                data-customer-id="<%= c.id %>"
+                >
+                  <td class="customer_firstname"><%= c.firstname %></td>
+                  <td class="customer_lastname"><%= c.lastname%></td>
+                  <td class="customer_phone"><%= c.phone_number %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= simple_form_for(@project, wrapper: :horizontal_form) do |p| %>
+    <%= p.error_notification %>
+    <div class="form-horizontal">
+      <% if action == :new || action == :edit %>
+        <div class="form-group">
+          <label for="customer" class="col-sm-3 control-label">Client *</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input
+                type="text"
+                id="customer"
+                placeholder="Nom du client"
+                disabled value="<%= @project.customer if @project.customer %>"
+                required="required">
+              <div class="input-group-btn">
+                <button type="button" id="chooseCustomerButton" data-target="#userSelectionModal">Choisir le client</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= p.input :customer, label: 'Client', input_html: { disabled: '' } %>
+      <% end %>
+      <%= p.input :customer_id, as: :hidden %>
+      <% if action != :new %>
+        <%= p.input :id, label: 'Numéro de projet', input_html: { disabled: '' } %>
+        <%= p.input :created_at,
+                    as: :string,
+                    input_html: { disabled: '', value: format_date(p.object.created_at)} %>
+        <%= p.input :updated_at,
+                    as: :string,
+                    input_html: { disabled: '', value: format_date(p.object.created_at)} %>
+      <% end %>
+      <%= p.input :description, input_html: { disabled: action == :show } %>
+    </div>
+    <% if action == :new %>
+       <%= p.submit 'Créer le projet', class: 'pull-right' %>
+    <% end %>
+    <% if action == :edit %>
+      <%= p.submit 'Mettre à jour le projet', class: 'pull-right' %>
+    <% end %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+
+  var $modalElt = $('#userSelectionModal');
+
+  $('#chooseCustomerButton').on('click', function() {
+    $modalElt.modal();
+  });
+
+  $('#userSelectionModal tbody tr').on('click', function() {
+    $('#project_customer_id').val($(this).data('customer-id'));
+    $('#customer').val($(this).data('firstname')+' '+$(this).data('lastname'));
+    $modalElt.modal('hide');
+  });
+
+  $modalElt.find('thead input').on('input', applyFilter);
+
+  function applyFilter() {
+    var firstNameFilterContent = clean($modalElt.find('#customer_firstname').val());
+    var lastNameFilterContent = clean($modalElt.find('#customer_lastname').val());
+    var phoneFilterContent = clean($modalElt.find('#customer_phone').val());
+    var $tr = $modalElt.find('tbody tr');
+
+    $tr.show();
+    $tr.each(function(index, trElt) {
+      var currentElt = $(trElt);
+      if (
+          clean(currentElt.find('.customer_firstname').text()).indexOf(firstNameFilterContent) == -1 ||
+          clean(currentElt.find('.customer_lastname').text()).indexOf(lastNameFilterContent) == -1   ||
+          clean(currentElt.find('.customer_phone').text()).indexOf(phoneFilterContent) == -1
+
+      ) currentElt.hide();
+    });
+  }
+
+  function clean(string) {
+    return string.split(' ').join().toLowerCase()
+  }
+</script>
