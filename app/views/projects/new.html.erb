@@ -1,44 +1,6 @@
 <% provide(:title, 'Projet') %>
 <% provide(:subtitle, 'Création') %>
 
-
-<!-- Modal -->
-<div class="modal fade" id="userSelectionModal" tabindex="-1" role="dialog" aria-labelledby="userSelectionModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Choix d'un utilisateur</h4>
-      </div>
-      <div class="modal-body">
-        <table class="table">
-          <thead>
-            <th><input type="text" id="customer_firstname" placeholder="Prénom"></th>
-            <th><input type="text" id="customer_lastname" placeholder="Nom"></th>
-            <th><input type="number" id="customer_phone" placeholder="Téléphone"></th>
-          </thead>
-          <tbody>
-            <% @customers.each do |c| %>
-              <tr
-                data-firstname="<%= c.firstname %>"
-                data-lastname="<%= c.lastname %>"
-                data-customer-id="<%= c.id %>"
-              >
-                <td class="customer_firstname"><%= c.firstname %></td>
-                <td class="customer_lastname"><%= c.lastname%></td>
-                <td class="customer_phone"><%= c.phone_number %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="row">
   <div class="col-sm-4">
     <div class="panel panel-default">
@@ -57,94 +19,8 @@
   <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-body">
-
-        <%= simple_form_for(@project, wrapper: :horizontal_form) do |p| %>
-
-          <%= p.error_notification %>
-
-          <div class="form-horizontal">
-
-            <div class="form-group">
-              <label for="customer" class="col-sm-3 control-label">Client *</label>
-              <div class="col-sm-9">
-                <div class="input-group">
-                  <input type="text" id="customer" placeholder="Nom du client" disabled required="required">
-                  <div class="input-group-btn">
-                    <button type="button" id="chooseCustomerButton" data-target="#userSelectionModal">Choisir le client</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="project_number" class="col-sm-3 control-label">Numéro du projet</label>
-              <div class="col-sm-9">
-                <p class="form-control-static" id="project_number">-</p>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="creation_date" class="col-sm-3 control-label">Date de création</label>
-              <div class="col-sm-9">
-                <p class="form-control-static" id="creation_date"><%= Date.today.strftime('%d-%m-%Y') %></p>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="modification_date" class="col-sm-3 control-label">Date de modification</label>
-              <div class="col-sm-9">
-                <p class="form-control-static" id="modification_date">-</p>
-              </div>
-            </div>
-
-            <%= p.input :customer_id, as: :hidden %>
-            <%= p.input :description %>
-
-          </div>
-          <%= p.submit 'Créer le projet', class: 'pull-right' %>
-        <% end %>
-
+        <%= render 'form', action: :new %>
       </div>
     </div>
   </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-
-  var $modalElt = $('#userSelectionModal');
-
-  $('#chooseCustomerButton').on('click', function() {
-    $modalElt.modal();
-  });
-
-  $('#userSelectionModal tbody tr').on('click', function() {
-    $('#project_customer_id').val($(this).data('customer-id'));
-    $('#customer').val($(this).data('firstname')+' '+$(this).data('lastname'));
-    $modalElt.modal('hide');
-  });
-
-  $modalElt.find('thead input').on('input', applyFilter);
-
-  function applyFilter() {
-    var firstNameFilterContent = clean($modalElt.find('#customer_firstname').val());
-    var lastNameFilterContent = clean($modalElt.find('#customer_lastname').val());
-    var phoneFilterContent = clean($modalElt.find('#customer_phone').val());
-    var $tr = $modalElt.find('tbody tr');
-
-    $tr.show();
-    $tr.each(function(index, trElt) {
-      var currentElt = $(trElt);
-      if (
-          clean(currentElt.find('.customer_firstname').text()).indexOf(firstNameFilterContent) == -1 ||
-          clean(currentElt.find('.customer_lastname').text()).indexOf(lastNameFilterContent) == -1   ||
-          clean(currentElt.find('.customer_phone').text()).indexOf(phoneFilterContent) == -1
-
-      ) currentElt.hide();
-    });
-  }
-
-  function clean(string) {
-    return string.split(' ').join().toLowerCase()
-  }
-
-</script>
