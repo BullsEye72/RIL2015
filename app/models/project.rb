@@ -8,6 +8,7 @@
 #  customer_id  :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  deleted_at   :datetime
 #
 # Indexes
 #
@@ -15,6 +16,8 @@
 #
 
 class Project < ActiveRecord::Base
+
+  default_scope { where(:deleted_at => nil) }
 
   belongs_to :customer
   has_many :quotes

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209122637) do
+ActiveRecord::Schema.define(version: 20161213142706) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20161209122637) do
   create_table "create_projects", force: :cascade do |t|
     t.string   "description"
     t.integer  "customer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "create_projects", ["customer_id"], name: "index_create_projects_on_customer_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20161209122637) do
     t.string   "phone_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "deleted_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20161209122637) do
     t.integer  "customer_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "deleted_at"
   end
 
   add_index "projects", ["customer_id"], name: "index_projects_on_customer_id"
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 20161209122637) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
@@ -152,6 +155,7 @@ ActiveRecord::Schema.define(version: 20161209122637) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "phone_number"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

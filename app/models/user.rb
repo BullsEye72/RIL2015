@@ -19,6 +19,7 @@
 #  firstname              :string
 #  lastname               :string
 #  phone_number           :string
+#  deleted_at             :datetime
 #
 # Indexes
 #
@@ -27,6 +28,8 @@
 #
 
 class User < ActiveRecord::Base
+
+  default_scope { where(:deleted_at => nil) }
 
   has_many :quotes
 
