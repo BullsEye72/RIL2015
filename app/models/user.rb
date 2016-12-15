@@ -41,4 +41,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def display_fullname
+    return "#{lastname} #{firstname.first}" if firstname && lastname
+    email
+  end
+
 end
