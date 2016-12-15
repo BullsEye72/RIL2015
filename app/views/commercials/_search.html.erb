@@ -15,14 +15,17 @@
       <div class="col-md-3">
         
         <%= select("triResultat", "select_id",
-        ["Tri",
-        ["Nom de client A-Z","1"],
-        ["Nom de client Z-A","2"],
-        ["Numéro de projet 0-N","3"],
-        ["Numéro de projet N-0","4"],
-        ["Plus récent","5"],
-        ["Plus ancient","6"]],
-        {selected: "Tri", disabled: "Tri"}) %>
+          [
+            'Tri',
+            ['Nom de client A-Z',1],
+            ['Nom de client Z-A',2],
+            ['Numéro de projet 0-N',3],
+            ['Numéro de projet N-0',4],
+            ['Plus récent',5],
+            ['Plus ancient',6]
+          ],
+          {selected: params[:sort], disabled: 'Tri'})
+        %>
 
       </div>
       
@@ -38,6 +41,7 @@
           <th>Date</th>
           <th>Num. projet</th>
           <th>Nom client</th>
+          <th>Description</th>
         </tr>
 
         <% @projects.each do |p| %>
@@ -45,12 +49,13 @@
               <td><%= format_date(p.created_at) %></td>
               <td><%= link_to p.id, project_path(p.id) %></td>
               <td><%= p.customer.fullname %></td>
+              <td><%= truncate(p.description) %></td>
             </tr>
         <% end %>
       </table>
       <% if @projects.total_pages > 1 %>
         <nav aria-label="Page navigation" class="text-center">
-          <%= paginate @projects, window: 1, outer_window: 1   %>
+          <%= paginate @projects, window: 1, outer_window: 1 %>
         </nav>
       <% end %>
     </div>

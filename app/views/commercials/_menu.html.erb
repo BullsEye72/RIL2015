@@ -23,12 +23,12 @@
             </tr>
           </thead>
           <tbody>
-          <% 7.times do |i| %>
+          <% @projects_menu.each do |p| %>
             <tr>
-               <td>01/02/2017</td>
-               <td><%= i*12 %></td>
-               <td>Fox Mulder</td>
-             </tr>
+              <td><%= format_date(p.created_at) %></td>
+              <td><%= link_to p.id, project_path(p.id) %></td>
+              <td><%= p.customer.fullname %></td>
+            </tr>
           <% end %>
           </tbody>
         </table>
