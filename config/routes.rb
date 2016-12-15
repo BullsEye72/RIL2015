@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   # HOME
   root to: 'home#index'
   
-  # RESSOURCES
+
+  # RESSOURCE
   resources :commercials
   resources :projects
+  resources :customers
 
 
 
