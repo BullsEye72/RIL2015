@@ -1,5 +1,3 @@
-<h1><%= action %></h1>
-
 <!-- Modal -->
 <% if action == :new || action == :edit %>
   <div class="modal fade" id="userSelectionModal" tabindex="-1" role="dialog" aria-labelledby="userSelectionModal">
@@ -75,11 +73,12 @@
       <%= p.input :description, input_html: { disabled: action == :show } %>
     </div>
     <% if action == :new %>
-       <%= p.submit 'Créer le projet', class: 'pull-right' %>
+       <%= p.submit 'Créer le projet' %>
     <% end %>
     <% if action == :edit %>
-      <%= p.submit 'Mettre à jour le projet', class: 'pull-right' %>
+      <%= p.submit 'Mettre à jour le projet' %>
     <% end %>
+    <%= link_to('Annuler', :back, class: 'btn btn-default pull-right') %>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
