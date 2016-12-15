@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  add_breadcrumb "Accueil", :root_path
+  
   protect_from_forgery
   before_action :authenticate_user_if_not_in_admin
 

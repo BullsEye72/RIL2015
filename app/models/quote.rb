@@ -7,6 +7,7 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted_at :datetime
 #
 # Indexes
 #
@@ -15,6 +16,9 @@
 #
 
 class Quote < ActiveRecord::Base
+
+  default_scope { where(:deleted_at => nil) }
+
   belongs_to :project
   belongs_to :user
 end

@@ -1,14 +1,22 @@
 <%= render 'layouts/menu' %>
 <header>
   <div class="container-fluid">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li class="active">Data</li>
-        </ol>
-        <%= page_titles(yield(:title), yield(:subtitle)) %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <ol class="breadcrumb">
+                  <%= render_breadcrumbs :tag => :li, :separator => "" %>
+                </ol>
+              </div>
+              <div class="col-sm-6">
+                <%= page_titles(yield(:title), yield(:subtitle)) %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
