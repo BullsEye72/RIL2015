@@ -6,7 +6,7 @@
         <form class="form-inline">
           <div class="form-group">
             <label for="elementRecherche">Recherche</label>
-            <input type="text" class="form-control" id="elementRecherche" placeholder="Nom de client / Num. du projet / ...">
+            <input type="text" class="form-control" id="elementRecherche" placeholder="Nom client / Num projet">
           </div>
           <button type="submit" class="btn btn-primary">Rechercher</button>
         </form>
@@ -17,12 +17,12 @@
         <%= select("triResultat", "select_id",
           [
             'Tri',
-            ['Nom de client A-Z',1],
-            ['Nom de client Z-A',2],
-            ['Numéro de projet 0-N',3],
-            ['Numéro de projet N-0',4],
-            ['Plus récent',5],
-            ['Plus ancient',6]
+            ['Nom de client A-Z','nameAZ'],
+            ['Nom de client Z-A','nameZA'],
+            ['Numéro de projet 0-N','id0N'],
+            ['Numéro de projet N-0','idN0'],
+            ['Plus récent','dateON'],
+            ['Plus ancient','dateNO']
           ],
           {selected: params[:sort], disabled: 'Tri'})
         %>

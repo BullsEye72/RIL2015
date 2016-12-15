@@ -9,14 +9,14 @@ class CommercialsController < ApplicationController
     
     @projects_menu = Project.order("updated_at DESC").first(5)
     
-    order = (['1','3','6'].include? params[:sort]) ? 'ASC' : 'DESC'
+    order = (['nameAZ','id0N','dateNO'].include? params[:sort]) ? 'ASC' : 'DESC'
     
     case params[:sort]
-    when '1','2'
+    when 'nameAZ','nameZA'
       @projects = Project.joins(:customer).order("customers.lastname #{order}")
-    when '3','4'
+    when 'id0N','idN0'
       @projects = Project.order("id  #{order}")
-    when '5','6'
+    when 'dateON','dateNO'
       @projects = Project.order("updated_at #{order}")
     else
       @projects = Project.joins(:customer).order('customers.lastname ASC')
