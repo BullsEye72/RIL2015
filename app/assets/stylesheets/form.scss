@@ -2,7 +2,8 @@
 
 input[type="text"],
 input[type="number"],
-input[type="email"] {
+input[type="email"],
+select {
   @extend .form-control !optional;
 }
 input[type="submit"] {

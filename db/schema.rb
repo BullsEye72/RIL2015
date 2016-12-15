@@ -40,15 +40,6 @@ ActiveRecord::Schema.define(version: 20161213142706) do
 
   add_index "contents", ["code"], name: "index_contents_on_code", unique: true
 
-  create_table "create_projects", force: :cascade do |t|
-    t.string   "description"
-    t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "create_projects", ["customer_id"], name: "index_create_projects_on_customer_id"
-
   create_table "customers", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -96,11 +87,10 @@ ActiveRecord::Schema.define(version: 20161213142706) do
   add_index "parameters", ["code"], name: "index_parameters_on_code", unique: true
 
   create_table "projects", force: :cascade do |t|
-    t.datetime "project_date"
     t.string   "description"
     t.integer  "customer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
   end
 

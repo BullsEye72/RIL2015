@@ -20,4 +20,10 @@ class Customer < ActiveRecord::Base
 
   validates_presence_of :firstname, :lastname, :phone_number, :address
   
+  def fullname
+    return "#{firstname.capitalize} #{lastname.upcase}"
+  end
+  
 end
+
+
