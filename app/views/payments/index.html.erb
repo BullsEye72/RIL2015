@@ -1,0 +1,56 @@
+<% provide(:title, t('Payment')) %>
+<% provide(:subtitle, 'Liste') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= t 'Listing Payments' %></h2>
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+              <th>Quote</th>
+              <th>Payment</th>
+              <th>Payment date</th>
+              <th>Payment state</th>
+              <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr>
+                <td><%= payment.quote %></td>
+                <td><%= payment.payment %></td>
+                <td><%= payment.payment_date %></td>
+                <td><%= payment.payment_state %></td>
+                <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                payment
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_payment_path(payment)
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                payment,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to t('Nouveau Payment'), new_payment_path, class: 'btn btn-default' %>
+  </div>
+</div>

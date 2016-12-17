@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213142706) do
+ActiveRecord::Schema.define(version: 20161217115146) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20161213142706) do
   end
 
   add_index "contents", ["code"], name: "index_contents_on_code", unique: true
+
+  create_table "create_projects", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "create_projects", ["customer_id"], name: "index_create_projects_on_customer_id"
 
   create_table "customers", force: :cascade do |t|
     t.string   "firstname"
@@ -86,11 +95,31 @@ ActiveRecord::Schema.define(version: 20161213142706) do
 
   add_index "parameters", ["code"], name: "index_parameters_on_code", unique: true
 
+  create_table "payment_states", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "quote_id"
+    t.decimal  "payment"
+    t.decimal  "payment_date"
+    t.integer  "payment_state_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "payments", ["payment_state_id"], name: "index_payments_on_payment_state_id"
+  add_index "payments", ["quote_id"], name: "index_payments_on_quote_id"
+
   create_table "projects", force: :cascade do |t|
+    t.datetime "project_date"
     t.string   "description"
     t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "deleted_at"
   end
 
