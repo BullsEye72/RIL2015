@@ -19,6 +19,10 @@ button {
   }
 }
 
+a.btn.btn-primary:visited {
+  color: white;
+}
+
 .modal-body {
   max-height: 70vh;
   overflow-y: auto;
@@ -32,4 +36,8 @@ button {
 
 table {
   @extend .table !optional;
+  @extend .table-condensed !optional;
+  tbody {
+    @extend  .table-stripped !optional;
+  }
 }
