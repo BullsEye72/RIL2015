@@ -26,3 +26,5 @@ fr:
         has_accepted_rules: A accepté les règles
         created_at: Créé le
         updated_at: Mis à jour le
+        name: Nom
+        value: Valeur
