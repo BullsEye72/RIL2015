@@ -12,7 +12,7 @@
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
           <th><%= attribute.human_name %></th>
     <% end -%>
-          <th colspan="3"></th>
+          <th></th>
         </tr>
       </thead>
 
@@ -22,9 +22,26 @@
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
             <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
     <% end -%>
-            <td><%%= link_to 'Voir', <%= singular_table_name %> %></td>
-            <td><%%= link_to 'Editer', edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
-            <td><%%= link_to 'Effacer', <%= singular_table_name %>, method: :delete, data: { confirm: 'Êtes vous certain ?' } %></td>
+            <td class="text-right">
+              <%%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                <%= singular_table_name %>
+              )
+              %>
+              |
+              <%%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
+              )
+              %>
+              |
+              <%%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                <%= singular_table_name %>,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+              
+            </td>
           </tr>
         <%% end %>
       </tbody>
