@@ -10,7 +10,7 @@
       <thead>
         <tr>
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
-          <th><%= attribute.human_name %></th>
+          <th><%%= t '<%= attribute.human_name %>' %></th>
     <% end -%>
           <th></th>
         </tr>
@@ -20,7 +20,7 @@
         <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
           <tr>
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
-            <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+            <td><%%= t <%= singular_table_name %>.<%= attribute.name %> %></td>
     <% end -%>
             <td class="text-right">
               <%%= link_to(
@@ -49,6 +49,6 @@
 
     <br>
 
-    <%%= link_to t('Nouveau <%= human_name %>'), new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
+    <%%= link_to "Nouveau #{t('<%= human_name %>')}", new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
   </div>
 </div>

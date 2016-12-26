@@ -249,4 +249,14 @@ fr:
       next: "&rsaquo;"
       previous: "&lsaquo;"
       truncate: "&hellip;"
-  'Payment State': 'État du paiement'
+  payment: paiement
+  Payment: Paiement
+  Payment state: État du paiement
+  Payment State: État du Paiement
+  Payment date: Date du paiement
+  Listing Payments: Liste des paiements
+  Listing Payment States: Liste des États de Paiement
+  Quote: Devis
+  Name: Nom
+  Value: Valeur
+

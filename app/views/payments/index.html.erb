@@ -9,10 +9,10 @@
     <table>
       <thead>
         <tr>
-              <th>Quote</th>
-              <th>Payment</th>
-              <th>Payment date</th>
-              <th>Payment state</th>
+              <th><%= t 'Quote' %></th>
+              <th><%= t 'Payment' %></th>
+              <th><%= t 'Payment date' %></th>
+              <th><%= t 'Payment state' %></th>
               <th></th>
         </tr>
       </thead>
@@ -20,10 +20,10 @@
       <tbody>
         <% @payments.each do |payment| %>
           <tr>
-                <td><%= payment.quote %></td>
-                <td><%= payment.payment %></td>
-                <td><%= payment.payment_date %></td>
-                <td><%= payment.payment_state %></td>
+                <td><%= t payment.quote %></td>
+                <td><%= t payment.payment %></td>
+                <td><%= t payment.payment_date %></td>
+                <td><%= t payment.payment_state %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
@@ -51,6 +51,6 @@
 
     <br>
 
-    <%= link_to t('Nouveau Payment'), new_payment_path, class: 'btn btn-default' %>
+    <%= link_to t('Nouveau Paiement'), new_payment_path, class: 'btn btn-default' %>
   </div>
 </div>

@@ -1,15 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :payments
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
-  resources :payment_states
   # USERS & ADMINISTRATION
   devise_for :admins
   devise_for :users,
@@ -27,6 +17,8 @@ Rails.application.routes.draw do
   # RESSOURCES
   resources :commercials
   resources :projects
+  resources :payments
+  resources :payment_states
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'

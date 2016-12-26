@@ -9,8 +9,8 @@
     <table>
       <thead>
         <tr>
-              <th>Name</th>
-              <th>Value</th>
+              <th><%= t 'Name' %></th>
+              <th><%= t 'Value' %></th>
               <th></th>
         </tr>
       </thead>
@@ -18,8 +18,8 @@
       <tbody>
         <% @payment_states.each do |payment_state| %>
           <tr>
-                <td><%= payment_state.name %></td>
-                <td><%= payment_state.value %></td>
+                <td><%= t payment_state.name %></td>
+                <td><%= t payment_state.value %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
@@ -38,7 +38,7 @@
                 payment_state,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
-              
+
             </td>
           </tr>
         <% end %>
@@ -47,6 +47,6 @@
 
     <br>
 
-    <%= link_to t('Nouveau Payment state'), new_payment_state_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('Payment state')}", new_payment_state_path, class: 'btn btn-default' %>
   </div>
 </div>
