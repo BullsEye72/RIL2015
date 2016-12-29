@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 20161226160810) do
   create_table "payments", force: :cascade do |t|
     t.integer  "quote_id"
     t.decimal  "payment"
-    t.decimal  "payment_date"
     t.integer  "payment_state_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false

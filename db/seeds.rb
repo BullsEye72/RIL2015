@@ -39,3 +39,15 @@ commercial.save!
   )
 end
 
+# PaymentStates
+payment_states = [
+    { name: 'Devis signé', value: 0.03},
+    { name: 'Permis de construire obtenu', value: 0.1},
+    { name: 'Chantier ouvert', value: 0.15},
+    { name: 'Fondations achevées', value: 0.25},
+    { name: 'Mur achevé', value: 0.4},
+    { name: "Mis hors d'eau/ hors d'air", value: 0.75},
+    { name: 'Travaux achevés', value: 0.95},
+    { name: 'Clef remises', value: 1},
+]
+payment_states.each {|ps| PaymentState.create! ps }

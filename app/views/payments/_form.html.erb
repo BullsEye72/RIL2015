@@ -5,8 +5,14 @@
       <% disabled = (action == :show) ? true : false %>
       <%= f.association :quote, input_html: { disabled: disabled } %>
       <%= f.input :payment, input_html: { disabled: disabled } %>
-      <%= f.input :payment_date, input_html: { disabled: disabled } %>
-      <%= f.association :payment_state, input_html: { disabled: disabled } %>
+      <%= f.association(
+          :payment_state,
+              input_html: { disabled: disabled },
+              label_method: ->(obj) do
+                "#{obj.name} : #{number_to_percentage(obj.value*100, precision: 0)}"
+              end
+          )
+      %>
     </div>
 
     <div class="form-actions">

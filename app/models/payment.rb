@@ -5,7 +5,6 @@
 #  id               :integer          not null, primary key
 #  quote_id         :integer
 #  payment          :decimal(, )
-#  payment_date     :decimal(, )
 #  payment_state_id :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -19,4 +18,8 @@
 class Payment < ActiveRecord::Base
   belongs_to :quote
   belongs_to :payment_state
+
+  validates_presence_of :quote, :payment, :payment_state
+  validates_numericality_of :payment, greater_than: 0
+  
 end

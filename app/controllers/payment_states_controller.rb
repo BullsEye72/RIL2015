@@ -4,7 +4,7 @@ class PaymentStatesController < ApplicationController
   # GET /payment_states
   # GET /payment_states.json
   def index
-    @payment_states = PaymentState.all
+    @payment_states = PaymentState.all.order :value
   end
 
   # GET /payment_states/1
