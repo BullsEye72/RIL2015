@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226160810) do
+ActiveRecord::Schema.define(version: 20170110194634) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(version: 20161226160810) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "construction_states", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "value"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "construction_states_quotes", id: false, force: :cascade do |t|
+    t.integer "construction_states_id"
+    t.integer "quotes_id"
+  end
+
+  add_index "construction_states_quotes", ["construction_states_id"], name: "index_construction_states_quotes_on_construction_states_id"
+  add_index "construction_states_quotes", ["quotes_id"], name: "index_construction_states_quotes_on_quotes_id"
 
   create_table "contents", force: :cascade do |t|
     t.string   "code",       null: false
@@ -88,7 +104,6 @@ ActiveRecord::Schema.define(version: 20161226160810) do
 
   create_table "payment_states", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -41,6 +41,13 @@ end
 
 # PaymentStates
 payment_states = [
+    'a facturer',
+    'facturer',
+    'payé'
+]
+payment_states.each {|ps| PaymentState.create!(name:  ps) }
+
+construction_states = [
     { name: 'Devis signé', value: 0.03},
     { name: 'Permis de construire obtenu', value: 0.1},
     { name: 'Chantier ouvert', value: 0.15},
@@ -50,4 +57,4 @@ payment_states = [
     { name: 'Travaux achevés', value: 0.95},
     { name: 'Clef remises', value: 1},
 ]
-payment_states.each {|ps| PaymentState.create! ps }
+construction_states.each {|cs| ConstructionState.create! cs }
