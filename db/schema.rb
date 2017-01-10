@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110194634) do
+ActiveRecord::Schema.define(version: 20170110200937) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -129,6 +129,12 @@ ActiveRecord::Schema.define(version: 20170110194634) do
 
   add_index "projects", ["customer_id"], name: "index_projects_on_customer_id"
 
+  create_table "quote_states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quotes", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
@@ -139,6 +145,14 @@ ActiveRecord::Schema.define(version: 20170110194634) do
 
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
   add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
+
+  create_table "quotes_quote_states", id: false, force: :cascade do |t|
+    t.integer "quotes_id"
+    t.integer "quote_states_id"
+  end
+
+  add_index "quotes_quote_states", ["quote_states_id"], name: "index_quotes_quote_states_on_quote_states_id"
+  add_index "quotes_quote_states", ["quotes_id"], name: "index_quotes_quote_states_on_quotes_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

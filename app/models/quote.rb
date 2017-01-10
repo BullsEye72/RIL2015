@@ -22,5 +22,6 @@ class Quote < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
   has_and_belongs_to_many :construction_states
+  has_and_belongs_to_many :quote_states
 
 end
