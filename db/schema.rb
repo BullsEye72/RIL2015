@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110200937) do
+ActiveRecord::Schema.define(version: 20170110203055) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -78,6 +78,21 @@ ActiveRecord::Schema.define(version: 20170110200937) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "margins", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "margins_quotes", id: false, force: :cascade do |t|
+    t.integer "margins_id"
+    t.integer "quotes_id"
+  end
+
+  add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
+  add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
 
   create_table "pages", force: :cascade do |t|
     t.string   "title",      null: false

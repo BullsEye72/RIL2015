@@ -16,5 +16,6 @@ class ConstructionState < ActiveRecord::Base
 
   validates :name, :value, presence: true
   validates_uniqueness_of :name
-
+  validates_numericality_of :value, greater_than: 0
+  
 end

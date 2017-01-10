@@ -40,14 +40,14 @@ commercial.save!
 end
 
 # PaymentStates
-payment_states = [
-    'a facturer',
-    'facturer',
-    'payé'
-]
-payment_states.each {|ps| PaymentState.create!(name:  ps) }
+[
+  'a facturé',
+  'facturé',
+  'payé'
+].each {|ps| PaymentState.create!(name:  ps) }
 
-construction_states = [
+# ConstructionStates
+[
     { name: 'Devis signé', value: 0.03},
     { name: 'Permis de construire obtenu', value: 0.1},
     { name: 'Chantier ouvert', value: 0.15},
@@ -56,5 +56,14 @@ construction_states = [
     { name: "Mis hors d'eau/ hors d'air", value: 0.75},
     { name: 'Travaux achevés', value: 0.95},
     { name: 'Clef remises', value: 1},
-]
-construction_states.each {|cs| ConstructionState.create! cs }
+].each {|cs| ConstructionState.create! cs }
+
+# QuoteStates
+%w(
+ brouillon
+  accepté
+  en\ attente
+  refusé
+  en\ commande
+  transfert\ en\ facturation
+).each { |qs| QuoteState.create! name: qs}
