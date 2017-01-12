@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # RESSOURCES
   resources :commercials
   resources :projects
+  resources :purchases
 
 
 
