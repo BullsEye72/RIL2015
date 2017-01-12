@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213142706) do
+ActiveRecord::Schema.define(version: 20170110203055) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(version: 20161213142706) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "construction_states", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "value"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "construction_states_quotes", id: false, force: :cascade do |t|
+    t.integer "construction_states_id"
+    t.integer "quotes_id"
+  end
+
+  add_index "construction_states_quotes", ["construction_states_id"], name: "index_construction_states_quotes_on_construction_states_id"
+  add_index "construction_states_quotes", ["quotes_id"], name: "index_construction_states_quotes_on_quotes_id"
 
   create_table "contents", force: :cascade do |t|
     t.string   "code",       null: false
@@ -63,6 +79,21 @@ ActiveRecord::Schema.define(version: 20161213142706) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
+  create_table "margins", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "margins_quotes", id: false, force: :cascade do |t|
+    t.integer "margins_id"
+    t.integer "quotes_id"
+  end
+
+  add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
+  add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
+
   create_table "pages", force: :cascade do |t|
     t.string   "title",      null: false
     t.string   "code"
@@ -86,6 +117,23 @@ ActiveRecord::Schema.define(version: 20161213142706) do
 
   add_index "parameters", ["code"], name: "index_parameters_on_code", unique: true
 
+  create_table "payment_states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "quote_id"
+    t.decimal  "payment"
+    t.integer  "payment_state_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "payments", ["payment_state_id"], name: "index_payments_on_payment_state_id"
+  add_index "payments", ["quote_id"], name: "index_payments_on_quote_id"
+
   create_table "projects", force: :cascade do |t|
     t.string   "description"
     t.integer  "customer_id"
@@ -95,6 +143,12 @@ ActiveRecord::Schema.define(version: 20161213142706) do
   end
 
   add_index "projects", ["customer_id"], name: "index_projects_on_customer_id"
+
+  create_table "quote_states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "quotes", force: :cascade do |t|
     t.integer  "project_id"
@@ -106,6 +160,14 @@ ActiveRecord::Schema.define(version: 20161213142706) do
 
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
   add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
+
+  create_table "quotes_quote_states", id: false, force: :cascade do |t|
+    t.integer "quotes_id"
+    t.integer "quote_states_id"
+  end
+
+  add_index "quotes_quote_states", ["quote_states_id"], name: "index_quotes_quote_states_on_quote_states_id"
+  add_index "quotes_quote_states", ["quotes_id"], name: "index_quotes_quote_states_on_quotes_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

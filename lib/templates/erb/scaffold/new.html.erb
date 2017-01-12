@@ -1,0 +1,8 @@
+<%% provide(:title, t('<%= singular_table_name.titleize %>')) %>
+<%% provide(:subtitle, 'Création') %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%%= render 'form', action: :new %>
+  </div>
+</div>

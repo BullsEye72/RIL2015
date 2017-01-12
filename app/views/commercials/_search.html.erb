@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="row">
-      
+
       <div class="col-md-9">
         <form class="form-inline">
           <div class="form-group">
@@ -11,27 +11,27 @@
           <button type="submit" class="btn btn-primary">Rechercher</button>
         </form>
       </div>
-      
+
       <div class="col-md-3">
-        
+
         <%= select("triResultat", "select_id",
-          [
-            'Tri',
-            ['Nom de client A-Z','nameAZ'],
-            ['Nom de client Z-A','nameZA'],
-            ['Numéro de projet 0-N','id0N'],
-            ['Numéro de projet N-0','idN0'],
-            ['Plus récent','dateON'],
-            ['Plus ancient','dateNO']
-          ],
-          {selected: params[:sort], disabled: 'Tri'})
+                   [
+                       'Tri',
+                       ['Nom de client A-Z', 'nameAZ'],
+                       ['Nom de client Z-A', 'nameZA'],
+                       ['Numéro de projet 0-N', 'id0N'],
+                       ['Numéro de projet N-0', 'idN0'],
+                       ['Plus récent', 'dateON'],
+                       ['Plus ancient', 'dateNO']
+                   ],
+                   {selected: params[:sort], disabled: 'Tri'})
         %>
 
       </div>
-      
+
     </div>
   </div>
-  
+
   <div class="panel-body">
     <div class="panel panel-default">
       <div class="panel-heading">Résultats de la recherche :</div>
@@ -54,26 +54,28 @@
         <% end %>
       </table>
       <% if @projects.total_pages > 1 %>
-        <nav aria-label="Page navigation" class="text-center">
-          <%= paginate @projects, window: 1, outer_window: 1 %>
-        </nav>
+          <nav aria-label="Page navigation" class="text-center">
+            <%= paginate @projects, window: 1, outer_window: 1 %>
+          </nav>
       <% end %>
     </div>
   </div>
 </div>
 <script>
+  $(function () {
     var actualUrl = '//' + location.host + location.pathname
-    
+
     $('#triResultat_select_id').on('change', function () {
-      if($(this).val() == 0) {
-         sort = "";
+      if ($(this).val() == 0) {
+        sort = '';
       } else {
-          sort = $(this).val();
+        sort = $(this).val();
       }
-     
-    var finalUrl = actualUrl + "<%= get_params %>" + sort;
-    window.location.href = finalUrl;
-     
-     return false;
+
+      var finalUrl = actualUrl + "<%= get_params %>" + sort;
+      window.location.href = finalUrl;
+
+      return false;
+    });
   });
 </script>
