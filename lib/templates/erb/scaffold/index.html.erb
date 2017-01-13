@@ -1,16 +1,16 @@
-<%% provide(:title, t('<%= singular_table_name.titleize %>')) %>
+<%% provide(:title, t(:<%= singular_table_name%>).titleize) %>
 <%% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%%= t 'Listing <%= plural_table_name.titleize %>' %></h2>
+    <h2 class="panel-title"><%%= t 'Listing <%= plural_table_name %>' %></h2>
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
-          <th><%%= t '<%= attribute.human_name %>' %></th>
+          <th><%%= t(:<%= attribute %>).titleize %></th>
     <% end -%>
           <th></th>
         </tr>
@@ -49,6 +49,6 @@
 
     <br>
 
-    <%%= link_to "Nouveau #{t('<%= human_name %>')}", new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
+    <%%= link_to "Nouveau #{t('<%= singular_table_name %>').lowercase}", new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
   </div>
 </div>
