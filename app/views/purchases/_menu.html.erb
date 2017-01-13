@@ -4,10 +4,10 @@
   </div>
   <div class="panel-body">
     <ul>
-      <li><%= link_to 'Fournisseurs', 'purchases/suppliers', class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Articles', "#", class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Devis', "#", class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Commandes', "#", class: 'btn btn-primary center-block' %></li>
+      <li><%= link_to 'Fournisseurs', 'purchases?cat=suppliers', class: 'btn btn-primary center-block' %></li>
+      <li><%= link_to 'Articles', 'purchases?cat=articles', class: 'btn btn-primary center-block' %></li>
+      <li><%= link_to 'Devis', 'purchases?cat=quotes', class: 'btn btn-primary center-block' %></li>
+      <li><%= link_to 'Commandes', 'purchases?cat=orders', class: 'btn btn-primary center-block' %></li>
     </ul>
   </div>
 </div>

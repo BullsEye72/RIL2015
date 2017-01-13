@@ -18,3 +18,20 @@ Exemple de lien avec une page :
 ```erb
 <%= page_path(@page.slug) %>
 ```
+
+
+## Datatypes
+:binary
+:boolean
+:date
+:datetime
+:decimal
+:float
+:integer
+:bigint
+:primary_key
+:references
+:string
+:text
+:time
+:timestamp

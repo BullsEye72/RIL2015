@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110203055) do
+ActiveRecord::Schema.define(version: 20170113130224) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,28 @@ ActiveRecord::Schema.define(version: 20170110203055) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "article_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "article_group_id"
+    t.string   "description"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "article_groups", ["article_group_id"], name: "index_article_groups_on_article_group_id"
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "article_group"
+    t.integer  "value_added_tax_id"
+    t.string   "reference"
+    t.string   "description"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "articles", ["value_added_tax_id"], name: "index_articles_on_value_added_tax_id"
 
   create_table "construction_states", force: :cascade do |t|
     t.string   "name"
@@ -93,6 +115,17 @@ ActiveRecord::Schema.define(version: 20170110203055) do
 
   add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
   add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal  "total_due_calc"
+    t.integer  "supplier_id"
+    t.integer  "quote_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "orders", ["quote_id"], name: "index_orders_on_quote_id"
+  add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id"
 
   create_table "pages", force: :cascade do |t|
     t.string   "title",      null: false
@@ -190,6 +223,15 @@ ActiveRecord::Schema.define(version: 20170110203055) do
 
   add_index "seos", ["page_id"], name: "index_seos_on_page_id"
 
+  create_table "suppliers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "siret"
+    t.string   "fax_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -219,5 +261,12 @@ ActiveRecord::Schema.define(version: 20170110203055) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+
+  create_table "value_added_taxes", force: :cascade do |t|
+    t.decimal  "value"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

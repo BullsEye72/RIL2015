@@ -1,0 +1,17 @@
+      <table class="table">
+        <tr>
+          <th>Nom</th>
+          <th>Telephone</th>
+          <th>Fax</th>
+          <th>Siret</th>
+        </tr>
+
+        <% @suppliers.each do |s| %>
+            <tr>
+              <td><%= s.name %></td>
+              <td><%= s.phone_number %></td>
+              <td><%= s.fax_number %></td>
+              <td><%= s.siret %></td>
+            </tr>
+        <% end %>
+      </table>

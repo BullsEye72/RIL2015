@@ -1,5 +1,4 @@
 <% provide(:title, "Achats") %>
-<% provide(:subtitle, "Accueil") %>
 
 <div class="row" id="controller-<%= params[:controller] %>">
   <div class="col-md-12">
@@ -10,8 +9,35 @@
       </div>
       <div class="col-md-10">
         <%# Partie Droite : Interface achats %>
-        <%= render 'interface' %>
+        
+        <div class="panel panel-default">
+        <div class="panel-heading">
+          <p><%= @interfaceTitle %></p>
+        </div>
+        <div class="panel-body">
+
+          <% case params[:cat] %>
+          <%   when 'suppliers' %>
+          <%=     render 'suppliers' %>
+          <%      provide(:subtitle, 'Fournisseurs') %>
+          <%   when 'articles' %>
+          <%=     render 'articles' %>
+          <%      provide(:subtitle, 'Articles') %>
+          <%   when 'orders' %>
+          <%=     render 'orders' %>
+          <%      provide(:subtitle, 'Commandes') %>
+          <%   when 'quotes' %>
+          <%=     render 'quotes' %>
+          <%       provide(:subtitle, 'Devis') %>
+          <%   else %>
+          <%=     "Bienvenue sur l'accueil du service achats!" %>
+          <%       provide(:subtitle, 'Accueil') %>
+          <% end %>
+      
+        </div>
+      </div>        
+        
       </div>
     </div>
   </div>
-</div>
+<div>

@@ -15,17 +15,13 @@ Rails.application.routes.draw do
   root to: 'home#index'
   
   
-  # get 'purchases/suppliers', to: 'suppliers#index'
-  
   # RESSOURCES
   resources :commercials
   resources :projects
   resources :payments
   resources :payment_states
   
-  resources :purchases do
-    resources :suppliers
-  end
+  resources :purchases
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'
