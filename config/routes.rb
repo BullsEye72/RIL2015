@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :payments
   resources :payment_states
+  resources :customers
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'

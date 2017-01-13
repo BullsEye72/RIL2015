@@ -1,0 +1,56 @@
+<% provide(:title, t(:customer).titleize) %>
+<% provide(:subtitle, 'Liste') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= t('listing customers').titleize %></h2>
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+              <th><%= t(:firstname).titleize %></th>
+              <th><%= t(:lastname).titleize %></th>
+              <th><%= t(:address).titleize %></th>
+              <th><%= t(:phone_number).titleize %></th>
+              <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+                <td><%= t customer.firstname %></td>
+                <td><%= t customer.lastname %></td>
+                <td><%= t customer.address %></td>
+                <td><%= t customer.phone_number %></td>
+                <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                customer
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_customer_path(customer)
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                customer,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to "Nouveau #{t('customer')}", new_customer_path, class: 'btn btn-default' %>
+  </div>
+</div>
