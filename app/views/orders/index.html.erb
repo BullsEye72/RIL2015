@@ -1,17 +1,17 @@
-<% provide(:title, t('Order')) %>
+<% provide(:title, t('order')) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t 'Listing Orders' %></h2>
+    <h2 class="panel-title"><%= t('listing orders').titleize %></h2>
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
-              <th><%= t 'Total due calc' %></th>
-              <th><%= t 'Supplier' %></th>
-              <th><%= t 'Quote' %></th>
+              <th><%= t 'total due calc' %></th>
+              <th><%= t 'supplier' %></th>
+              <th><%= t 'quote' %></th>
               <th></th>
         </tr>
       </thead>
@@ -19,9 +19,9 @@
       <tbody>
         <% @orders.each do |order| %>
           <tr>
-                <td><%= t order.total_due_calc %></td>
-                <td><%= t order.supplier %></td>
-                <td><%= t order.quote %></td>
+                <td><%= order.total_due_calc.to_s + " €" %></td>
+                <td><%= order.supplier.name %></td>
+                <td><%= "Devis n°" + order.quote.id.to_s %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
@@ -49,6 +49,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('Order')}", new_order_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('order')}", new_order_path, class: 'btn btn-default' %>
   </div>
 </div>

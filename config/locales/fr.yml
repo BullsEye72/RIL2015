@@ -249,18 +249,33 @@ fr:
       next: "&rsaquo;"
       previous: "&lsaquo;"
       truncate: "&hellip;"
+  simple_form:
+    labels:
+      defaults:
+        firstname: Prénom
+        lastname: Nom
+        phone_number: Téléphone
+        fax_number: Fax
   payment: paiement
-  Payment: Paiement
-  Payment state: État du paiement
-  Payment State: État du Paiement
-  Payment date: Date du paiement
-  Listing Payments: Liste des paiements
-  Listing Payment States: Liste des États de Paiement
-  Quote: Devis
-  Name: Nom
-  Value: Valeur
-  Supplier: Fournisseur
-  Article: Article
-  Order: Commande
-  Total Due Calc: Total Du
-
+  payment state: état du paiement
+  payment date: date du paiement
+  listing payments: liste des paiements
+  listing customers: liste des clients
+  listing payment states: liste des états de paiement
+  listing suppliers: liste des fournisseurs
+  listing quotes: liste des devis
+  listing orders: liste des commandes
+  listing articles: liste des articles
+  quote: devis
+  name: nom
+  value: valeur
+  customer: client
+  firstname: prénom
+  lastname: nom
+  address: adresse
+  phone_number: téléphone
+  fax_number: fax
+  supplier: fournisseur
+  article: article
+  order: commande
+  description: Description

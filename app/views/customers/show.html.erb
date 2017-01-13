@@ -1,5 +1,5 @@
-<%% provide(:title, t(:<%= singular_table_name %>).titleize ) %>
-<%% provide(:subtitle, 'Création') %>
+<% provide(:title, t('customer').titleize) %>
+<% provide(:subtitle, 'Création') %>
 
 
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="Effacer">
@@ -13,7 +13,7 @@
         Êtes vous certain d'effacer cet élément ?
       </div>
       <div class="modal-footer">
-        <%%= link_to 'Effacer',  @<%= singular_table_name %>,  method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Effacer',  @customer,  method: :delete, class: 'btn btn-danger' %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
       </div>
     </div>
@@ -22,8 +22,8 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%%= render 'form', action: :show %>
-    <a href="<%%= edit_<%= singular_table_name %>_path %>" class="btn btn-primary">
+    <%= render 'form', action: :show %>
+    <a href="<%= edit_customer_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
       Editer
     </a>

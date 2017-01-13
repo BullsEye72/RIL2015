@@ -15,7 +15,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1
   # GET /quotes/1.json
   def show
-    add_breadcrumb @quotes.name
+    add_breadcrumb "Devis n°" + @quote.id.to_s
   end
 
   # GET /quotes/new

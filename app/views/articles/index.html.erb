@@ -1,19 +1,19 @@
-<% provide(:title, t('Article')) %>
+<% provide(:title, t('article')) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t 'Listing Articles' %></h2>
+    <h2 class="panel-title"><%= t('listing articles').titleize %></h2>
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
-              <th><%= t 'Name' %></th>
-              <th><%= t 'Article group' %></th>
-              <th><%= t 'Value added tax' %></th>
-              <th><%= t 'Reference' %></th>
-              <th><%= t 'Description' %></th>
+              <th><%= t('name').titleize %></th>
+              <th><%= 'Article group' %></th>
+              <th><%= 'Value added tax' %></th>
+              <th><%= 'Reference' %></th>
+              <th><%= t('description').titleize %></th>
               <th></th>
         </tr>
       </thead>
@@ -53,6 +53,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('Article')}", new_article_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('article')}", new_article_path, class: 'btn btn-default' %>
   </div>
 </div>

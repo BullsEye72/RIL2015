@@ -1,9 +1,9 @@
-<% provide(:title, t('Quote')) %>
+<% provide(:title, t('quote')) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t 'Listing Quotes' %></h2>
+    <h2 class="panel-title"><%= t('listing quotes').titleize %></h2>
   </div>
   <div class="panel-body">
     <table>
@@ -47,6 +47,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('Quote')}", new_quote_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('quote')}", new_quote_path, class: 'btn btn-default' %>
   </div>
 </div>

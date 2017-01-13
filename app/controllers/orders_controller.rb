@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    add_breadcrumb @orders.name
+    add_breadcrumb "Commande n°" + @order.id.to_s
   end
 
   # GET /orders/new
