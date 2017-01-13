@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :payment_states
   
   resources :purchases
+  resources :suppliers
+
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'

@@ -19,7 +19,7 @@
 
 <div class="container-fluid">
   <%= render 'layouts/flash_messages', flash: flash %>
-  <%= yield %>
+  <%= content_for?(:content) ? yield(:content) : yield %></div>
 </div>
 
 <%= render 'layouts/footer' %>

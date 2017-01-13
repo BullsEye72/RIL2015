@@ -27,14 +27,12 @@
 body {
   height: 100vh;
   color: $black;
-  background: linear-gradient( -20deg, white, $khaki );
+  background: linear-gradient(-20deg, white, $khaki);
 }
-
 
 .navbar-brand {
   padding-top: 12px;
 }
-
 
 header {
   h1 {
@@ -52,4 +50,19 @@ header {
     @extend .pull-left !optional;
     margin: 0 auto;
   }
+}
+
+#application-menu {
+
+  .btn {
+    width: 90%;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
 }
