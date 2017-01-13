@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :orders
+  resources :quotes
+  resources :articles
+  resources :suppliers
   # USERS & ADMINISTRATION
   devise_for :admins
   devise_for :users,

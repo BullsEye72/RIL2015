@@ -1,0 +1,20 @@
+<%= simple_form_for(@quote,  wrapper: :horizontal_form) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-horizontal">
+    <div class="form-inputs">
+      <% disabled = (action == :show) ? true : false %>
+      <%= f.association :project, input_html: { disabled: disabled } %>
+      <%= f.association :user, input_html: { disabled: disabled } %>
+    </div>
+
+    <div class="form-actions">
+      <% if action == :new %>
+          <%= f.submit 'Créer' %>
+      <% end %>
+      <% if action == :edit %>
+          <%= f.submit 'Mettre à jour' %>
+      <% end %>
+      <%= link_to('Annuler', :back, class: 'btn btn-default pull-right') %>
+    </div>
+  </div>
+<% end %>

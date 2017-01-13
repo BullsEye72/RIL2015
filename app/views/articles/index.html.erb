@@ -1,45 +1,47 @@
-<% provide(:title, t('Supplier')) %>
+<% provide(:title, t('Article')) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t 'Listing Suppliers' %></h2>
+    <h2 class="panel-title"><%= t 'Listing Articles' %></h2>
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
               <th><%= t 'Name' %></th>
-              <th><%= t 'Phone number' %></th>
-              <th><%= t 'Siret' %></th>
-              <th><%= t 'Fax number' %></th>
+              <th><%= t 'Article group' %></th>
+              <th><%= t 'Value added tax' %></th>
+              <th><%= t 'Reference' %></th>
+              <th><%= t 'Description' %></th>
               <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @suppliers.each do |supplier| %>
+        <% @articles.each do |article| %>
           <tr>
-                <td><%= t supplier.name %></td>
-                <td><%= t supplier.phone_number %></td>
-                <td><%= t supplier.siret %></td>
-                <td><%= t supplier.fax_number %></td>
+                <td><%= t article.name %></td>
+                <td><%= t article.article_group %></td>
+                <td><%= t article.value_added_tax %></td>
+                <td><%= t article.reference %></td>
+                <td><%= t article.description %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                supplier
+                article
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_supplier_path(supplier)
+                edit_article_path(article)
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                supplier,
+                article,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
 
@@ -51,6 +53,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('Supplier')}", new_supplier_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('Article')}", new_article_path, class: 'btn btn-default' %>
   </div>
 </div>
