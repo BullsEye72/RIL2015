@@ -1,6 +1,7 @@
 class SuppliersController < ApplicationController
-  
-  def show
+  layout 'application_with_menu'
+
+  def index
   end
-  
+
 end

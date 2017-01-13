@@ -1,0 +1,24 @@
+<% content_for :content do %>
+
+    <div class="row" id="controller-<%= params[:controller] %>">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+            <%= render 'layouts/menu' %>
+          </div>
+          <div class="col-md-10">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <p>INTERFACE</p>
+              </div>
+              <div class="panel-body">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+<%= render template: 'layouts/application' %>
