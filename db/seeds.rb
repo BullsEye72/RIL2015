@@ -50,22 +50,20 @@ commercial.save!
 ].each {|cs| ConstructionState.create! cs }
 
 # VAT
-ValueAddedTax.create
 [
   { name: 'Taux normal', value: 20.0},
   { name: 'Taux réduit', value: 5.5}
-]
+].each {|cs| ValueAddedTax.create! cs }
 
 # Article_Groups
-ArticleGroup.create
-  [
-    { name: 'Montants', description: 'Montants en bois pour la structure, nommés lisses ou contrefort' , article_group_id: nil},
-    { name: 'Montage', description: 'Eléments de montages, sabots métalliques, boulons, gougeons' , article_group_id: nil},
-    { name: 'Panneaux 1', description: 'Panneaux d’isolation et pare-pluie ' , article_group_id: nil},
-    { name: 'Panneaux 2', description: "Panneaux intermédiaires et de couverture (intérieur ou extérieur)" , article_group_id: nil},
-    { name: 'Plancher', description: '' , article_group_id: nil},
-    { name: 'Couverture', description: '' , article_group_id: nil}
-  ]
+[
+  { name: 'Montants', description: 'Montants en bois pour la structure, nommés lisses ou contrefort' , article_group_id: nil},
+  { name: 'Montage', description: 'Eléments de montages, sabots métalliques, boulons, gougeons' , article_group_id: nil},
+  { name: 'Panneaux 1', description: 'Panneaux d’isolation et pare-pluie ' , article_group_id: nil},
+  { name: 'Panneaux 2', description: "Panneaux intermédiaires et de couverture (intérieur ou extérieur)" , article_group_id: nil},
+  { name: 'Plancher', description: '' , article_group_id: nil},
+  { name: 'Couverture', description: '' , article_group_id: nil}
+].each {|cs| ArticleGroup.create! cs }
 
 # QuoteStates
 %w(
