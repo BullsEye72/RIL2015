@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113130946) do
+ActiveRecord::Schema.define(version: 20170116155133) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20170113130946) do
   end
 
   add_index "article_groups", ["article_group_id"], name: "index_article_groups_on_article_group_id"
+
+  create_table "article_suppliers", force: :cascade do |t|
+    t.integer  "supplier_id"
+    t.integer  "article_id"
+    t.string   "supplier_reference"
+    t.decimal  "price"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "article_suppliers", ["article_id"], name: "index_article_suppliers_on_article_id"
+  add_index "article_suppliers", ["supplier_id"], name: "index_article_suppliers_on_supplier_id"
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"

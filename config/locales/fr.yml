@@ -278,4 +278,8 @@ fr:
   supplier: fournisseur
   article: article
   order: commande
-  description: Description
+  description: description
+  project: projet
+  user: utilisateur
+  article_group: type d'article
+  price: prix

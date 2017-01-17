@@ -1,5 +1,5 @@
 <% provide(:title, t('supplier')) %>
-<% provide(:subtitle, 'Création') %>
+<% provide(:subtitle, 'Affichage') %>
 
 
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="Effacer">
@@ -33,3 +33,57 @@
     </button>
   </div>
 </div>
+
+  
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Articles correspondants
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+              <th><%= t('name').titleize %></th>
+              <th><%= 'Ref. Article' %></th>
+              <th><%= 'Ref. Fournisseur' %></th>
+              <th><%= 'Prix' %></th>
+              <th><%= t('description').titleize %></th>
+              <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @article_suppliers.each do |ac| %>
+          <tr>
+                <td><%= ac.article.name %></td>
+                <td><%= ac.article.reference %></td>
+                <td><%= ac.supplier_reference %></td>
+                <td><%= ac.price %></td>
+                <td><%= truncate(ac.article.description) %></td>
+                <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                ac.article
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_article_path(ac.article)
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                ac.article,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  

@@ -9,9 +9,10 @@
     <table>
       <thead>
         <tr>
-              <th><%= t 'total due calc' %></th>
-              <th><%= t 'supplier' %></th>
-              <th><%= t 'quote' %></th>
+              <th><%= 'Date' %></th>
+              <th><%= 'Total' %></th>
+              <th><%= t('supplier').titleize %></th>
+              <th><%= t('quote').titleize %></th>
               <th></th>
         </tr>
       </thead>
@@ -19,6 +20,7 @@
       <tbody>
         <% @orders.each do |order| %>
           <tr>
+                <td><%= format_date(order.updated_at) %></td>
                 <td><%= order.total_due_calc.to_s + " €" %></td>
                 <td><%= order.supplier.name %></td>
                 <td><%= "Devis n°" + order.quote.id.to_s %></td>
@@ -49,6 +51,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('order')}", new_order_path, class: 'btn btn-default' %>
+    <%= link_to "Nouvelle #{t('order')}", new_order_path, class: 'btn btn-default' %>
   </div>
 </div>

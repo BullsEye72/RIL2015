@@ -10,10 +10,9 @@
       <thead>
         <tr>
               <th><%= t('name').titleize %></th>
-              <th><%= 'Article group' %></th>
-              <th><%= 'Value added tax' %></th>
               <th><%= 'Reference' %></th>
               <th><%= t('description').titleize %></th>
+              <th><%= 'Type' %></th>
               <th></th>
         </tr>
       </thead>
@@ -21,11 +20,10 @@
       <tbody>
         <% @articles.each do |article| %>
           <tr>
-                <td><%= t article.name %></td>
-                <td><%= t article.article_group %></td>
-                <td><%= t article.value_added_tax %></td>
-                <td><%= t article.reference %></td>
-                <td><%= t article.description %></td>
+                <td><%= article.name %></td>
+                <td><%= article.reference %></td>
+                <td><%= article.description %></td>
+                <td><%= article.article_group %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
@@ -50,6 +48,11 @@
         <% end %>
       </tbody>
     </table>
+    <% if @articles.total_pages > 1 %>
+      <nav aria-label="Page navigation" class="text-center">
+        <%= paginate @articles, window: 1, outer_window: 1 %>
+      </nav>
+    <% end %>
 
     <br>
 

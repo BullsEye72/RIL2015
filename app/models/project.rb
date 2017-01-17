@@ -22,8 +22,12 @@ class Project < ActiveRecord::Base
   has_many :quotes
 
   validates_presence_of :customer, :description
-
-
+  
   accepts_nested_attributes_for :customer
-
+  
+  def to_label
+    "#{id} | #{customer.fullname}"
+  end
+  
 end
+

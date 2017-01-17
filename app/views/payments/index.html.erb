@@ -20,10 +20,10 @@
       <tbody>
         <% @payments.each do |payment| %>
           <tr>
-                <td><%= t payment.quote %></td>
-                <td><%= t payment.payment %></td>
-                <td><%= t payment.payment_date %></td>
-                <td><%= t payment.payment_state %></td>
+                <td><%= payment.quote.id %></td>
+                <td><%= payment.payment %></td>
+                <td><%= format_date(payment.updated_at) %></td>
+                <td><%= payment.payment_state.name %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),

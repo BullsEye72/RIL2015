@@ -10,4 +10,7 @@
 #
 
 class ValueAddedTax < ActiveRecord::Base
+  def to_label
+    "#{name} | #{value}"
+  end
 end

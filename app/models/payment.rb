@@ -22,4 +22,8 @@ class Payment < ActiveRecord::Base
   validates_presence_of :quote, :payment, :payment_state
   validates_numericality_of :payment, greater_than: 0
   
+  def to_label
+    "#{name} : #{number_to_percentage(value*100, precision: 0)}"
+  end
+  
 end

@@ -4,18 +4,23 @@ class ArticlesController < ApplicationController
   add_breadcrumb "Articles", :articles_path
   
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles =  Article.page(params[:page]).per(15)
     add_breadcrumb "Accueil"
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    add_breadcrumb @articles.name
+    
+    add_breadcrumb @article.name
+    
+    @suppliers=[]
+    @article_suppliers=ArticleSupplier.joins(:supplier, :article).where(article_id: @article.id)
+    
   end
 
   # GET /articles/new

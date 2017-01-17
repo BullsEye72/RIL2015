@@ -33,3 +33,52 @@
     </button>
   </div>
 </div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Articles correspondants
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+              <th><%= t('name').titleize %></th>
+              <th><%= 'Reference' %></th>
+              <th><%= t('price').titleize %></th>
+              <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @article_suppliers.each do |ac| %>
+          <tr>
+                <td><%= ac.supplier.name %></td>
+                <td><%= ac.supplier_reference %></td>
+                <td><%= ac.price %></td>
+                <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                ac.supplier
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_supplier_path(ac.supplier)
+              )
+              %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                ac.supplier,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

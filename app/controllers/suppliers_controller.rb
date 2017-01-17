@@ -8,7 +8,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers
   # GET /suppliers.json
   def index
-    @suppliers = Supplier.all
+    @suppliers = Supplier.page(params[:page]).per(15)
     add_breadcrumb "Accueil"
   end
 
@@ -16,6 +16,10 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1.json
   def show
     add_breadcrumb @supplier.name
+    
+    @article_suppliers=[]
+    @article_suppliers=ArticleSupplier.joins(:supplier, :article).where(supplier_id: @supplier.id)
+
   end
 
   # GET /suppliers/new

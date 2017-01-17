@@ -13,6 +13,7 @@
               <th><%= t('phone_number').titleize %></th>
               <th><%= ('siret').titleize %></th>
               <th><%= t('fax_number').titleize %></th>
+              <th><%= 'Nb. produits' %></th>
               <th></th>
         </tr>
       </thead>
@@ -20,10 +21,11 @@
       <tbody>
         <% @suppliers.each do |supplier| %>
           <tr>
-                <td><%= t supplier.name %></td>
-                <td><%= t supplier.phone_number %></td>
-                <td><%= t supplier.siret %></td>
-                <td><%= t supplier.fax_number %></td>
+                <td><%= supplier.name %></td>
+                <td><%= supplier.phone_number %></td>
+                <td><%= supplier.siret %></td>
+                <td><%= supplier.fax_number %></td>
+                <td><%= count_article_in_supplier(supplier.id) %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
@@ -48,6 +50,11 @@
         <% end %>
       </tbody>
     </table>
+    <% if @suppliers.total_pages > 1 %>
+      <nav aria-label="Page navigation" class="text-center">
+        <%= paginate @suppliers, window: 1, outer_window: 1 %>
+      </nav>
+    <% end %>
 
     <br>
 

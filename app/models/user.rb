@@ -45,5 +45,9 @@ class User < ActiveRecord::Base
     return "#{lastname} #{firstname.first}" if firstname && lastname
     email
   end
+  
+  def to_label
+    "#{id} | #{email}"
+  end
 
 end

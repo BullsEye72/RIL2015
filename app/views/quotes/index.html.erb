@@ -9,8 +9,8 @@
     <table>
       <thead>
         <tr>
-              <th><%= t 'Project' %></th>
-              <th><%= t 'User' %></th>
+              <th><%= t('project').titleize %></th>
+              <th><%= t('user').titleize %></th>
               <th></th>
         </tr>
       </thead>
@@ -18,8 +18,8 @@
       <tbody>
         <% @quotes.each do |quote| %>
           <tr>
-                <td><%= t quote.project %></td>
-                <td><%= t quote.user %></td>
+                <td><%= quote.project.id.to_s %></td>
+                <td><%= quote.user.display_fullname %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
