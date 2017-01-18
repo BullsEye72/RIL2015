@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116155133) do
+ActiveRecord::Schema.define(version: 20170118130542) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -46,13 +46,24 @@ ActiveRecord::Schema.define(version: 20170116155133) do
     t.integer  "article_group_id"
     t.integer  "value_added_tax_id"
     t.string   "reference"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
   add_index "articles", ["article_group_id"], name: "index_articles_on_article_group_id"
   add_index "articles", ["value_added_tax_id"], name: "index_articles_on_value_added_tax_id"
+
+  create_table "articles_caracteristics", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "characteristic_id"
+    t.string   "value"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "articles_caracteristics", ["article_id"], name: "index_articles_caracteristics_on_article_id"
+  add_index "articles_caracteristics", ["characteristic_id"], name: "index_articles_caracteristics_on_characteristic_id"
 
   create_table "articles_suppliers", force: :cascade do |t|
     t.integer  "supplier_id"
@@ -65,6 +76,15 @@ ActiveRecord::Schema.define(version: 20170116155133) do
 
   add_index "articles_suppliers", ["article_id"], name: "index_articles_suppliers_on_article_id"
   add_index "articles_suppliers", ["supplier_id"], name: "index_articles_suppliers_on_supplier_id"
+
+  create_table "characteristics", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "unit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "characteristics", ["unit_id"], name: "index_characteristics_on_unit_id"
 
   create_table "construction_states", force: :cascade do |t|
     t.string   "name"
@@ -243,6 +263,13 @@ ActiveRecord::Schema.define(version: 20170116155133) do
     t.string   "fax_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.text     "regex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

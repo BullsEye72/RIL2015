@@ -10,5 +10,6 @@ class Ability
     can [:index], :purchases if user.has_role? :purchaser
     can [:new, :create, :index, :show], :articles if user.has_role? :purchaser
     can [:new, :create, :index, :show], :suppliers if user.has_role? :purchaser
+    can [:index, :show], :quotes if user.has_role? :purchaser
   end
 end

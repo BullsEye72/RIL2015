@@ -37,7 +37,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    Articles correspondants
+    Fournisseurs correspondants
   </div>
   <div class="panel-body">
     <table>
@@ -45,16 +45,16 @@
         <tr>
           <th><%= t('name').titleize %></th>
           <th><%= 'Reference' %></th>
-          <th><%= t('price').titleize %></th>
+          <th><%= 'Prix HT' %></th>
           <th></th>
         </tr>
       </thead>
 
       <tbody>
         <% @suppliers.each do |ac| %>
-          <% as = ac.articles_suppliers.first %>
+          <% as = ac.articles_suppliers.where(supplier_id: ac.id, article_id: @article.id).first %>
           <tr>
-                <td><%= ac.name %></td>
+                <td><%= "#{ac.id} | #{ac.name}" %></td>
                 <td><%= as.supplier_reference %></td>
                 <td><%= as.price %></td>
                 <td class="text-right">

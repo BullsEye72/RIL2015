@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration
       t.references :article_group, index: true, foreign_key: true
       t.references :value_added_tax, index: true, foreign_key: true
       t.string :reference
-      t.string :description
+      t.text :description
 
       t.timestamps null: false
     end

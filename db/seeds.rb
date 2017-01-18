@@ -78,6 +78,18 @@ purchaser.save!
   transfert\ en\ facturation
 ).each { |qs| QuoteState.create! name: qs}
 
+# Unités
+[
+  { name: 'U',   regex: '(?<= )[uU]' },
+  { name: 'm²',  regex: '(?<= )([mM][²2])' },
+  { name: 'm³',  regex: '(?<= )([mM][³3])' },
+  { name: 'm',   regex: '(?<= )[mM]' },
+  { name: 'mm',  regex: '(?<= )([mM]{2})' },
+  { name: 'L',   regex: '(?<= )[lL]' },
+  { name: 'T',   regex: '(?<= )[tT]' },
+  { name: 'g',   regex: '(?<= )[gG]' },
+  { name: 'kg',  regex: '(?<= )([kK][gG])' }
+].each {|u| Unit.create! u }
 
 # =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
 
@@ -100,7 +112,7 @@ purchaser.save!
 end
 
 # Suppliers & Articles
-10.times do
+30.times do
   # Suppliers
   Supplier.create!(
       name:    Faker::Company.suffix + " " + Faker::Company.name,
@@ -110,31 +122,42 @@ end
   )
   
   # Articles
-  rand(20).times do
+  rand(10..20).times do
     Article.create!(
       name: Faker::Commerce.product_name,
       value_added_tax_id: 1,
       reference: Faker::Code.asin,
       description: Faker::Lorem.paragraph(3)
-    ) 
+    )
     
     ArticlesSupplier.create!(
       supplier_id: Supplier.last.id,
       article_id: Article.last.id,
       supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
       price: rand(0.5..3000.0).round(2)
-      )
+    )
   end
+end
+
+#Ajout de liasons
+Supplier.all.each do |supplier|
+  rand(5..10).times do
+    a=ArticlesSupplier.new(
+      supplier_id: supplier.id,
+      article_id: rand(Article.all.count),
+      supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
+      price: rand(0.5..3000.0).round(2)
+    )
   
-  #Ajout d'autres liasons
-  Article.all.each do |article|
-    rand(4).times do
-      ArticlesSupplier.create!(
-          supplier_id: rand(Supplier.all.count),
-          article_id: article.id,
-          supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
-          price: rand(0.5..3000.0).round(2)
-        )
-    end
+    a.save if a.validate
   end
+end
+
+#Quelques devis bidons
+10.times do |i|
+  a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
+  while !a.validate
+    a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
+  end
+  a.save if a.validate
 end

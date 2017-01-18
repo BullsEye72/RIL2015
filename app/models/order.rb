@@ -19,6 +19,6 @@ class Order < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :quote
   
-  validates_presence_of :total_due_calc, :quote, :supplier
+  validates_presence_of :quote, :supplier
   
 end

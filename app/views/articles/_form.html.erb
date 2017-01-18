@@ -6,11 +6,12 @@
       <%= f.input :name, input_html: { disabled: disabled } %>
       <%= f.association :article_group, label: t('article_group').titleize, input_html: { disabled: disabled } %>
       <%= f.association :value_added_tax, label: 'TVA', input_html: { disabled: disabled } %>
-      <%#= f.association :article_supplier, label: t('supplier').titleize, input_html: { disabled: disabled } %>
+      <%#= f.association :suppliers, label: t('supplier').titleize, input_html: { disabled: disabled } %>
       <%= f.input :reference, input_html: { disabled: disabled } %>
-      <%= f.input :description, input_html: { disabled: disabled } %>
+      <%= f.input :description, input_html: { :rows =>8 } %>
+      <%= f.association :articles_caracteristic, label: 'Unité', input_html: { disabled: disabled } %>
     </div>
-
+    
     <div class="form-actions">
       <% if action == :new %>
           <%= f.submit 'Créer' %>

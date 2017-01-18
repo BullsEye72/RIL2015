@@ -20,6 +20,7 @@ class Quote < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :project, :user
+  validates :project_id, :presence => true, :uniqueness => {:scope => :user_id}
   
   def to_label
     "Devis n°#{id}"
