@@ -10,7 +10,7 @@
         <h4 class="modal-title" id="myModalLabel">Êtes vous certain ?</h4>
       </div>
       <div class="modal-body">
-        Êtes vous certain d'effacer cet élément ?
+        Êtes vous certain de vouloir effacer cet élément ?
       </div>
       <div class="modal-footer">
         <%= link_to 'Effacer',  @supplier,  method: :delete, class: 'btn btn-danger' %>
@@ -43,42 +43,32 @@
     <table>
       <thead>
         <tr>
-              <th><%= t('name').titleize %></th>
-              <th><%= 'Ref. Article' %></th>
-              <th><%= 'Ref. Fournisseur' %></th>
-              <th><%= 'Prix' %></th>
-              <th><%= t('description').titleize %></th>
-              <th></th>
+          <th><%= t('name').titleize %></th>
+          <th><%= 'Ref. Article' %></th>
+          <th><%= 'Ref. Fournisseur' %></th>
+          <th><%= 'Prix' %></th>
+          <th><%= t('description').titleize %></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @article_suppliers.each do |ac| %>
+        <% @articles.each do |ac| %>
+          <% as = ac.articles_suppliers.first %>
           <tr>
-                <td><%= ac.article.name %></td>
-                <td><%= ac.article.reference %></td>
-                <td><%= ac.supplier_reference %></td>
-                <td><%= ac.price %></td>
-                <td><%= truncate(ac.article.description) %></td>
-                <td class="text-right">
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                ac.article
-              )
-              %>
+            <td><%= ac.name %></td>
+            <td><%= ac.reference %></td>
+            <td><%= as.supplier_reference %></td>
+            <td><%= as.price %></td>
+            <td><%= truncate(ac.description) %></td>
+            <td class="text-right">
+              <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), ac) %>
               |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_article_path(ac.article)
-              )
-              %>
+              <%= link_to(raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'), edit_article_path(ac) ) %>
               |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                ac.article,
+              <%= link_to(raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),ac,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
-
             </td>
           </tr>
         <% end %>
@@ -86,4 +76,3 @@
     </table>
   </div>
 </div>
-  

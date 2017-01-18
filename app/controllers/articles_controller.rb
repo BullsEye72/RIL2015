@@ -9,18 +9,14 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles =  Article.page(params[:page]).per(15)
-    add_breadcrumb "Accueil"
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    
     add_breadcrumb @article.name
     
-    @suppliers=[]
-    @article_suppliers=ArticleSupplier.joins(:supplier, :article).where(article_id: @article.id)
-    
+    @suppliers=Article.find(@article.id).suppliers
   end
 
   # GET /articles/new

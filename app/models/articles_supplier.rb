@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: article_suppliers
+# Table name: articles_suppliers
 #
 #  id                 :integer          not null, primary key
 #  supplier_id        :integer
@@ -12,11 +12,11 @@
 #
 # Indexes
 #
-#  index_article_suppliers_on_article_id   (article_id)
-#  index_article_suppliers_on_supplier_id  (supplier_id)
+#  index_articles_suppliers_on_article_id   (article_id)
+#  index_articles_suppliers_on_supplier_id  (supplier_id)
 #
 
-class ArticleSupplier < ActiveRecord::Base
+class ArticlesSupplier < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :article
 end

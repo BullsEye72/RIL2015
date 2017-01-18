@@ -12,5 +12,6 @@
 #
 
 class Supplier < ActiveRecord::Base
-  has_and_belongs_to_many :article_suppliers
+  has_many :articles_suppliers
+  has_many :articles, through: :articles_suppliers
 end

@@ -20,13 +20,12 @@ Rails.application.routes.draw do
   
   
   # RESSOURCES
-  resources :commercials
-  resources :projects
-  resources :payments
-  resources :payment_states
-  resources :purchases
-  resources :suppliers
-  resources :customers
+  resources :commercials, path: 'commerciaux'
+  resources :projects, path: 'projets'
+  resources :payments, path: 'paiement'
+  resources :purchases, path: 'achats'
+  resources :suppliers, path: 'fournisseurs'
+  resources :customers, path: 'clients'
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'

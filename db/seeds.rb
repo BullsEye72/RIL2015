@@ -7,28 +7,31 @@ Admin.create!(
 
 # User default
 User.create!(
-  email:                  'user@user.com',
+  email:                  'user@madera.com',
   password:               'user8888',
-  password_confirmation:  'user8888'
+  password_confirmation:  'user8888',
+  lastname:               'Utilisateur par défaut'
 )
 
 # Commercial
 commercial = User.new(
-    email:                  'commercial@commercial.com',
+    email:                  'commercial@madera.com',
     password:               'commercial',
-    password_confirmation:  'commercial'
+    password_confirmation:  'commercial',
+    lastname:               'Service Commercial'
 )
 commercial.add_role :commercial
 commercial.save!
 
 # Achats
 purchaser = User.new(
-    email:                  'purchaser@purchaser.com',
-    password:               'purchaser',
-    password_confirmation:  'purchaser'
+    email:                  'achats@madera.com',
+    password:               'achats88',
+    password_confirmation:  'achats88',
+    lastname:               'Service Achats'
 )
-commercial.add_role :purchaser
-commercial.save!
+purchaser.add_role :purchaser
+purchaser.save!
 
 # PaymentStates
 [
@@ -115,11 +118,23 @@ end
       description: Faker::Lorem.paragraph(3)
     ) 
     
-    ArticleSupplier.create!(
+    ArticlesSupplier.create!(
       supplier_id: Supplier.last.id,
       article_id: Article.last.id,
       supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
       price: rand(0.5..3000.0).round(2)
       )
+  end
+  
+  #Ajout d'autres liasons
+  Article.all.each do |article|
+    rand(4).times do
+      ArticlesSupplier.create!(
+          supplier_id: rand(Supplier.all.count),
+          article_id: article.id,
+          supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
+          price: rand(0.5..3000.0).round(2)
+        )
+    end
   end
 end

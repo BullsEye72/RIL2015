@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @orders = Order.all
-    add_breadcrumb "Accueil"
   end
 
   # GET /orders/1

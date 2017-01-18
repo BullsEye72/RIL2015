@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Derniers devis</h2>
+  </div>
+  
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th><%= 'Num.' %></th>
+          <th><%= 'Date MAJ' %></th>
+          <th><%= 'Fournisseur' %></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @last_orders.each do |lo| %>
+          <tr>
+            <td><%= lo.id %></td>
+            <td><%= format_date(lo.updated_at) %></td>
+            <td><%= Supplier.find(lo.supplier_id).name %></td>
+            <td class="text-right">
+              <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), lo) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

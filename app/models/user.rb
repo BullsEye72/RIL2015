@@ -42,12 +42,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def display_fullname
-    return "#{lastname} #{firstname.first}" if firstname && lastname
+    return "#{lastname.titleize} #{firstname.first.titleize}" if firstname && lastname
+    return "#{lastname.titleize}" if lastname
     email
   end
   
   def to_label
-    "#{id} | #{email}"
+    display_fullname
   end
 
 end

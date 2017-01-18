@@ -21,5 +21,6 @@ class Article < ActiveRecord::Base
   belongs_to :article_group
   belongs_to :value_added_tax
   
-  has_and_belongs_to_many :articles
+  has_many :articles_suppliers
+  has_many :suppliers, through: :articles_suppliers
 end

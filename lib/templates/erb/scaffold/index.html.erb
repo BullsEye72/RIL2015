@@ -20,20 +20,18 @@
         <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
           <tr>
     <% attributes.reject(&:password_digest?).each do |attribute| -%>
-            <td><%%= t <%= singular_table_name %>.<%= attribute.name %> %></td>
+            <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
     <% end -%>
             <td class="text-right">
               <%%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
                 <%= singular_table_name %>
-              )
-              %>
+              ) %>
               |
               <%%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
                 edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
-              )
-              %>
+              ) %>
               |
               <%%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),

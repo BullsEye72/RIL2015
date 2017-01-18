@@ -10,7 +10,7 @@
         <h4 class="modal-title" id="myModalLabel">Êtes vous certain ?</h4>
       </div>
       <div class="modal-body">
-        Êtes vous certain d'effacer cet élément ?
+        Êtes vous certain de vouloir effacer cet élément ?
       </div>
       <div class="modal-footer">
         <%= link_to 'Effacer',  @article,  method: :delete, class: 'btn btn-danger' %>
@@ -43,35 +43,36 @@
     <table>
       <thead>
         <tr>
-              <th><%= t('name').titleize %></th>
-              <th><%= 'Reference' %></th>
-              <th><%= t('price').titleize %></th>
-              <th></th>
+          <th><%= t('name').titleize %></th>
+          <th><%= 'Reference' %></th>
+          <th><%= t('price').titleize %></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @article_suppliers.each do |ac| %>
+        <% @suppliers.each do |ac| %>
+          <% as = ac.articles_suppliers.first %>
           <tr>
-                <td><%= ac.supplier.name %></td>
-                <td><%= ac.supplier_reference %></td>
-                <td><%= ac.price %></td>
+                <td><%= ac.name %></td>
+                <td><%= as.supplier_reference %></td>
+                <td><%= as.price %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                ac.supplier
+                ac
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_supplier_path(ac.supplier)
+                edit_supplier_path(ac)
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                ac.supplier,
+                ac,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
 

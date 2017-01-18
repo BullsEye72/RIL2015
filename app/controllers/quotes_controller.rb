@@ -9,7 +9,6 @@ class QuotesController < ApplicationController
   # GET /quotes.json
   def index
     @quotes = Quote.all
-    add_breadcrumb "Accueil"
   end
 
   # GET /quotes/1
