@@ -15,6 +15,8 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     add_breadcrumb "Commande n°" + @order.id.to_s
+  
+    @order_items=OrderItem.where(order_id: @order.id)
   end
 
   # GET /orders/new
@@ -25,6 +27,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @order_items=OrderItem.where(order_id: @order.id)
   end
 
   # POST /orders
@@ -66,6 +69,20 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def get_total_price ord_id
+    c=0
+    OrderItem.where(order_id: ord_id).each do |oi|
+      c += oi.quantity * oi.articles_supplier.price
+    end
+    return view_context.number_to_currency(c, locale: :fr)
+  end
+  
+  def get_total_items ord_id
+    "%g" % OrderItem.where(order_id: ord_id).sum(:quantity)
+  end
+  helper_method :get_total_price
+  helper_method :get_total_items
 
   private
     # Use callbacks to share common setup or constraints between actions.

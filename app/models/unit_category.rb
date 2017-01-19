@@ -1,18 +1,12 @@
 # == Schema Information
 #
-# Table name: characteristics
+# Table name: unit_categories
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  unit_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_characteristics_on_unit_id  (unit_id)
-#
 
-class Characteristic < ActiveRecord::Base
-  belongs_to :unit
+class UnitCategory < ActiveRecord::Base
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118130542) do
+ActiveRecord::Schema.define(version: 20170119130911) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(version: 20170118130542) do
 
   create_table "articles_caracteristics", force: :cascade do |t|
     t.integer  "article_id"
-    t.integer  "characteristic_id"
+    t.integer  "unit_id"
     t.string   "value"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "articles_caracteristics", ["article_id"], name: "index_articles_caracteristics_on_article_id"
-  add_index "articles_caracteristics", ["characteristic_id"], name: "index_articles_caracteristics_on_characteristic_id"
+  add_index "articles_caracteristics", ["unit_id"], name: "index_articles_caracteristics_on_unit_id"
 
   create_table "articles_suppliers", force: :cascade do |t|
     t.integer  "supplier_id"
@@ -148,6 +148,17 @@ ActiveRecord::Schema.define(version: 20170118130542) do
 
   add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
   add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "articles_supplier_id"
+    t.integer  "order_id"
+    t.decimal  "quantity"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "order_items", ["articles_supplier_id"], name: "index_order_items_on_articles_supplier_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
 
   create_table "orders", force: :cascade do |t|
     t.decimal  "total_due_calc"
@@ -265,12 +276,21 @@ ActiveRecord::Schema.define(version: 20170118130542) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "units", force: :cascade do |t|
+  create_table "unit_categories", force: :cascade do |t|
     t.string   "name"
-    t.text     "regex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.string   "regex"
+    t.integer  "unit_category_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "units", ["unit_category_id"], name: "index_units_on_unit_category_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

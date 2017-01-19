@@ -78,17 +78,27 @@ purchaser.save!
   transfert\ en\ facturation
 ).each { |qs| QuoteState.create! name: qs}
 
+# Catégories d'unités
+[
+  { name: 'Longueur ' },
+  { name: 'Quantité' },
+  { name: 'Surface' },
+  { name: 'Poids' },
+  { name: 'Volume' },
+  { name: 'Autre' }
+].each {|u| UnitCategory.create! u }
+
 # Unités
 [
-  { name: 'U',   regex: '(?<= )[uU]' },
-  { name: 'm²',  regex: '(?<= )([mM][²2])' },
-  { name: 'm³',  regex: '(?<= )([mM][³3])' },
-  { name: 'm',   regex: '(?<= )[mM]' },
-  { name: 'mm',  regex: '(?<= )([mM]{2})' },
-  { name: 'L',   regex: '(?<= )[lL]' },
-  { name: 'T',   regex: '(?<= )[tT]' },
-  { name: 'g',   regex: '(?<= )[gG]' },
-  { name: 'kg',  regex: '(?<= )([kK][gG])' }
+  { name: 'U',   regex: '(?<= )[uU]',       unit_category_id: 2 },
+  { name: 'm²',  regex: '(?<= )([mM][²2])', unit_category_id: 2 },
+  { name: 'm³',  regex: '(?<= )([mM][³3])', unit_category_id: 2 },
+  { name: 'm',   regex: '(?<= )[mM]',       unit_category_id: 2 },
+  { name: 'mm',  regex: '(?<= )([mM]{2})',  unit_category_id: 2 },
+  { name: 'L',   regex: '(?<= )[lL]',       unit_category_id: 2 },
+  { name: 'T',   regex: '(?<= )[tT]',       unit_category_id: 2 },
+  { name: 'g',   regex: '(?<= )[gG]',       unit_category_id: 2 },
+  { name: 'kg',  regex: '(?<= )([kK][gG])', unit_category_id: 2 }
 ].each {|u| Unit.create! u }
 
 # =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
@@ -154,10 +164,25 @@ Supplier.all.each do |supplier|
 end
 
 #Quelques devis bidons
-10.times do |i|
+10.times do
   a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
   while !a.validate
     a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
   end
   a.save if a.validate
 end
+
+# Commandes bidons
+20.times do
+  Order.create!(supplier_id: Supplier.order("RANDOM()").first.id, quote_id: Quote.order("RANDOM()").first.id)
+
+  # Items bidons  
+  rand(5..30).times do
+    OrderItem.create!(articles_supplier_id: ArticlesSupplier.order("RANDOM()").first.id,
+                      order_id: Order.last.id,
+                      quantity: rand(1..10))
+  end
+  
+end
+
+

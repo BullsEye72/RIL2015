@@ -9,33 +9,33 @@
     <table>
       <thead>
         <tr>
-              <th><%= 'Date' %></th>
-              <th><%= 'Total' %></th>
-              <th><%= t('supplier').titleize %></th>
-              <th><%= t('quote').titleize %></th>
-              <th></th>
+          <th><%= t('quote').titleize %></th>
+          <th><%= t('supplier').titleize %></th>
+          <th><%= "Nb. d'articles" %></th>
+          <th><%= 'Total' %></th>
+          <th><%= 'Date' %></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
         <% @orders.each do |order| %>
           <tr>
-                <td><%= format_date(order.updated_at) %></td>
-                <td><%= order.total_due_calc.to_s + " €" %></td>
-                <td><%= order.supplier.name %></td>
-                <td><%= "Devis n°" + order.quote.id.to_s %></td>
-                <td class="text-right">
+            <td><%= order.quote.id %></td>
+            <td><%= order.supplier.name %></td>
+            <td><%= get_total_items(order.id) %></td>
+            <td><%= get_total_price(order.id) %></td>
+            <td><%= format_date(order.updated_at) %></td>
+            <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
                 order
-              )
-              %>
+              ) %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
                 edit_order_path(order)
-              )
-              %>
+              ) %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
