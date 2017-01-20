@@ -6,7 +6,12 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles =  Article.page(params[:page])
+    
+    @articles =  Article.all
+    @articles = @articles.where('name LIKE ?', '%'+params[:nom]+'%') if !params[:nom].blank?
+    @articles = @articles.where('reference LIKE ?', '%'+params[:ref]+'%') if !params[:ref].blank?
+    @articles = @articles.page(params[:page])
+    
   end
 
   # GET /articles/1

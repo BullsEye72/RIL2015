@@ -2,9 +2,27 @@
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
+  
+  
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t('listing articles').titleize %></h2>
+	  <ul class="nav nav-pills nav-justified">
+	    <li class="panel-title"><%= t('listing articles').titleize %></li>
+			  
+			  <li>
+          <%= form_tag(articles_path, method: "get", :class => "form-inline") do %>
+            <%= label_tag(:nom, "Filtrer les résultats : ") %>
+            <%= text_field_tag(:nom, value = params[:nom], :placeholder => "Nom") %>
+            <%= text_field_tag(:ref, value = params[:ref], :placeholder => "Référence") %>
+            <%= submit_tag("Filtrer", name: nil) %>
+          <% end %>
+			  </li>
+				
+		  </ul>
   </div>
+  
+  
+  
+  
   <div class="panel-body">
     <table>
       <thead>
