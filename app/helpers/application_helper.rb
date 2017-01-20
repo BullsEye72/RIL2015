@@ -31,6 +31,13 @@ module ApplicationHelper
   def format_date date
     date.strftime('%d-%m-%Y')
   end
+  
+  def get_list_group_item class_ref, ctrl_ref
+    rep = 'list-group-item'
+    rep += ' disabled' if class_ref != nil && cannot?(:index, class_ref)
+    rep += ' active' if controller.controller_name==ctrl_ref
+    return rep
+  end
 
 
 end

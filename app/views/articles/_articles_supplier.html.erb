@@ -17,26 +17,19 @@
         <% @suppliers.each do |ac| %>
           <% as = ac.articles_suppliers.where(supplier_id: ac.id, article_id: @article.id).first %>
           <tr>
-                <td><%= "#{ac.id} | #{ac.name}" %></td>
-                <td><%= as.supplier_reference %></td>
-                <td><%= number_to_currency(as.price, locale: :fr) %></td>
-                <td class="text-right">
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                ac
-              )
-              %>
-              |
+            <td><%= "#{ac.id} | #{ac.name}" %></td>
+            <td><%= as.supplier_reference %></td>
+            <td><%= number_to_currency(as.price, locale: :fr) %></td>
+            <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_supplier_path(ac)
+                "#", data: { confirm: 'Non fonctionnel : Edition de la ref et prix' }
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                ac,
-                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+                "#", data: { confirm: 'Non fonctionnel : Suppression de la liaison article/supplier' }
               ) %>
 
             </td>

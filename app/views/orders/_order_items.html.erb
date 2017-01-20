@@ -34,11 +34,11 @@
             <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                '#') %>
+                '#', data: { confirm: 'Non fonctionnel : Edition de la quantité' }) %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                '#') %>
+                '#', data: { confirm: 'Non fonctionnel : Suppression de la liaison order/article' }) %>
             </td>
           </tr>
         <% end %>

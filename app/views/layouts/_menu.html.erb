@@ -2,13 +2,13 @@
   <div class="panel-heading">
     <p>MENU</p>
   </div>
-  <div class="panel-body" id="application-menu">
-    <ul>
-      <li><%= link_to 'Accueil', purchases_path , class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Fournisseurs', suppliers_path , class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Articles', articles_path, class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Devis', quotes_path, class: 'btn btn-primary center-block' %></li>
-      <li><%= link_to 'Commandes', orders_path, class: 'btn btn-primary center-block' %></li>
-    </ul>
+
+  <div class="list-group">
+    <%= link_to 'Accueil', purchases_path , class: get_list_group_item(nil, 'purchases') %>
+    <%= link_to 'Fournisseurs', suppliers_path , class: get_list_group_item(Supplier, 'suppliers') %>
+    <%= link_to 'Articles', articles_path, class: get_list_group_item(Article, 'articles') %>
+    <%= link_to 'Devis', quotes_path, class: get_list_group_item(Quote, 'quotes') %>
+    <%= link_to 'Commandes', orders_path, class: get_list_group_item(Order, 'orders') %>
   </div>
+  
 </div>
