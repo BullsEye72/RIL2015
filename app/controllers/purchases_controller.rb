@@ -1,9 +1,8 @@
 class PurchasesController < ApplicationController
-  layout 'application_with_menu'
 
   def index
-    @last_quotes = Quote.order(updated_at: :desc).first(5)
-    @last_orders = Order.order(updated_at: :desc).first(5)
+    @last_quotes = Quote.order(updated_at: :desc).first(10)
+    @last_orders = Order.order(updated_at: :desc).first(10)
   end
 
 end

@@ -1,6 +1,5 @@
 class SuppliersController < ApplicationController
   
-  layout 'application_with_menu'
   add_breadcrumb "Fournisseur", :suppliers_path
   
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
@@ -8,7 +7,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers
   # GET /suppliers.json
   def index
-    @suppliers = Supplier.page(params[:page]).per(15)
+    @suppliers = Supplier.page(params[:page])
   end
 
   # GET /suppliers/1

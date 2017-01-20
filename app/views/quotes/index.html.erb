@@ -44,6 +44,11 @@
         <% end %>
       </tbody>
     </table>
+    <% if @quotes.total_pages > 1 %>
+      <nav aria-label="Page navigation" class="text-center">
+        <%= paginate @quotes, window: 1, outer_window: 1 %>
+      </nav>
+    <% end %>
 
     <br>
 

@@ -1,6 +1,4 @@
 class ArticlesController < ApplicationController
-    
-  layout 'application_with_menu'
   add_breadcrumb "Articles", :articles_path
   
   before_action :set_article, only: [:show, :edit, :update, :destroy]
@@ -8,7 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles =  Article.page(params[:page]).per(15)
+    @articles =  Article.page(params[:page])
   end
 
   # GET /articles/1

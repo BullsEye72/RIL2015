@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Derniers Projets</h2>
+  </div>
+  
+  <div class="panel-body">
+    <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Num. projet</th>
+              <th>Nom client</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @last_projects.each do |p| %>
+            <tr>
+              <td><%= format_date(p.created_at) %></td>
+              <td><%= link_to p.id, project_path(p.id) %></td>
+              <td><%= p.customer.fullname %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>

@@ -48,6 +48,11 @@
         <% end %>
       </tbody>
     </table>
+    <% if @orders.total_pages > 1 %>
+      <nav aria-label="Page navigation" class="text-center">
+        <%= paginate @orders, window: 1, outer_window: 1 %>
+      </nav>
+    <% end %>
 
     <br>
 

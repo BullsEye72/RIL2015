@@ -1,0 +1,81 @@
+<% provide(:title, t('projects').titleize) %>
+<% provide(:subtitle, 'Accueil') %>
+
+<div class="panel panel-default">
+  
+  <div class="panel-heading">
+	  <ul class="nav nav-pills nav-justified">
+	    <li class="panel-title"><%= t('listing projects').titleize %></li>
+			  
+			  <li>
+  				<form class="form-inline">
+            <div class="form-group">
+              <label for="elementRecherche">Recherche</label>
+              <input type="text" class="form-control" id="elementRecherche" placeholder="Nom client / Num projet">
+            </div>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+          </form>
+			  </li>
+				
+			  <li>
+				  <%= select("triResultat", "select_id",
+           [
+             'Tri',
+             ['Nom de client A-Z', 'nameAZ'],
+             ['Nom de client Z-A', 'nameZA'],
+             ['Numéro de projet 0-N', 'id0N'],
+             ['Numéro de projet N-0', 'idN0'],
+             ['Plus récent', 'dateON'],
+             ['Plus ancient', 'dateNO']
+             ],
+             {selected: params[:sort], disabled: 'Tri'})
+          %>
+			  </li>
+		  </ul>
+  </div>
+
+  <div class="panel-body">
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Num. projet</th>
+          <th>Nom client</th>
+          <th>Description</th>
+        </tr>
+
+        <% @projects.each do |p| %>
+          <tr>
+            <td><%= format_date(p.created_at) %></td>
+            <td><%= link_to p.id, project_path(p.id) %></td>
+            <td><%= p.customer.fullname %></td>
+            <td><%= truncate(p.description) %></td>
+          </tr>
+        <% end %>
+      </table>
+      <% if @projects.total_pages > 1 %>
+        <nav aria-label="Page navigation" class="text-center">
+          <%= paginate @projects, window: 1, outer_window: 1 %>
+        </nav>
+      <% end %>
+
+  </div>
+</div>
+
+<script>
+  $(function () {
+    var actualUrl = '//' + location.host + location.pathname
+
+    $('#triResultat_select_id').on('change', function () {
+      if ($(this).val() == 0) {
+        sort = '';
+      } else {
+        sort = $(this).val();
+      }
+
+      var finalUrl = actualUrl + "<%= get_params %>" + sort;
+      window.location.href = finalUrl;
+
+      return false;
+    });
+  });
+</script>

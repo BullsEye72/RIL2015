@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
-    
-  layout 'application_with_menu'
+
   add_breadcrumb "Commandes", :orders_path
   
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -8,7 +7,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.page(params[:page])
   end
 
   # GET /orders/1

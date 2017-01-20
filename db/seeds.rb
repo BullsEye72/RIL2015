@@ -173,7 +173,12 @@ end
 #Quelques devis bidons
 10.times do
   a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
+  
+  loop_cnt=0
   while !a.validate
+    loop_cnt+=1
+    break if loop_cnt>10
+    
     a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
   end
   a.save if a.validate

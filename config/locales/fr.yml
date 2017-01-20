@@ -266,6 +266,7 @@ fr:
   listing quotes: liste des devis
   listing orders: liste des commandes
   listing articles: liste des articles
+  listing projects: liste des projets
   quote: devis
   name: nom
   value: valeur
@@ -280,6 +281,7 @@ fr:
   order: commande
   description: description
   project: projet
+  projects: projets
   user: utilisateur
   article_group: type d'article
   price: prix

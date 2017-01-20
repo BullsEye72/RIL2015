@@ -1,6 +1,4 @@
 class QuotesController < ApplicationController
-  
-  layout 'application_with_menu'
   add_breadcrumb "Devis", :quotes_path
   
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
@@ -8,7 +6,7 @@ class QuotesController < ApplicationController
   # GET /quotes
   # GET /quotes.json
   def index
-    @quotes = Quote.all
+    @quotes = Quote.page(params[:page])
   end
 
   # GET /quotes/1
