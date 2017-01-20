@@ -1,41 +1,41 @@
-<% provide(:title, t('quote')) %>
-<% provide(:subtitle, 'Liste') %>
-
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t('listing quotes').titleize %></h2>
+    Fournisseurs correspondants
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
-              <th><%= t('project').titleize %></th>
-              <th><%= t('user').titleize %></th>
-              <th></th>
+          <th><%= t('name').titleize %></th>
+          <th><%= 'Reference' %></th>
+          <th><%= 'Prix HT' %></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @quotes.each do |quote| %>
+        <% @suppliers.each do |ac| %>
+          <% as = ac.articles_suppliers.where(supplier_id: ac.id, article_id: @article.id).first %>
           <tr>
-                <td><%= "#{quote.project.id} |  #{quote.project.customer.fullname}" %></td>
-                <td><%= quote.user.display_fullname %></td>
+                <td><%= "#{ac.id} | #{ac.name}" %></td>
+                <td><%= as.supplier_reference %></td>
+                <td><%= number_to_currency(as.price, locale: :fr) %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                quote
+                ac
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_quote_path(quote)
+                edit_supplier_path(ac)
               )
               %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                quote,
+                ac,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
 
@@ -44,9 +44,5 @@
         <% end %>
       </tbody>
     </table>
-
-    <br>
-
-    <%= link_to "Nouveau #{t('quote')}", new_quote_path, class: 'btn btn-default' %>
   </div>
 </div>

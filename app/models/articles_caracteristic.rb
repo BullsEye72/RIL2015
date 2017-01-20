@@ -18,4 +18,14 @@
 class ArticlesCaracteristic < ActiveRecord::Base
   belongs_to :article
   belongs_to :unit
+  
+  validates :article_id, :presence => true, :uniqueness => {:scope => :unit_id}
+  
+  def to_label
+    u=unit.name
+    c=unit.unit_category.name
+    v=value
+    return "[#{c}] #{v} #{u}"
+    #return "#{v} #{u}"
+  end
 end

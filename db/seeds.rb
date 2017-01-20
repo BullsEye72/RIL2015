@@ -91,14 +91,14 @@ purchaser.save!
 # Unités
 [
   { name: 'U',   regex: '(?<= )[uU]',       unit_category_id: 2 },
-  { name: 'm²',  regex: '(?<= )([mM][²2])', unit_category_id: 2 },
-  { name: 'm³',  regex: '(?<= )([mM][³3])', unit_category_id: 2 },
-  { name: 'm',   regex: '(?<= )[mM]',       unit_category_id: 2 },
-  { name: 'mm',  regex: '(?<= )([mM]{2})',  unit_category_id: 2 },
-  { name: 'L',   regex: '(?<= )[lL]',       unit_category_id: 2 },
-  { name: 'T',   regex: '(?<= )[tT]',       unit_category_id: 2 },
-  { name: 'g',   regex: '(?<= )[gG]',       unit_category_id: 2 },
-  { name: 'kg',  regex: '(?<= )([kK][gG])', unit_category_id: 2 }
+  { name: 'm²',  regex: '(?<= )([mM][²2])', unit_category_id: 3 },
+  { name: 'm³',  regex: '(?<= )([mM][³3])', unit_category_id: 5 },
+  { name: 'm',   regex: '(?<= )[mM]',       unit_category_id: 1 },
+  { name: 'mm',  regex: '(?<= )([mM]{2})',  unit_category_id: 1 },
+  { name: 'L',   regex: '(?<= )[lL]',       unit_category_id: 5 },
+  { name: 'T',   regex: '(?<= )[tT]',       unit_category_id: 4 },
+  { name: 'g',   regex: '(?<= )[gG]',       unit_category_id: 4 },
+  { name: 'kg',  regex: '(?<= )([kK][gG])', unit_category_id: 4 }
 ].each {|u| Unit.create! u }
 
 # =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
@@ -139,6 +139,13 @@ end
       reference: Faker::Code.asin,
       description: Faker::Lorem.paragraph(3)
     )
+    
+    a=ArticlesCaracteristic.new(
+      article_id: Article.last.id,
+      unit_id: Unit.order('RANDOM()').first.id,
+      value: rand(1000)
+      )
+    a.save if a.validate
     
     ArticlesSupplier.create!(
       supplier_id: Supplier.last.id,

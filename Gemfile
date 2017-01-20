@@ -61,6 +61,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'puma'
   gem 'rename'
+  gem 'rails-erd'
 end
 
 group :development do

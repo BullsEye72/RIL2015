@@ -24,4 +24,6 @@ class Article < ActiveRecord::Base
   has_many :articles_caracteristic
   has_many :articles_suppliers
   has_many :suppliers, through: :articles_suppliers
+  
+  accepts_nested_attributes_for :articles_suppliers
 end
