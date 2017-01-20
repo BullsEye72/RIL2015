@@ -8,29 +8,25 @@
 	    <li class="panel-title"><%= t('listing projects').titleize %></li>
 			  
 			  <li>
-  				<form class="form-inline">
-            <div class="form-group">
-              <label for="elementRecherche">Recherche</label>
-              <input type="text" class="form-control" id="elementRecherche" placeholder="Nom client / Num projet">
-            </div>
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-          </form>
+          <%= form_tag(projects_path, method: "get", :class => "form-inline") do %>
+            <%= label_tag(:like, "Filtrer les résultats : ") %>
+            <%= text_field_tag(:like, value = params[:like], :placeholder => "Prénom ou Nom") %>
+            <%= select_tag(:sort, options_for_select(
+              [
+               ['Tri',0,disabled:true],
+               ['Nom de client A-Z', 'nameAZ'],
+               ['Nom de client Z-A', 'nameZA'],
+               ['Numéro de projet 0-N', 'id0N'],
+               ['Numéro de projet N-0', 'idN0'],
+               ['Plus récent', 'dateON'],
+               ['Plus ancient', 'dateNO']
+              ],  params[:sort] || 0
+              )) %>
+            
+            <%= submit_tag("Filtrer", name: nil) %>
+          <% end %>
 			  </li>
 				
-			  <li>
-				  <%= select("triResultat", "select_id",
-           [
-             'Tri',
-             ['Nom de client A-Z', 'nameAZ'],
-             ['Nom de client Z-A', 'nameZA'],
-             ['Numéro de projet 0-N', 'id0N'],
-             ['Numéro de projet N-0', 'idN0'],
-             ['Plus récent', 'dateON'],
-             ['Plus ancient', 'dateNO']
-             ],
-             {selected: params[:sort], disabled: 'Tri'})
-          %>
-			  </li>
 		  </ul>
   </div>
 
@@ -61,21 +57,3 @@
   </div>
 </div>
 
-<script>
-  $(function () {
-    var actualUrl = '//' + location.host + location.pathname
-
-    $('#triResultat_select_id').on('change', function () {
-      if ($(this).val() == 0) {
-        sort = '';
-      } else {
-        sort = $(this).val();
-      }
-
-      var finalUrl = actualUrl + "<%= get_params %>" + sort;
-      window.location.href = finalUrl;
-
-      return false;
-    });
-  });
-</script>

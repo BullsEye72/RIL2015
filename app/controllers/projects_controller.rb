@@ -44,9 +44,14 @@ class ProjectsController < ApplicationController
     else
       @projects = Project.joins(:customer).order('customers.lastname ASC')
     end
-
+    
+    if !params[:like].blank?
+      @projects = Project.joins(:customer).where('firstname LIKE ? or lastname LIKE ?', '%'+params[:like]+'%','%'+params[:like]+'%')
+    end
     @projects = @projects.page @param_page[:value]
   end
+
+  
 
   # GET /project/:id
   def show

@@ -29,5 +29,7 @@ class Project < ActiveRecord::Base
     "#{id} | #{customer.fullname}"
   end
   
+
+  
 end
 
