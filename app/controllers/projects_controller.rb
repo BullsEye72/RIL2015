@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     
     @project = Project.new(project_params)
     if @project.save
-      redirect_to commercials_path, notice: 'Le projet à bien été créé.'
+      redirect_to commercials_path, notice: 'Le projet a bien été créé.'
       # redirect_to @project, notice: 'Le projet à bien été créé.'
     else
       render :new

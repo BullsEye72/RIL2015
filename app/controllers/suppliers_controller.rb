@@ -38,7 +38,7 @@ class SuppliersController < ApplicationController
 
     respond_to do |format|
       if @supplier.save
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
+        format.html { redirect_to @supplier, notice: 'Le fournisseur a été créé avec succès.' }
         format.json { render :show, status: :created, location: @supplier }
       else
         format.html { render :new }

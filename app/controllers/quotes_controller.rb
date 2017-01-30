@@ -32,7 +32,7 @@ class QuotesController < ApplicationController
 
     respond_to do |format|
       if @quote.save
-        format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
+        format.html { redirect_to @quote, notice: 'Le devis a été créé avec succès.' }
         format.json { render :show, status: :created, location: @quote }
       else
         format.html { render :new }
