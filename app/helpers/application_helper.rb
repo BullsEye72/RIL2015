@@ -31,21 +31,12 @@ module ApplicationHelper
   def format_date date
     date.strftime('%d-%m-%Y')
   end
-  
-  def get_list_group_item class_ref, ctrl_ref
-    rep = 'list-group-item'
-    rep += ' disabled' if class_ref != nil && cannot?(:index, class_ref)
-    rep += ' active' if controller.controller_name==ctrl_ref
-    return rep
-  end
-  
-  def get_list_group_link class_ref, link
-    if can?(:index, class_ref)
-      return link
-    else
-      return '#'
-    end
-  end
 
+  def menu_item label, link, action, model, controller_name = model.name.tableize.to_s
+    css_class = 'list-group-item'
+    css_class += ' disabled' if cannot? action, model
+    css_class += ' active' if controller.controller_name == controller_name.to_s
+    link_to(label, link, class: css_class)
+  end
 
 end

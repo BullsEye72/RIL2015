@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_customers, only: [:new, :create, :edit]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  #authorize_resource :class => false
+  load_and_authorize_resource
   add_breadcrumb "Projets" #, :projects_path
   
   # GET /projects/new

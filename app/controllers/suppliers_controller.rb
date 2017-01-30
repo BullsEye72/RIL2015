@@ -1,5 +1,6 @@
 class SuppliersController < ApplicationController
-  
+  load_and_authorize_resource
+
   add_breadcrumb "Fournisseur", :suppliers_path
   
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]

@@ -4,9 +4,10 @@ class Ability
   def initialize(user)
     #Commerciaux
     if user.has_role? :commercial
+      can :index, :commercial
       can :manage, Project
       can :manage, Quote
-      can [:show], [Order,Article,Supplier]
+      can :show, [Order,Article,Supplier]
     end
 
     #Service Achats
@@ -14,7 +15,7 @@ class Ability
       can :manage, Order
       can :manage, Article
       can :manage, Supplier
-      can [:show], [Quote,Project]
+      can :show, [Quote,Project]
     end
   end
 end

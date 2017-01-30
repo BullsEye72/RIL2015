@@ -1,5 +1,5 @@
 class CommercialsController < ApplicationController
-  #authorize_resource :class => false
+  authorize_resource :class => false
   
   def index
     @last_quotes = Quote.order(updated_at: :desc).first(10)

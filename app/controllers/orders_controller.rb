@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  load_and_authorize_resource
   add_breadcrumb "Commandes", :orders_path
   
   before_action :set_order, only: [:show, :edit, :update, :destroy]
