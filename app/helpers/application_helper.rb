@@ -38,6 +38,14 @@ module ApplicationHelper
     rep += ' active' if controller.controller_name==ctrl_ref
     return rep
   end
+  
+  def get_list_group_link class_ref, link
+    if can?(:index, class_ref)
+      return link
+    else
+      return '#'
+    end
+  end
 
 
 end

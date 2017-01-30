@@ -37,14 +37,32 @@
           <th>Num. projet</th>
           <th>Nom client</th>
           <th>Description</th>
+          <th></th>
         </tr>
 
-        <% @projects.each do |p| %>
+        <% @projects.each do |project| %>
           <tr>
-            <td><%= format_date(p.created_at) %></td>
-            <td><%= link_to p.id, project_path(p.id) %></td>
-            <td><%= p.customer.fullname %></td>
-            <td><%= truncate(p.description) %></td>
+            <td><%= format_date(project.created_at) %></td>
+            <td><%= link_to project.id, project_path(project.id) %></td>
+            <td><%= project.customer.fullname %></td>
+            <td><%= truncate(project.description) %></td>
+            <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                project
+              ) %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_project_path(project)
+              ) %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                project,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+            </td>
           </tr>
         <% end %>
       </table>
@@ -53,7 +71,10 @@
           <%= paginate @projects, window: 1, outer_window: 1 %>
         </nav>
       <% end %>
+      
+      <br />
+      
+      <%= link_to "Nouveau #{t('project')}", new_project_path, class: 'btn btn-default' %>
 
   </div>
 </div>
-

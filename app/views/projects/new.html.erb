@@ -1,26 +1,8 @@
-<% provide(:title, 'Projet') %>
+<% provide(:title, t('project')) %>
 <% provide(:subtitle, 'Création') %>
 
-<div class="row">
-  <div class="col-sm-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= link_to 'Créer devis', '#', class: 'btn btn-primary disabled' %>
-      </div>
-      <div class="panel-body">
-        <p>Devis du projet :</p>
-        <ul class="list-group">
-          <li class="list-group-item">Aucun devis</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-  <div class="col-sm-8">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= render 'form', action: :new %>
-      </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= render 'form', action: :new %>
   </div>
 </div>
