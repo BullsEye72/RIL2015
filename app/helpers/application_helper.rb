@@ -43,7 +43,7 @@ module ApplicationHelper
     if can?(:index, class_ref)
       return link
     else
-      return '#'
+      return ''
     end
   end
 

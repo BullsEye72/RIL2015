@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'
 
+  # URL CUSTOM
+  delete 'order_item_destroy/:id', to: 'order_item#destroy'
+
   # FROALA (WYSIWYG)
   post '/froala_upload' => 'froala#upload'
   post '/froala_manage' => 'froala#manage'

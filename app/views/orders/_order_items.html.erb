@@ -32,20 +32,24 @@
             <td><%= as.price %></td>
             <td><%= oi.quantity * as.price %></td>
             <td class="text-right">
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                '#', data: { confirm: 'Non fonctionnel : Edition de la quantité' }) %>
-              |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                '#', data: { confirm: 'Non fonctionnel : Suppression de la liaison order/article' }) %>
+              <% if action == :edit %>
+                <%= link_to(
+                  raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                  '#', data: { confirm: 'Non fonctionnel : Edition de la quantité' }) %>
+                |
+                <%= link_to(
+                  raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                  '/order_item_destroy/'+oi.id.to_s,
+                  method: :delete,
+                  data: { confirm: 'Non fonctionnel : Suppression de la liaison order/article' }) %>
+              <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
       
       <tfoot>
-        <td></td>
+        <td>Total :</td>
         <td><%= get_total_items(params[:id]) %></td>
         <td></td>
         <td><%= get_total_price(params[:id]) %></td>

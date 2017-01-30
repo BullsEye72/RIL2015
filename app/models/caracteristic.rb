@@ -14,5 +14,7 @@
 #
 
 class Caracteristic < ActiveRecord::Base
+  default_scope { where(:deleted_at => nil) }
+    
   belongs_to :unit
 end

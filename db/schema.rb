@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119130911) do
+ActiveRecord::Schema.define(version: 20170130145347) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170119130911) do
     t.text     "description"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.datetime "deleted_at"
   end
 
   add_index "articles", ["article_group_id"], name: "index_articles_on_article_group_id"
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 20170119130911) do
     t.integer  "quote_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
   end
 
   add_index "orders", ["quote_id"], name: "index_orders_on_quote_id"
@@ -274,6 +276,7 @@ ActiveRecord::Schema.define(version: 20170119130911) do
     t.string   "fax_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "deleted_at"
   end
 
   create_table "unit_categories", force: :cascade do |t|
@@ -288,6 +291,7 @@ ActiveRecord::Schema.define(version: 20170119130911) do
     t.integer  "unit_category_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.datetime "deleted_at"
   end
 
   add_index "units", ["unit_category_id"], name: "index_units_on_unit_category_id"
