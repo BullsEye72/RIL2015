@@ -1,7 +1,7 @@
 class QuotesController < ApplicationController
   load_and_authorize_resource
   add_breadcrumb "Devis", :quotes_path
-  
+
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
 
   # GET /quotes

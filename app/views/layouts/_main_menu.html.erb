@@ -1,0 +1,20 @@
+<ul class="nav navbar-nav navbar-left">
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      Menu <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <%= main_menu_item('Commerciaux', commercials_path, :index, :commercial, :commercials) %>
+      <%= main_menu_item('Achats', purchases_path, :index, :purchase, :purchases) %>
+      <%= main_menu_item('Projets', projects_path, :index, Project) %>
+      <%= main_menu_item('Fournisseurs', suppliers_path, :index, Supplier) %>
+      <%= main_menu_item('Articles', articles_path, :index, Article) %>
+      <%= main_menu_item('Devis', quotes_path, :index, Quote) %>
+      <%= main_menu_item('Commandes', orders_path, :index, Order) %>
+    </ul>
+  </li>
+
+</ul>
+
+

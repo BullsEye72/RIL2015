@@ -32,11 +32,11 @@ module ApplicationHelper
     date.strftime('%d-%m-%Y')
   end
 
-  def menu_item label, link, action, model, controller_name = model.name.tableize.to_s
-    css_class = 'list-group-item'
+  def main_menu_item label, link, action, model, controller_name = model.name.tableize.to_s
+    css_class = ''
     css_class += ' disabled' if cannot? action, model
     css_class += ' active' if controller.controller_name == controller_name.to_s
-    link_to(label, link, class: css_class)
+    raw "<li class='#{css_class}'>#{link_to(label, link)}</li>"
   end
 
 end
