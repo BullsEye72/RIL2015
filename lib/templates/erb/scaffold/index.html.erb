@@ -47,6 +47,6 @@
 
     <br>
 
-    <%%= link_to "Nouveau #{t('<%= singular_table_name %>').lowercase}", new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
+    <%%= link_to "Nouveau #{t('<%= singular_table_name %>').downcase}", new_<%= singular_table_name %>_path, class: 'btn btn-default' %>
   </div>
 </div>

@@ -1,0 +1,46 @@
+<% provide(:title, t(:order_item).titleize) %>
+<% provide(:subtitle, 'Liste') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= t 'Listing order_items' %></h2>
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+              <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @order_items.each do |order_item| %>
+          <tr>
+                <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                order_item
+              ) %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                edit_order_item_path(order_item)
+              ) %>
+              |
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                order_item,
+                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+              ) %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to "Nouveau #{t('order_item').downcase}", new_order_item_path, class: 'btn btn-default' %>
+  </div>
+</div>

@@ -22,3 +22,4 @@
 //= stub rails_admin/custom/ui.js
 //= stub 'ie'
 
+

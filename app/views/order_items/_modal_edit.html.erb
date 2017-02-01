@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="modalLabel">
+    Edition de l'article <%= @order_item.articles_supplier.article.name %>
+  </h4>
+</div>
+
+<%= simple_form_for(@order_item,  wrapper: :horizontal_form) do |f| %>
+
+  <div class="modal-body">
+    <%= f.error_notification %>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Référence</label>
+      <div class="col-sm-9">
+        <p class="form-control-static"><%= @order_item.articles_supplier.supplier_reference %></p>
+      </div>
+    </div>
+    <%= f.input :quantity %>
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit 'Mettre à jour' %>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+  </div>
+
+<% end %>

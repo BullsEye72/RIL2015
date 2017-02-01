@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :orders
-  resources :quotes
-  resources :articles
-  resources :suppliers
+
   # USERS & ADMINISTRATION
   devise_for :admins
   devise_for :users,
@@ -21,11 +18,15 @@ Rails.application.routes.draw do
   
   # RESSOURCES
   resources :commercials, path: 'commerciaux'
-  resources :projects, path: 'projets'
-  resources :payments, path: 'paiement'
-  resources :purchases, path: 'achats'
-  resources :suppliers, path: 'fournisseurs'
-  resources :customers, path: 'clients'
+  resources :projects,    path: 'projets'
+  resources :payments,    path: 'paiement'
+  resources :purchases,   path: 'achats'
+  resources :suppliers,   path: 'fournisseurs'
+  resources :customers,   path: 'clients'
+  resources :orders,      path: 'commande'
+  resources :quotes,      path: 'devis'
+  resources :articles
+  resources :order_items
 
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'

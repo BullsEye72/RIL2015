@@ -1,3 +1,12 @@
+<!-- Modal -->
+<div class="modal fade" id="edit-order-item" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
 <div class="panel panel-default">
   
   <div class="panel-heading">
@@ -9,50 +18,59 @@
     <% if action_name == 'edit' %>
       <button type="button" class="btn btn-default">Ajouter article</button>
     <% end %>
-    
-    <table>
-      
-      <thead>
+
+    <div class="table-responsive">
+      <table>
+
+        <thead>
         <tr>
           <th><%= 'Nom' %></th>
+          <th><%= 'Référence Fournisseur' %></th>
           <th><%= 'Qté.' %></th>
           <th><%= 'Prix unit.' %></th>
           <th><%= 'Total HT' %></th>
           <th></th>
         </tr>
-      </thead>
+        </thead>
 
-      <tbody>
+        <tbody>
         <% @order_items.each do |oi| %>
-          <% as = oi.articles_supplier %>
-          <% art = as.article %>
-          <tr>
-            <td><%= art.name %></td>
-            <td><%= "%g" % oi.quantity %></td>
-            <td><%= as.price %></td>
-            <td><%= oi.quantity * as.price %></td>
-            <td class="text-right">
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                '#', data: { confirm: 'Non fonctionnel : Edition de la quantité' }) %>
-              |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                '#', data: { confirm: 'Non fonctionnel : Suppression de la liaison order/article' }) %>
-            </td>
-          </tr>
+            <% as = oi.articles_supplier %>
+            <% art = as.article %>
+            <tr>
+              <td><%= art.name %></td>
+              <td><%= oi.articles_supplier.supplier_reference %></td>
+              <td><%= "%g" % oi.quantity %></td>
+              <td><%= as.price %></td>
+              <td><%= oi.quantity * as.price %></td>
+              <td class="text-right">
+                <%= link_to(
+                        raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                        edit_order_item_path(oi),
+                        remote: true
+                    ) %>
+                |
+                <%= link_to(
+                        raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                        '#',
+                        data: {confirm: 'Non fonctionnel : Suppression de la liaison order/article'}
+                    ) %>
+              </td>
+            </tr>
         <% end %>
-      </tbody>
-      
-      <tfoot>
+        </tbody>
+
+        <tfoot>
         <td></td>
         <td><%= get_total_items(params[:id]) %></td>
         <td></td>
         <td><%= get_total_price(params[:id]) %></td>
         <td></td>
-      </tfoot>
-      
-    </table>
+        </tfoot>
+
+      </table>
+    </div>
+
     
   </div>
 
