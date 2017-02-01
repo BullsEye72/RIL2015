@@ -50,11 +50,11 @@
                         remote: true
                     ) %>
                 |
-                <%= link_to(
-                        raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                        '#',
-                        data: {confirm: 'Non fonctionnel : Suppression de la liaison order/article'}
-                    ) %>
+               <%= link_to(
+                  raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                  order_item_path(oi),
+                  method: :delete,
+                  data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
               </td>
             </tr>
         <% end %>
