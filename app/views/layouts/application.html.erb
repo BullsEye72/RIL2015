@@ -17,23 +17,6 @@
 
 <%= render 'layouts/header' %>
 
-<% content_for :content do %>
-
-    <div class="row" id="controller-<%= params[:controller] %>">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-2">
-            <%= render 'layouts/menu' %>
-          </div>
-          <div class="col-md-10">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<% end %>
-
 <div class="container-fluid">
   <%= render 'layouts/flash_messages', flash: flash %>
   <%= content_for?(:content) ? yield(:content) : yield %></div>

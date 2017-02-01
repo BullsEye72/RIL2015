@@ -1,5 +1,6 @@
 class SuppliersController < ApplicationController
-  
+  load_and_authorize_resource
+
   add_breadcrumb "Fournisseur", :suppliers_path
   
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
@@ -40,7 +41,7 @@ class SuppliersController < ApplicationController
 
     respond_to do |format|
       if @supplier.save
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
+        format.html { redirect_to @supplier, notice: 'Le fournisseur a été créé avec succès.' }
         format.json { render :show, status: :created, location: @supplier }
       else
         format.html { render :new }

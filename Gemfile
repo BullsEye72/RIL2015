@@ -45,7 +45,7 @@ gem 'cancancan', '~> 1.10'
 gem 'rolify'
 gem 'permanent_records', '~> 4.2', '>= 4.2.7'
 gem 'breadcrumbs_on_rails'
-gem 'composite_primary_keys', '~> 8'
+gem 'faker'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -57,7 +57,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'pry-byebug'
-  gem 'faker'
   gem 'letter_opener'
   gem 'puma'
   gem 'rename'

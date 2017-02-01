@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_customers, only: [:new, :create, :edit]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  #authorize_resource :class => false
+  load_and_authorize_resource
   add_breadcrumb "Projets" #, :projects_path
   
   # GET /projects/new
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     
     @project = Project.new(project_params)
     if @project.save
-      redirect_to commercials_path, notice: 'Le projet à bien été créé.'
+      redirect_to commercials_path, notice: 'Le projet a bien été créé.'
       # redirect_to @project, notice: 'Le projet à bien été créé.'
     else
       render :new

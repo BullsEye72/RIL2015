@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
           <span class="sr-only">MENU</span>
           <i class="fa fa-bars"></i>
         </button>
@@ -10,12 +10,16 @@
           MADERA
         </a>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="main-navbar">
+
+        <%= render 'layouts/main_menu' %>
+
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to(current_user.display_fullname, edit_user_registration_path) %></li>
 
           <%= render 'devise/menu/login_items' %>
         </ul>
+
       </div>
   </div>
 </nav>
