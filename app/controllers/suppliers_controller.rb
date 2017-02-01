@@ -27,6 +27,8 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1/edit
   def edit
     add_breadcrumb "Editer " + @supplier.name
+    
+    @articles=Supplier.find(@supplier.id).articles
   end
 
   # POST /suppliers

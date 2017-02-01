@@ -16,5 +16,12 @@ class Ability
       can :manage, Supplier
       can [:show], [Quote,Project]
     end
+    
+    #BE
+    if user.has_role? :conceptor
+      can :manage, Article
+      can :manage, Supplier
+      can [:show], [Quote,Project]
+    end
   end
 end

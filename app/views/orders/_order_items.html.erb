@@ -39,7 +39,7 @@
                 |
                 <%= link_to(
                   raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                  '/order_item_destroy/'+oi.id.to_s,
+                  order_item_path(oi),
                   method: :delete,
                   data: { confirm: 'Non fonctionnel : Suppression de la liaison order/article' }) %>
               <% end %>

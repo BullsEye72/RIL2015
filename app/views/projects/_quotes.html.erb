@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Devis correspondants
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th><%= t('project').titleize %></th>
+          <th><%= t('user').titleize %></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @quotes.each do |quote| %>
+        <tr>
+          <td><%= "#{quote.project.id} |  #{quote.project.customer.fullname}" %></td>
+          <td><%= quote.user.display_fullname %></td>
+          <td class="text-right">
+            <%= link_to(
+              raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+              quote
+              )
+            %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

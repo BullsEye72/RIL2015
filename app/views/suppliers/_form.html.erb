@@ -15,6 +15,7 @@
       <% end %>
       <% if action == :edit %>
           <%= f.submit 'Mettre à jour' %>
+          <%= link_to "Ajouter article", '', tarte: :empion, class: 'btn btn-default' %>
       <% end %>
       <%= link_to('Annuler', :back, class: 'btn btn-default pull-right') %>
     </div>

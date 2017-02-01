@@ -30,6 +30,9 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    add_breadcrumb "Editer " + @article.name
+    
+    @suppliers=Article.find(@article.id).suppliers
   end
 
   # POST /articles

@@ -1,18 +1,4 @@
 <div class="panel panel-default">
-  <div class="panel-body">
-    <%= render 'form', action: :show %>
-    <a href="<%= edit_supplier_path %>" class="btn btn-primary">
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
-      Editer
-    </a>
-    <button class="btn-danger" data-toggle="modal" data-target="#delete">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
-      Supprimer
-    </button>
-  </div>
-</div>
-
-<div class="panel panel-default">
   <div class="panel-heading">
     Articles correspondants
   </div>
@@ -31,23 +17,27 @@
 
       <tbody>
         <% @articles.each do |ac| %>
-          <% as = ac.articles_suppliers.first %>
-          <tr>
-            <td><%= ac.name %></td>
-            <td><%= ac.reference %></td>
-            <td><%= as.supplier_reference %></td>
-            <td><%= number_to_currency(as.price, locale: :fr) %></td>
-            <td><%= truncate(ac.description) %></td>
-            <td class="text-right">
-              <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), ac) %>
-              |
-              <%= link_to(raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'), edit_article_path(ac) ) %>
-              |
-              <%= link_to(raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),ac,
-                method: :delete, data: { confirm: 'Êtes vous certain ?' }
+        <% as = ac.articles_suppliers.first %>
+        <tr>
+          <td><%= ac.name %></td>
+          <td><%= ac.reference %></td>
+          <td><%= as.supplier_reference %></td>
+          <td><%= number_to_currency(as.price, locale: :fr) %></td>
+          <td><%= truncate(ac.description) %></td>
+          <td class="text-right">
+            <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), ac) %>
+            <% if action == :edit %>
+            |
+            <%= link_to(raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+              "#", data: { confirm: 'Modification de la reference et prix' } ) %>
+            |
+            <%= link_to(raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+              articles_supplier_path(ac),
+              method: :delete, data: { confirm: 'Suppresion : Êtes vous certain ?' }
               ) %>
-            </td>
-          </tr>
+            <% end %>
+          </td>
+        </tr>
         <% end %>
       </tbody>
     </table>

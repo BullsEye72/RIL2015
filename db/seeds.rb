@@ -25,13 +25,23 @@ commercial.save!
 
 # Achats
 purchaser = User.new(
-    email:                  'achats@madera.com',
-    password:               'achats88',
-    password_confirmation:  'achats88',
+    email:                  'achat@madera.com',
+    password:               'achat888',
+    password_confirmation:  'achat888',
     lastname:               'Service Achats'
 )
 purchaser.add_role :purchaser
 purchaser.save!
+
+# BE
+conceptor = User.new(
+    email:                  'betudes@madera.com',
+    password:               'betudes88',
+    password_confirmation:  'betudes88',
+    lastname:               "Bureau d'études"
+)
+conceptor.add_role :conceptor
+conceptor.save!
 
 # PaymentStates
 [

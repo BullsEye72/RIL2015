@@ -56,6 +56,8 @@ class ProjectsController < ApplicationController
   # GET /project/:id
   def show
     add_breadcrumb "Projet"
+    
+    @quotes=Project.find(@project.id).quotes
   end
 
   # GET /project/:id/edit
