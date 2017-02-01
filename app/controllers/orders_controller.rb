@@ -14,8 +14,7 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     add_breadcrumb "Commande n°" + @order.id.to_s
-  
-    @order_items=OrderItem.where(order_id: @order.id)
+    @order_items = OrderItem.where(order_id: @order)
   end
 
   # GET /orders/new
@@ -26,7 +25,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    @order_items=OrderItem.where(order_id: @order.id)
+    @order_items = OrderItem.where(order_id: @order.id)
   end
 
   # POST /orders

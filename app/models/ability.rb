@@ -12,6 +12,7 @@ class Ability
 
     #Service Achats
     if user.has_role? :purchaser
+      can :index, :purchase
       can :manage, Order
       can :manage, Article
       can :manage, Supplier
