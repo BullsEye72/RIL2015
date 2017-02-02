@@ -9,7 +9,7 @@
       <%#= f.association :suppliers, label: t('supplier').titleize, input_html: { disabled: disabled } %>
       <%= f.input :reference, input_html: { disabled: disabled } %>
       <%= f.input :description, input_html: { disabled: disabled } %>
-      <%= f.association :articles_caracteristic, collection: ArticlesCaracteristic.where(article_id: @article.id) , label: 'Unité', input_html: { disabled: disabled } %>
+      <%= f.association :articles_caracteristic, collection: ArticleUnit.where(article_id: @article.id) , label: 'Unité', input_html: {disabled: disabled } %>
     </div>
     
     <div class="form-actions">

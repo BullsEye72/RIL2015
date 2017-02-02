@@ -18,6 +18,8 @@
 class Quote < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
+  has_and_belongs_to_many :construction_states
+  has_and_belongs_to_many :quote_states
   
   validates_presence_of :project, :user
   validates :project_id, :presence => true, :uniqueness => {:scope => :user_id}

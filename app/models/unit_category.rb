@@ -9,4 +9,7 @@
 #
 
 class UnitCategory < ActiveRecord::Base
+
+  has_many :units
+
 end

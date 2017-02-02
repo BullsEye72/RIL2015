@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   default_scope { where(:deleted_at => nil) }
 
   has_many :quotes
+  has_and_belongs_to_many :roles, :join_table => :users_roles
+
 
   rolify
   include RailsAdmin::UserAdmin

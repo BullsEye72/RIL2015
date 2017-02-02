@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119130911) do
+ActiveRecord::Schema.define(version: 20170202180351) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20170119130911) do
 
   add_index "article_groups", ["article_group_id"], name: "index_article_groups_on_article_group_id"
 
+  create_table "article_units", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "unit_id"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "article_units", ["article_id"], name: "index_article_units_on_article_id"
+  add_index "article_units", ["unit_id"], name: "index_article_units_on_unit_id"
+
   create_table "articles", force: :cascade do |t|
     t.string   "name"
     t.integer  "article_group_id"
@@ -53,17 +64,6 @@ ActiveRecord::Schema.define(version: 20170119130911) do
 
   add_index "articles", ["article_group_id"], name: "index_articles_on_article_group_id"
   add_index "articles", ["value_added_tax_id"], name: "index_articles_on_value_added_tax_id"
-
-  create_table "articles_caracteristics", force: :cascade do |t|
-    t.integer  "article_id"
-    t.integer  "unit_id"
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "articles_caracteristics", ["article_id"], name: "index_articles_caracteristics_on_article_id"
-  add_index "articles_caracteristics", ["unit_id"], name: "index_articles_caracteristics_on_unit_id"
 
   create_table "articles_suppliers", force: :cascade do |t|
     t.integer  "supplier_id"
