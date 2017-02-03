@@ -16,6 +16,8 @@
 #
 
 class Quote < ActiveRecord::Base
+  default_scope { where(:deleted_at => nil) }
+  
   belongs_to :project
   belongs_to :user
   has_and_belongs_to_many :construction_states

@@ -19,7 +19,8 @@
 class ArticlesSupplier < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :article
+  has_many :order_items
   
-  
+  validates_associated :order_items
   validates :supplier_id, :presence => true, :uniqueness => {:scope => :article_id}
 end

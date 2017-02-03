@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Articles correspondants
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th><%= t('name').titleize %></th>
+          <th><%= 'Ref. Article' %></th>
+          <th><%= 'Ref. Fournisseur' %></th>
+          <th><%= 'Prix' %></th>
+          <th><%= t('description').titleize %></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @articles.each do |ac| %>
+        <% as = ac.articles_suppliers.first %>
+        <tr>
+          <td><%= ac.name %></td>
+          <td><%= ac.reference %></td>
+          <td><%= as.supplier_reference %></td>
+          <td><%= number_to_currency(as.price, locale: :fr) %></td>
+          <td><%= truncate(ac.description) %></td>
+          <td class="text-right">
+            <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), ac) %>
+            <% if action == :edit %>
+            |
+            <%= link_to(raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+              "#", data: { confirm: 'Modification de la reference et prix' } ) %>
+            |
+            <%= link_to(raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+              articles_supplier_path(ac),
+              method: :delete, data: { confirm: 'Suppresion : Êtes vous certain ?' }
+              ) %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

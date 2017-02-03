@@ -25,13 +25,23 @@ commercial.save!
 
 # Achats
 purchaser = User.new(
-    email:                  'achats@madera.com',
-    password:               'achats88',
-    password_confirmation:  'achats88',
+    email:                  'achat@madera.com',
+    password:               'achat888',
+    password_confirmation:  'achat888',
     lastname:               'Service Achats'
 )
 purchaser.add_role :purchaser
 purchaser.save!
+
+# BE
+conceptor = User.new(
+    email:                  'betudes@madera.com',
+    password:               'betudes88',
+    password_confirmation:  'betudes88',
+    lastname:               "Bureau d'études"
+)
+conceptor.add_role :conceptor
+conceptor.save!
 
 # PaymentStates
 [
@@ -148,7 +158,11 @@ end
       description: Faker::Lorem.paragraph(3)
     )
     
+<<<<<<< HEAD
     a=ArticleUnit.new(
+=======
+    a=ArticlesUnit.new(
+>>>>>>> 29d654cdeea1ee09a187d902d599317247674f6d
       article_id: Article.last.id,
       unit_id: Unit.order('RANDOM()').first.id,
       value: rand(1000)

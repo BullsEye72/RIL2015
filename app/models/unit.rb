@@ -8,6 +8,7 @@
 #  unit_category_id :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  deleted_at       :datetime
 #
 # Indexes
 #
@@ -15,5 +16,7 @@
 #
 
 class Unit < ActiveRecord::Base
+  default_scope { where(:deleted_at => nil) }
+    
   belongs_to :unit_category
 end

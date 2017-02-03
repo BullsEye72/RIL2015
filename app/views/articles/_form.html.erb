@@ -6,10 +6,9 @@
       <%= f.input :name, input_html: { disabled: disabled } %>
       <%= f.association :article_group, label: t('article_group').titleize, input_html: { disabled: disabled } %>
       <%= f.association :value_added_tax, label: 'TVA', input_html: { disabled: disabled } %>
-      <%#= f.association :suppliers, label: t('supplier').titleize, input_html: { disabled: disabled } %>
       <%= f.input :reference, input_html: { disabled: disabled } %>
       <%= f.input :description, input_html: { disabled: disabled } %>
-      <%= f.association :articles_caracteristic, collection: ArticleUnit.where(article_id: @article.id) , label: 'Unité', input_html: {disabled: disabled } %>
+      <%= f.association :articles_units, collection: ArticlesUnit.where(article_id: @article.id) , label: 'Unité', input_html: { disabled: disabled } %>
     </div>
     
     <div class="form-actions">

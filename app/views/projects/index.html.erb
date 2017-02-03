@@ -43,7 +43,7 @@
         <% @projects.each do |project| %>
           <tr>
             <td><%= format_date(project.created_at) %></td>
-            <td><%= link_to project.id, project_path(project.id) %></td>
+            <td><%= project.id %></td>
             <td><%= project.customer.fullname %></td>
             <td><%= truncate(project.description) %></td>
             <td class="text-right">

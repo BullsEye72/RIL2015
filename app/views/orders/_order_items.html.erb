@@ -39,7 +39,7 @@
             <% art = as.article %>
             <tr>
               <td><%= art.name %></td>
-              <td><%= oi.articles_supplier.supplier_reference %></td>
+              <td><%= as.supplier_reference %></td>
               <td><%= "%g" % oi.quantity %></td>
               <td><%= as.price %></td>
               <td><%= oi.quantity * as.price %></td>
@@ -50,18 +50,18 @@
                         remote: true
                     ) %>
                 |
-                <%= link_to(
-                        raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                        '#',
-                        data: {confirm: 'Non fonctionnel : Suppression de la liaison order/article'}
-                    ) %>
+               <%= link_to(
+                  raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                  order_item_path(oi),
+                  method: :delete,
+                  data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
               </td>
             </tr>
         <% end %>
         </tbody>
 
         <tfoot>
-        <td></td>
+        <td>Total :</td>
         <td><%= get_total_items(params[:id]) %></td>
         <td></td>
         <td><%= get_total_price(params[:id]) %></td>

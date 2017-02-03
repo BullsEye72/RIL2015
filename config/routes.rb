@@ -31,7 +31,11 @@ Rails.application.routes.draw do
   # PAGE
   get '/pages/:id' => 'pages#show', as: 'page'
 
-  # FROALA (WYSIWYG)
+  # DESTROY LINKS
+  resources :order_items, only: :destroy
+  resources :articles_suppliers, only: :destroy
+
+  # FROALA (WYSIWYG
   post '/froala_upload' => 'froala#upload'
   post '/froala_manage' => 'froala#manage'
   delete '/froala_delete' => 'froala#delete'
