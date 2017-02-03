@@ -150,7 +150,7 @@ end
       description: Faker::Lorem.paragraph(3)
     )
     
-    a=ArticlesCaracteristic.new(
+    a=ArticlesUnit.new(
       article_id: Article.last.id,
       unit_id: Unit.order('RANDOM()').first.id,
       value: rand(1000)

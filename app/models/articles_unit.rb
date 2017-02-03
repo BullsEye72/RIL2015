@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: articles_caracteristics
+# Table name: articles_units
 #
 #  id         :integer          not null, primary key
 #  article_id :integer
@@ -11,11 +11,11 @@
 #
 # Indexes
 #
-#  index_articles_caracteristics_on_article_id  (article_id)
-#  index_articles_caracteristics_on_unit_id     (unit_id)
+#  index_articles_units_on_article_id  (article_id)
+#  index_articles_units_on_unit_id     (unit_id)
 #
 
-class ArticlesCaracteristic < ActiveRecord::Base
+class ArticlesUnit < ActiveRecord::Base
   belongs_to :article
   belongs_to :unit
   
