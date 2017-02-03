@@ -16,7 +16,11 @@
 #
 
 class Unit < ActiveRecord::Base
+
   default_scope { where(:deleted_at => nil) }
     
   belongs_to :unit_category
+
+  validates :name, :regex, :unit_category, presence: true
+
 end

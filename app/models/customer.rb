@@ -14,14 +14,14 @@
 
 class Customer < ActiveRecord::Base
 
-  default_scope { where(:deleted_at => nil) }
+  default_scope { where(deleted_at: nil) }
 
   has_many :projects
 
   validates_presence_of :firstname, :lastname, :phone_number, :address
   
   def fullname
-    return "#{firstname.capitalize} #{lastname.upcase}"
+    "#{firstname.capitalize} #{lastname.upcase}"
   end
   
 end
