@@ -62,14 +62,6 @@ conceptor.save!
     { name: 'Clef remises', value: 1},
 ].each {|cs| ConstructionState.create! cs }
 
-brouillon
-accepté
-en\ attente
-refusé
-en\ commande
-transfert\ en\ facturation
-
-
 # VAT
 [
   { name: 'Taux normal', value: 20.0},
@@ -158,11 +150,7 @@ end
       description: Faker::Lorem.paragraph(3)
     )
     
-<<<<<<< HEAD
-    a=ArticleUnit.new(
-=======
     a=ArticlesUnit.new(
->>>>>>> 29d654cdeea1ee09a187d902d599317247674f6d
       article_id: Article.last.id,
       unit_id: Unit.order('RANDOM()').first.id,
       value: rand(1000)
