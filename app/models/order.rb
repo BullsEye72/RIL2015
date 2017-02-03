@@ -17,7 +17,8 @@
 #
 
 class Order < ActiveRecord::Base
-  default_scope { where(:deleted_at => nil) }
+
+  default_scope { where(deleted_at: nil) }
   
   belongs_to :supplier
   belongs_to :quote
