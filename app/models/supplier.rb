@@ -12,6 +12,10 @@
 #
 
 class Supplier < ActiveRecord::Base
+
   has_many :articles_suppliers
   has_many :articles, through: :articles_suppliers
+
+  validates :name, :phone_number, :siret, :fax_number, presence: true
+
 end

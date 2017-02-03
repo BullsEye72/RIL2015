@@ -15,5 +15,9 @@
 #
 
 class Unit < ActiveRecord::Base
+
   belongs_to :unit_category
+
+  validates :name, :regex, :unit_category, presence: true
+
 end

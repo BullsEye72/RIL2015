@@ -16,16 +16,15 @@
 #
 
 class ArticleUnit < ActiveRecord::Base
+
   belongs_to :article
   belongs_to :unit
   
-  validates :article_id, :presence => true, :uniqueness => {:scope => :unit_id}
+  validates :article, presence: true, uniqueness: {scope: :unit}
+  validates :unit, presence: true, uniqueness: true
+  validates_presence_of :value
   
   def to_label
-    u=unit.name
-    c=unit.unit_category.name
-    v=value
-    return "[#{c}] #{v} #{u}"
-    #return "#{v} #{u}"
+    "[#{unit.unit_category.name}] #{value} #{unit.name}"
   end
 end

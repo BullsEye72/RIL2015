@@ -16,6 +16,11 @@
 #
 
 class OrderItem < ActiveRecord::Base
+
   belongs_to :articles_supplier
   belongs_to :order
+
+  validates_presence_of :articles_supplier, :order
+  validates_numericality_of :quantity, greater_than: 0
+
 end

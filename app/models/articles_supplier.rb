@@ -17,9 +17,13 @@
 #
 
 class ArticlesSupplier < ActiveRecord::Base
+
   belongs_to :supplier
   belongs_to :article
   
-  
-  validates :supplier_id, :presence => true, :uniqueness => {:scope => :article_id}
+  validates :supplier, presence: true, uniqueness: {scope: :article}
+  validates :article_id, presence: true
+  validates_numericality_of :price, greater_than_or_equal_to: 0
+  validates_uniqueness_of :supplier_reference
+
 end
