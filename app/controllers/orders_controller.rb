@@ -15,6 +15,17 @@ class OrdersController < ApplicationController
   def show
     add_breadcrumb "Commande n°" + @order.id.to_s
     @order_items = OrderItem.where(order_id: @order)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'file_name',
+               show_as_html: params.key?('debug'),
+               footer: {
+                   right: 'p [page]/[topage]',
+                   left: Time.now.strftime('%d-%m-%Y')
+               }
+      end
+    end
   end
 
   # GET /orders/new

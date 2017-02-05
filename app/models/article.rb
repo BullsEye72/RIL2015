@@ -19,6 +19,7 @@
 #
 
 class Article < ActiveRecord::Base
+
   default_scope { where(deleted_at: nil) }
   
   belongs_to :article_group
@@ -36,6 +37,6 @@ class Article < ActiveRecord::Base
                         :value_added_tax,
                         :article_units,
                         :name,
-                        :reference,
+                        :reference
 
 end

@@ -10,8 +10,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 
-#gem 'pg'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -46,6 +44,8 @@ gem 'rolify'
 gem 'permanent_records', '~> 4.2', '>= 4.2.7'
 gem 'breadcrumbs_on_rails'
 gem 'faker'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
