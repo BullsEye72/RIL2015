@@ -36,6 +36,6 @@ class Article < ActiveRecord::Base
                         :value_added_tax,
                         :article_units,
                         :name,
-                        :reference,
+                        :reference
 
 end
