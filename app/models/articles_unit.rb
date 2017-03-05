@@ -26,6 +26,5 @@ class ArticlesUnit < ActiveRecord::Base
     c=unit.unit_category.name
     v=value
     return "[#{c}] #{v} #{u}"
-    #return "#{v} #{u}"
   end
 end

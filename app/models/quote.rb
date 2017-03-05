@@ -24,7 +24,7 @@ class Quote < ActiveRecord::Base
   has_and_belongs_to_many :construction_states
   has_and_belongs_to_many :quote_states
   
-  validates_presence_of :project, :user, :construction_states, :quote_states
+  validates_presence_of :user
   validates :project_id, presence: true, uniqueness: {scope: :user_id}
   
   def to_label

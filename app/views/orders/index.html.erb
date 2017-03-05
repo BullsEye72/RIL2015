@@ -23,8 +23,8 @@
           <tr>
             <td><%= order.quote.id %></td>
             <td><%= order.supplier.name %></td>
-            <td><%= get_total_items(order.id) %></td>
-            <td><%= get_total_price(order.id) %></td>
+            <td><%= order.items_quantity %></td>
+            <td><%= number_to_currency(order.total_price) %></td>
             <td><%= format_date(order.updated_at) %></td>
             <td class="text-right">
               <%= link_to(

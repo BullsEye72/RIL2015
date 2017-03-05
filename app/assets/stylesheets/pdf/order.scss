@@ -1,0 +1,127 @@
+$secondary: rgb(255, 203, 0);
+$lightgray: #efefef;
+$red: rgb(217, 0, 25);
+
+#pdf {
+
+
+  h1 {
+    text-transform: uppercase;
+    text-align: right;
+    margin: 5px 0;
+  }
+  h2 {
+    font-size: 15px;
+  }
+
+  header {
+    .madera-details {
+      float: left;
+      width: 50%;
+      img {
+        width: 120px;
+        height: 120px;
+        float: left;
+        margin: 0 10px 10px 0;
+      }
+      h2 {
+        font-family: Sans-Serif;
+        text-transform: uppercase;
+        margin: 0;
+        color: $red;
+      }
+      address {
+        font-style: inherit;
+      }
+    }
+
+    .order-details {
+      float: right;
+      width: 50%;
+      .form-group {
+        label h2 {
+          display: inline;
+        }
+        input {
+          width: 100px;
+          text-align: right;
+        }
+      }
+    }
+
+    .to, .shipping-details {
+      width: 48%;
+    }
+    .to {
+      float: left;
+    }
+
+    .shipping-details {
+      float: right;
+    }
+  }
+
+  .form-group {
+    overflow: auto;
+    text-align: right;
+    label {
+      position: relative;
+      top: 5px;
+      width: 30%;
+    }
+    input, textarea {
+      width: 70%;
+      float: right;
+      margin: 5px;
+      padding: 0px 5px;
+      vertical-align: middle;
+      border: 1px solid $secondary;
+      background-color: $lightgray;
+      border-radius: 5px;
+    }
+    input {
+      height: 25px;
+    }
+    textarea {
+      height: 50px;
+    }
+  }
+
+  table {
+    width: 100%;
+    font-size: .8em;
+    border-collapse: collapse;
+    thead, tfoot {
+      background-color: $secondary;
+      text-transform: uppercase;
+      display: table-header-group;
+      th, td {
+        border-right: 1px solid white;
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+    tbody {
+      tr {
+        page-break-inside: avoid;
+        &:nth-child(even) {
+          background-color: $lightgray;
+        }
+      }
+
+      td {
+        border: 1px solid $lightgray;
+        &.price,
+        &.total {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .clearfix {
+    overflow: auto;
+  }
+}
+

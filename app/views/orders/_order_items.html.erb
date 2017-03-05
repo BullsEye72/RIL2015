@@ -44,23 +44,18 @@
               <td><%= as.price %></td>
               <td><%= oi.quantity * as.price %></td>
               <td class="text-right">
-                              <%= link_to(
-                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                oi
-              ) %>
-              <% if action == :edit %>
-                |
-                <%= link_to(
-                        raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                        edit_order_item_path(oi),
-                        remote: true
-                    ) %>
-                |
-               <%= link_to(
-                  raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                  order_item_path(oi),
-                  method: :delete,
-                  data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
+                <% unless @order.effective? %>
+                  <%= link_to(
+                          raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                          edit_order_item_path(oi),
+                          remote: true
+                      ) %>
+                  |
+                 <%= link_to(
+                    raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                    order_item_path(oi),
+                    method: :delete,
+                    data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
                   <% end %>
               </td>
             </tr>
@@ -68,11 +63,12 @@
         </tbody>
 
         <tfoot>
-        <td>Total :</td>
-        <td><%= get_total_items(params[:id]) %></td>
-        <td></td>
-        <td><%= get_total_price(params[:id]) %></td>
-        <td></td>
+          <td>Totaux :</td>
+          <td></td>
+          <td><%= @order.items_quantity %></td>
+          <td></td>
+          <td><%= number_to_currency(@order.total_price) %></td>
+          <td></td>
         </tfoot>
 
       </table>
