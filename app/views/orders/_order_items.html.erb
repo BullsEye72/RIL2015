@@ -61,11 +61,12 @@
         </tbody>
 
         <tfoot>
-        <td>Total :</td>
-        <td><%= get_total_items(params[:id]) %></td>
-        <td></td>
-        <td><%= get_total_price(params[:id]) %></td>
-        <td></td>
+          <td>Totaux :</td>
+          <td></td>
+          <td><%= @order.items_quantity %></td>
+          <td></td>
+          <td><%= number_to_currency(@order.total_price) %></td>
+          <td></td>
         </tfoot>
 
       </table>

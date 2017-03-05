@@ -4,7 +4,7 @@
     <meta charset='utf-8'/>
     <%= wicked_pdf_stylesheet_link_tag 'pdf/order' %>
   </head>
-  <body>
+  <body id="pdf">
 
     <header>
 
@@ -100,6 +100,15 @@
           </tr>
         <% end %>
       </tbody>
+      <tfoot>
+        <tr>
+          <td><%= @order.items_quantity %></td>
+          <td></td>
+          <td></td>
+          <td style="text-align: right"><%= number_to_currency(@order.total_price) %></td>
+          <td></td>
+        </tr>
+      </tfoot>
 
     </table>
 

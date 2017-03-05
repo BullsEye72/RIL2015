@@ -2,11 +2,8 @@ $secondary: rgb(255, 203, 0);
 $lightgray: #efefef;
 $red: rgb(217, 0, 25);
 
-html {
+#pdf {
 
-  //border: 2px solid $secondary;
-  //border-radius: 5px;
-  //min-height: 100vh;
 
   h1 {
     text-transform: uppercase;
@@ -94,11 +91,11 @@ html {
     width: 100%;
     font-size: .8em;
     border-collapse: collapse;
-    thead {
+    thead, tfoot {
       background-color: $secondary;
       text-transform: uppercase;
       display: table-header-group;
-      th {
+      th, td {
         border-right: 1px solid white;
         &:last-child {
           border: none;
@@ -127,3 +124,4 @@ html {
     overflow: auto;
   }
 }
+
