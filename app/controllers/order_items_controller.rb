@@ -19,6 +19,7 @@ class OrderItemsController < ApplicationController
 
   # GET /order_items/1/edit
   def edit
+    redirect_to :back if @order_item.order.effective?
   end
 
   # POST /order_items
@@ -54,7 +55,7 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1
   def destroy
     @order_item = OrderItem.find(params[:id])
-    @order_item.destroy
+    @order_item.destroy unless @order_item.order.effective?
     redirect_to :back
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202180351) do
+ActiveRecord::Schema.define(version: 20170305103336) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -165,9 +165,10 @@ ActiveRecord::Schema.define(version: 20170202180351) do
     t.decimal  "total_due_calc"
     t.integer  "supplier_id"
     t.integer  "quote_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "deleted_at"
+    t.boolean  "effective?",     default: false
   end
 
   add_index "orders", ["quote_id"], name: "index_orders_on_quote_id"

@@ -18,6 +18,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
+        # Une fois le pdf généré, la commande n'es plus éditable
+        @order.update(effective?: true)
         render pdf: 'file_name',
                show_as_html: params.key?('debug'),
                footer: {
@@ -36,6 +38,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    if @order.effective?
+      redirect_to @order, notice: 'La commande à été validé, elle ne peux plus être éditer'
+    end
     @order_items = OrderItem.where(order_id: @order.id)
   end
 
@@ -72,10 +77,14 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
+    if @order.effective?
+      redirect_to @order, notice: 'La commande à été validé, elle ne peux plus être supprimé.'
+    else
+      @order.destroy
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
