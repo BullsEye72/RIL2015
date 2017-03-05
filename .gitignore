@@ -24,3 +24,4 @@ public/assets/**
 .byebug_history
 /*.iml
 /railways.cache
+db/.fuse*
