@@ -202,7 +202,7 @@ end
   rand(5..30).times do
     OrderItem.create!(articles_supplier_id: ArticlesSupplier.order("RANDOM()").first.id,
                       order_id: Order.last.id,
-                      quantity: rand(1..10))
+                      items_quantity: rand(1..10))
   end
   
 end
