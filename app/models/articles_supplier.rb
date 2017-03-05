@@ -28,4 +28,8 @@ class ArticlesSupplier < ActiveRecord::Base
   validates_numericality_of :price, greater_than_or_equal_to: 0
   validates_uniqueness_of :supplier_reference
 
+  def article_label
+    "#{article.name} (#{supplier_reference})"
+  end
+
 end
