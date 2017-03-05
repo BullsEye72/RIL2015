@@ -25,18 +25,15 @@ class Article < ActiveRecord::Base
   belongs_to :article_group
   belongs_to :value_added_tax
   
-  has_many :articles_units
   has_many :articles_suppliers
   has_many :suppliers, through: :articles_suppliers
   
   accepts_nested_attributes_for :articles_suppliers
 
-  validates_presence_of :articles_suppliers,
-                        :article_units,
-                        :article_group,
-                        :value_added_tax,
-                        :article_units,
+  validates_presence_of :value_added_tax,
                         :name,
                         :reference
+                        # :article_group,
+                        # :articles_suppliers,
 
 end

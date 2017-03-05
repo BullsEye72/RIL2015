@@ -147,7 +147,7 @@ end
       name: Faker::Commerce.product_name,
       value_added_tax_id: 1,
       reference: Faker::Code.asin,
-      description: Faker::Lorem.paragraph(3)
+      description: Faker::Lorem.paragraph(3),
     )
     
     a=ArticleUnit.new(
@@ -195,16 +195,16 @@ end
 end
 
 # Commandes bidons
-20.times do
-  Order.create!(supplier_id: Supplier.order("RANDOM()").first.id, quote_id: Quote.order("RANDOM()").first.id)
+# 20.times do
+#   Order.create!(supplier_id: Supplier.order("RANDOM()").first.id, quote_id: Quote.order("RANDOM()").first.id)
 
   # Items bidons  
-  rand(5..30).times do
-    OrderItem.create!(articles_supplier_id: ArticlesSupplier.order("RANDOM()").first.id,
-                      order_id: Order.last.id,
-                      items_quantity: rand(1..10))
-  end
+  # rand(5..30).times do
+  #   OrderItem.create!(articles_supplier_id: ArticlesSupplier.order("RANDOM()").first.id,
+  #                     order_id: Order.last.id,
+  #                     items_quantity: rand(1..10))
+  # end
   
-end
+# end
 
 
