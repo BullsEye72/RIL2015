@@ -41,17 +41,6 @@ ActiveRecord::Schema.define(version: 20170305103336) do
 
   add_index "article_groups", ["article_group_id"], name: "index_article_groups_on_article_group_id"
 
-  create_table "article_units", force: :cascade do |t|
-    t.integer  "article_id"
-    t.integer  "unit_id"
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "article_units", ["article_id"], name: "index_article_units_on_article_id"
-  add_index "article_units", ["unit_id"], name: "index_article_units_on_unit_id"
-
   create_table "articles", force: :cascade do |t|
     t.string   "name"
     t.integer  "article_group_id"
@@ -78,14 +67,16 @@ ActiveRecord::Schema.define(version: 20170305103336) do
   add_index "articles_suppliers", ["article_id"], name: "index_articles_suppliers_on_article_id"
   add_index "articles_suppliers", ["supplier_id"], name: "index_articles_suppliers_on_supplier_id"
 
-  create_table "characteristics", force: :cascade do |t|
-    t.string   "name"
+  create_table "articles_units", force: :cascade do |t|
+    t.integer  "article_id"
     t.integer  "unit_id"
+    t.string   "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "characteristics", ["unit_id"], name: "index_characteristics_on_unit_id"
+  add_index "articles_units", ["article_id"], name: "index_articles_units_on_article_id"
+  add_index "articles_units", ["unit_id"], name: "index_articles_units_on_unit_id"
 
   create_table "construction_states", force: :cascade do |t|
     t.string   "name"
