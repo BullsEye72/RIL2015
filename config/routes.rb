@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :quotes,      path: 'devis'
   resources :articles
   resources :order_items
+  resources :units
+
 
   get '/order/:order/item/new', to: 'order_items#new', as: 'new_order_item_supplier'
 

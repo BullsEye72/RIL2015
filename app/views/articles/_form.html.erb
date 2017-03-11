@@ -8,7 +8,25 @@
       <%= f.association :value_added_tax, label: 'TVA', input_html: { disabled: disabled } %>
       <%= f.input :reference, input_html: { disabled: disabled } %>
       <%= f.input :description, input_html: { disabled: disabled } %>
-      <%= f.association :articles_units, collection: ArticlesUnit.where(article_id: @article.id) , label: 'Unité', input_html: { disabled: disabled } %>
+      <%= f.input :unit_category,
+                  as: :fake_select,
+                  collection: UnitCategory.all,
+                  selected: "#{@unit.nil? ? UnitCategory.first : @unit.unit_category.id }",
+                  input_html: {
+                      'data-remote': true,
+                      'data-url': units_path,
+                      format: :json
+                  }
+      %>
+      <%#= simple_fields_for 'articles_units_attributes[]', @article_unit, wrapper: :horizontal_form do |au| %>
+      <%= simple_fields_for 'articles_units', wrapper: :horizontal_form do |au| %>
+        <%= au.input  :unit_id,
+                      collection: @units,
+                      selected: @unit,
+                      label: 'Unité'
+        %>
+        <%= au.input :value, input_html: {value: "#{@article_unit ? @article_unit.value : ''}" } %>
+      <% end %>
     </div>
     
     <div class="form-actions">

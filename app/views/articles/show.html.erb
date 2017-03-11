@@ -6,14 +6,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Êtes vous certain ?</h4>
       </div>
       <div class="modal-body">
         Êtes vous certain de vouloir effacer cet élément ?
       </div>
       <div class="modal-footer">
-        <%= link_to 'Effacer',  @article,  method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Effacer', @article, method: :delete, class: 'btn btn-danger' %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
       </div>
     </div>
@@ -22,7 +23,93 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render 'form', action: :show %>
+
+    <div class="form-horizontal">
+      <div class="form-inputs">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_name">Nom *</label>
+          <div class="col-sm-9">
+            <input class="form-control" aria-required="true" type="text" id="article_name" value="<%= @article.name %>" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_article_group_id">Type D'article *</label>
+          <div class="col-sm-9">
+            <input class="form-control" aria-required="true" type="text" id="article_article_group_id" value="<%= @article.article_group.name %>" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_value_added_tax_id">TVA *</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="article_value_added_tax_id"
+                   value="<%= @article.value_added_tax.to_label %>"
+                   disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_reference">Reference *</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="article_value_added_tax_id"
+                   value="<%= @article.reference %>"
+                   disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_description">Description</label>
+          <div class="col-sm-9">
+            <textarea class="form-control text optional"
+                      name="article[description]"
+                      id="article_description"
+                      disabled>
+              <%= @article.description %>
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_unit_category">Unit category</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="article_unit_category"
+                   value="<%= @article.articles_units.first.unit.unit_category.name %>"
+                   disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="articles_units_unit_id">Unité *</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="articles_units_unit_id"
+                   value="<%= @article.articles_units.first.unit.name %>"
+                   disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="articles_units_value">Valeur *</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="articles_units_value"
+                   value="<%= @article.articles_units.first.value %>"
+                   disabled>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
     <a href="<%= edit_article_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
       Editer
@@ -31,7 +118,9 @@
       <span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
       Supprimer
     </button>
+
   </div>
+
 </div>
 
-<%= render 'articles_supplier' , action: :show %>
+<%= render 'articles_supplier', action: :show %>
