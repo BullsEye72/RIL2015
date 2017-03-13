@@ -12,12 +12,14 @@
                   as: :fake_select,
                   collection: UnitCategory.all,
                   selected: "#{@unit.nil? ? UnitCategory.first : @unit.unit_category.id }",
+                  label: "Catégorie d'unité",
                   input_html: {
                       'data-remote': true,
                       'data-url': units_path,
                       format: :json
                   }
       %>
+      <%= f.association :suppliers, label: 'Fournisseur' %>
       <%#= simple_fields_for 'articles_units_attributes[]', @article_unit, wrapper: :horizontal_form do |au| %>
       <%= simple_fields_for 'articles_units', wrapper: :horizontal_form do |au| %>
         <%= au.input  :unit_id,
