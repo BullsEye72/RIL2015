@@ -5,23 +5,21 @@
   
   
   <div class="panel-heading">
-	  <ul class="nav nav-pills nav-justified">
-	    <li class="panel-title"><%= t('listing articles').titleize %></li>
-			  
-			  <li>
-          <%= form_tag(articles_path, method: "get", :class => "form-inline") do %>
+    <div class="row">
+      <div class="col-sm-4">
+        <h2 class="panel-title"><%= t('listing articles').titleize %></h2>
+      </div>
+      <div class="col-sm-8">
+        <%= form_tag(articles_path, method: "get", class: 'form-inline pull-right') do %>
             <%= label_tag(:nom, "Filtrer les résultats : ") %>
             <%= text_field_tag(:nom, value = params[:nom], :placeholder => "Nom") %>
             <%= text_field_tag(:ref, value = params[:ref], :placeholder => "Référence") %>
             <%= submit_tag("Filtrer", name: nil) %>
-          <% end %>
-			  </li>
-				
-		  </ul>
+        <% end %>
+      </div>
+    </div>
+
   </div>
-  
-  
-  
   
   <div class="panel-body">
     <table>
@@ -42,7 +40,7 @@
                 <td><%= article.name %></td>
                 <td><%= article.reference %></td>
                 <td><%= truncate(article.description) %></td>
-                <td><%= article.article_group %></td>
+                <td><%= article.article_group.name %></td>
                 <td><%= show_or_count_supplier_in_article(article.id) %></td>
                 <td class="text-right">
               <%= link_to(
@@ -74,6 +72,6 @@
 
     <br>
 
-    <%= link_to "Nouveau #{t('article')}", new_article_path, class: 'btn btn-default' %>
+    <%= link_to "Nouvel #{t('article')}", new_article_path, class: 'btn btn-default' %>
   </div>
 </div>

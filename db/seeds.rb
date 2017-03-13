@@ -36,8 +36,8 @@ purchaser.save!
 # BE
 conceptor = User.new(
     email:                  'betudes@madera.com',
-    password:               'betudes88',
-    password_confirmation:  'betudes88',
+    password:               'betudes8',
+    password_confirmation:  'betudes8',
     lastname:               "Bureau d'études"
 )
 conceptor.add_role :conceptor
