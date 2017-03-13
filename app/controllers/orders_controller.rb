@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
     @order_items = OrderItem.where(order_id: @order)
     respond_to do |format|
       format.html
+      format.json
       format.pdf do
         # Une fois le pdf généré, la commande n'es plus éditable
         @order.update(effective?: true)
