@@ -35,7 +35,5 @@ class Article < ActiveRecord::Base
   validates_presence_of :value_added_tax,
                         :name,
                         :reference,
-                        :article_group,
-                        :suppliers
-
+                        :article_group
 end
