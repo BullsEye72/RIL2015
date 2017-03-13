@@ -22,6 +22,7 @@ class Ability
     
     #BE
     if user.has_role? :conceptor
+      can :index, :conception
       can :manage, Article
       can :manage, Supplier
       can [:show], [Quote,Project]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305103336) do
+ActiveRecord::Schema.define(version: 20170313173726) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -113,6 +113,24 @@ ActiveRecord::Schema.define(version: 20170305103336) do
     t.datetime "deleted_at"
   end
 
+  create_table "drawing_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "drawing_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "drawing_types", ["drawing_type_id"], name: "index_drawing_types_on_drawing_type_id"
+
+  create_table "drawings", force: :cascade do |t|
+    t.string   "thumbnail_path"
+    t.string   "file_path"
+    t.integer  "drawing_type"
+    t.string   "internal_reference"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -125,6 +143,20 @@ ActiveRecord::Schema.define(version: 20170305103336) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "house_modules", force: :cascade do |t|
+    t.integer  "range_id"
+    t.string   "name"
+    t.boolean  "default"
+    t.integer  "layout_id"
+    t.integer  "drawing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "house_modules", ["drawing_id"], name: "index_house_modules_on_drawing_id"
+  add_index "house_modules", ["layout_id"], name: "index_house_modules_on_layout_id"
+  add_index "house_modules", ["range_id"], name: "index_house_modules_on_range_id"
 
   create_table "margins", force: :cascade do |t|
     t.string   "name"
@@ -140,6 +172,13 @@ ActiveRecord::Schema.define(version: 20170305103336) do
 
   add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
   add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
+
+  create_table "module_ranges", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "articles_supplier_id"

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :articles
   resources :order_items
   resources :units
+  resources :conceptions, path: 'be'
 
 
   get '/order/:order/item/new', to: 'order_items#new', as: 'new_order_item_supplier'
