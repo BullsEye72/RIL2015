@@ -15,6 +15,19 @@ class OrdersController < ApplicationController
   def show
     add_breadcrumb "Commande n°" + @order.id.to_s
     @order_items = OrderItem.where(order_id: @order)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        # Une fois le pdf généré, la commande n'es plus éditable
+        @order.update(effective?: true)
+        render pdf: 'file_name',
+               show_as_html: params.key?('debug'),
+               footer: {
+                   right: 'p [page]/[topage]',
+                   left: Time.now.strftime('%d-%m-%Y')
+               }
+      end
+    end
   end
 
   # GET /orders/new
@@ -25,6 +38,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    if @order.effective?
+      redirect_to @order, notice: 'La commande à été validé, elle ne peux plus être éditer'
+    end
     @order_items = OrderItem.where(order_id: @order.id)
   end
 
@@ -61,30 +77,16 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def get_total_price ord_id
-    begin
-      c=0
-      OrderItem.where(order_id: ord_id).each do |oi|
-        c += oi.quantity * oi.articles_supplier.price
+    if @order.effective?
+      redirect_to @order, notice: 'La commande à été validé, elle ne peux plus être supprimé.'
+    else
+      @order.destroy
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+        format.json { head :no_content }
       end
-      return view_context.number_to_currency(c, locale: :fr)
-    rescue
-      return "Erreur"
     end
   end
-  
-  def get_total_items ord_id
-    "%g" % OrderItem.where(order_id: ord_id).sum(:quantity)
-  end
-  helper_method :get_total_price
-  helper_method :get_total_items
 
   private
     # Use callbacks to share common setup or constraints between actions.

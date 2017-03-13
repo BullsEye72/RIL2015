@@ -16,6 +16,7 @@
 #
 
 class Payment < ActiveRecord::Base
+
   belongs_to :quote
   belongs_to :payment_state
 

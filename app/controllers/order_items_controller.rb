@@ -15,20 +15,26 @@ class OrderItemsController < ApplicationController
   # GET /order_items/new
   def new
     @order_item = OrderItem.new
+    @order = Order.find(params[:order])
+    if @order
+      redirect_to :back if @order.effective?
+      # @article_supplier = ArticlesSupplier.where(supplier: @order.supplier)
+      @article_supplier = @order.supplier.articles_suppliers.all
+    end
   end
 
   # GET /order_items/1/edit
   def edit
+    redirect_to :back if @order_item.order.effective?
   end
 
   # POST /order_items
   # POST /order_items.json
   def create
     @order_item = OrderItem.new(order_item_params)
-
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to @order_item, notice: 'Order item was successfully created.' }
+        format.html { redirect_to :back, notice: 'Order item was successfully created.' }
         format.json { render :show, status: :created, location: @order_item }
       else
         format.html { render :new }
@@ -40,6 +46,7 @@ class OrderItemsController < ApplicationController
   # PATCH/PUT /order_items/1
   # PATCH/PUT /order_items/1.json
   def update
+    redirect_to :back if @order_item.order.effective?
     respond_to do |format|
       if @order_item.update(order_item_params)
         format.html { redirect_to :back, notice: "L'élément de commande a été mis à jour" }
@@ -54,7 +61,7 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1
   def destroy
     @order_item = OrderItem.find(params[:id])
-    @order_item.destroy
+    @order_item.destroy unless @order_item.order.effective?
     redirect_to :back
   end
 
@@ -66,6 +73,6 @@ class OrderItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params
-      params.require(:order_item).permit(:quantity)
+      params.require(:order_item).permit(:quantity, :order_id, :articles_supplier_id)
     end
 end

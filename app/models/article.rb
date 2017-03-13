@@ -19,14 +19,22 @@
 #
 
 class Article < ActiveRecord::Base
-  default_scope { where(:deleted_at => nil) }
+
+  default_scope { where(deleted_at: nil) }
   
   belongs_to :article_group
   belongs_to :value_added_tax
-  
   has_many :articles_units
+
   has_many :articles_suppliers
   has_many :suppliers, through: :articles_suppliers
   
   accepts_nested_attributes_for :articles_suppliers
+  accepts_nested_attributes_for :articles_units
+
+  validates_presence_of :value_added_tax,
+                        :name,
+                        :reference,
+                        :article_group
+
 end

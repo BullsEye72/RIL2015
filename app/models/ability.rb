@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
     #Commerciaux
     if user.has_role? :commercial
       can :index, :commercial
@@ -25,5 +26,7 @@ class Ability
       can :manage, Supplier
       can [:show], [Quote,Project]
     end
+
   end
+
 end

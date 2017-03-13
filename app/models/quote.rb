@@ -16,15 +16,16 @@
 #
 
 class Quote < ActiveRecord::Base
-  default_scope { where(:deleted_at => nil) }
+
+  default_scope { where(deleted_at: nil) }
   
   belongs_to :project
   belongs_to :user
   has_and_belongs_to_many :construction_states
   has_and_belongs_to_many :quote_states
   
-  validates_presence_of :project, :user
-  validates :project_id, :presence => true, :uniqueness => {:scope => :user_id}
+  validates_presence_of :user
+  validates :project_id, presence: true, uniqueness: {scope: :user_id}
   
   def to_label
     "Devis n°#{id}"

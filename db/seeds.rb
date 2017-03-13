@@ -147,7 +147,8 @@ end
       name: Faker::Commerce.product_name,
       value_added_tax_id: 1,
       reference: Faker::Code.asin,
-      description: Faker::Lorem.paragraph(3)
+      description: Faker::Lorem.paragraph(3),
+      article_group: ArticleGroup.order('RANDOM()').first
     )
     
     a=ArticlesUnit.new(
@@ -182,29 +183,32 @@ end
 
 #Quelques devis bidons
 10.times do
-  a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
-  
+  a=Quote.new(
+      project: Project.order("RANDOM()").first,
+      user: User.order("RANDOM()").first
+  )
+
   loop_cnt=0
   while !a.validate
     loop_cnt+=1
     break if loop_cnt>10
     
-    a=Quote.new(project_id: Project.order("RANDOM()").first.id, user_id: User.order("RANDOM()").first.id)
+    a=Quote.new(project: Project.order("RANDOM()").first, user: User.order("RANDOM()").first)
   end
   a.save if a.validate
 end
 
 # Commandes bidons
 20.times do
-  Order.create!(supplier_id: Supplier.order("RANDOM()").first.id, quote_id: Quote.order("RANDOM()").first.id)
+  Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
 
-  # Items bidons  
+#   Items bidons
   rand(5..30).times do
-    OrderItem.create!(articles_supplier_id: ArticlesSupplier.order("RANDOM()").first.id,
-                      order_id: Order.last.id,
+    OrderItem.create!(articles_supplier: ArticlesSupplier.order("RANDOM()").first,
+                      order: Order.last,
                       quantity: rand(1..10))
   end
-  
+
 end
 
 

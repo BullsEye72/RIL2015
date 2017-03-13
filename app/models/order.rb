@@ -17,12 +17,30 @@
 #
 
 class Order < ActiveRecord::Base
-  default_scope { where(:deleted_at => nil) }
+
+  default_scope { where(deleted_at: nil) }
   
   belongs_to :supplier
   belongs_to :quote
   has_many :order_items, dependent: :destroy
   
   validates_presence_of :quote, :supplier
-  
+
+  def items_quantity
+    order_items.sum(:quantity).to_i
+  end
+
+  def total_price
+    begin
+      c=0
+      order_items.each do |oi|
+        c += oi.quantity * oi.articles_supplier.price
+      end
+      return c
+    rescue
+      return 'Erreur'
+    end
+  end
+
+
 end

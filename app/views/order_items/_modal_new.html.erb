@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="modalLabel">
+    Ajout d'un article
+  </h4>
+</div>
+
+<%= simple_form_for(@order_item, wrapper: :horizontal_form) do |f| %>
+
+    <div class="modal-body">
+      <div class="form-horizontal">
+        <%= f.error_notification %>
+        <%= f.hidden_field :order_id, value: @order.id %>
+        <%= f.association :articles_supplier,
+                          label: 'Article',
+                          collection: @article_supplier,
+                          label_method: :article_label,
+                          value_method: :id
+        %>
+        <%= f.input :quantity %>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <%= f.submit 'Ajouter' %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+    </div>
+
+<% end %>

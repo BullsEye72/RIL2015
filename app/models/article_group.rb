@@ -15,5 +15,9 @@
 #
 
 class ArticleGroup < ActiveRecord::Base
+
   belongs_to :article_group
+
+  validates_presence_of :name
+
 end

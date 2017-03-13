@@ -31,6 +31,10 @@ module ApplicationHelper
   def format_date date
     date.strftime('%d-%m-%Y')
   end
+
+  def monetize num
+    "#{num.to_s.split('.').join(',')} €"
+  end
   
   def get_list_group_item class_ref, ctrl_ref
     rep = 'list-group-item'

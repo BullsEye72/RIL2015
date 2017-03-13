@@ -16,7 +16,12 @@
   <div class="panel-body">
     
     <% if action_name == 'edit' %>
-      <button type="button" class="btn btn-default">Ajouter article</button>
+      <%= link_to(
+              'Ajouter article',
+              new_order_item_supplier_path(@order),
+              remote: true,
+              class: "btn btn-default"
+          ) %>
     <% end %>
 
     <div class="table-responsive">
@@ -44,6 +49,7 @@
               <td><%= as.price %></td>
               <td><%= oi.quantity * as.price %></td>
               <td class="text-right">
+<<<<<<< HEAD
                               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
                 oi
@@ -61,6 +67,20 @@
                   order_item_path(oi),
                   method: :delete,
                   data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
+=======
+                <% unless @order.effective? %>
+                  <%= link_to(
+                          raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                          edit_order_item_path(oi),
+                          remote: true
+                      ) %>
+                  |
+                 <%= link_to(
+                    raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
+                    order_item_path(oi),
+                    method: :delete,
+                    data: { confirm: "Suppression de l'article, voulez-vous continuer?" }) %>
+>>>>>>> francois
                   <% end %>
               </td>
             </tr>
@@ -68,11 +88,12 @@
         </tbody>
 
         <tfoot>
-        <td>Total :</td>
-        <td><%= get_total_items(params[:id]) %></td>
-        <td></td>
-        <td><%= get_total_price(params[:id]) %></td>
-        <td></td>
+          <td>Totaux :</td>
+          <td></td>
+          <td><%= @order.items_quantity %></td>
+          <td></td>
+          <td><%= number_to_currency(@order.total_price) %></td>
+          <td></td>
         </tfoot>
 
       </table>
