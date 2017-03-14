@@ -12,4 +12,11 @@
 #
 
 class Drawing < ActiveRecord::Base
+    
+    
+    
+    def to_label
+        "Plan n°: #{id}"
+    end
+    
 end

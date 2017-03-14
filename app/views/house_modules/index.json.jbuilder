@@ -1,0 +1,1 @@
+json.array! @house_modules, partial: 'house_modules/house_module', as: :house_module

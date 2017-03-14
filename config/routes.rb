@@ -1,6 +1,22 @@
 Rails.application.routes.draw do
 
 
+  resources :house_modules
+  resources :house_modules
+  get 'house_module/index'
+
+  get 'house_module/show'
+
+  get 'house_module/new'
+
+  get 'house_module/edit'
+
+  get 'house_module/create'
+
+  get 'house_module/update'
+
+  get 'house_module/destroy'
+
   # USERS & ADMINISTRATION
   devise_for :admins
   devise_for :users,

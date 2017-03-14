@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313173726) do
+ActiveRecord::Schema.define(version: 20170313194020) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -145,18 +145,19 @@ ActiveRecord::Schema.define(version: 20170313173726) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "house_modules", force: :cascade do |t|
-    t.integer  "range_id"
+    t.integer  "module_range_id"
     t.string   "name"
+    t.string   "description"
     t.boolean  "default"
     t.integer  "layout_id"
     t.integer  "drawing_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "house_modules", ["drawing_id"], name: "index_house_modules_on_drawing_id"
   add_index "house_modules", ["layout_id"], name: "index_house_modules_on_layout_id"
-  add_index "house_modules", ["range_id"], name: "index_house_modules_on_range_id"
+  add_index "house_modules", ["module_range_id"], name: "index_house_modules_on_module_range_id"
 
   create_table "margins", force: :cascade do |t|
     t.string   "name"
