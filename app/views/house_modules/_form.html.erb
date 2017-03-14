@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-2">
+    <img src="<%= image_url('wall_module') %>" class="img-responsive" alt="">
+  </div>
+  
+  <div class="col-md-10">
+    <%= simple_form_for(@house_module,  wrapper: :horizontal_form) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-horizontal">
+        <div class="form-inputs">
+          <% disabled = (action == :show) ? true : false %>
+          <%= f.input :name, input_html: { disabled: disabled } %>
+          <%= f.input :description, input_html: { disabled: disabled } %>
+          <%= f.association :module_range, label: "Gamme", input_html: { disabled: disabled } %>
+          <%= f.input :default, label: "Module par defaut", input_html: { disabled: disabled } %>
+          <%#= f.association :layout, input_html: { disabled: disabled } %>
+          <%= f.association :drawing, label: "Coupe de principe", input_html: { disabled: disabled } %>
+        </div>
+        
+        <div>
+          <h3>Définition du module :</h3>
+          
+          <% (1..8).each do |i| %>
+            <%= f.input :name, :collection => Article.all.order("name"), label: "(#{i})" %>
+          <% end %>
+        </div>
+    
+        <div class="form-actions">
+          <% if action == :new %>
+              <%= f.submit 'Créer' %>
+          <% end %>
+          <% if action == :edit %>
+              <%= f.submit 'Mettre à jour' %>
+          <% end %>
+          <%= link_to('Retour', house_modules_path, class: 'btn btn-default pull-right') %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
