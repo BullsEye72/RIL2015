@@ -16,6 +16,7 @@
 #
 
 class Quote < ActiveRecord::Base
+  before_create :set_quote
 
   default_scope { where(deleted_at: nil) }
   
@@ -24,10 +25,18 @@ class Quote < ActiveRecord::Base
   has_and_belongs_to_many :construction_states
   has_and_belongs_to_many :quote_states
   
-  validates_presence_of :user
+  # validates_presence_of :user
   validates :project_id, presence: true, uniqueness: {scope: :user_id}
   
   def to_label
     "Devis n°#{id}"
   end
+
+  private
+
+    def set_quote
+      self.user = User.current
+      self.quote_states<< QuoteState.find_by_name(:brouillon)
+    end
+
 end

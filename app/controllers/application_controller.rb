@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_filter :set_current
+
   add_breadcrumb 'Accueil', :root_path
   layout 'application'
 
@@ -12,5 +14,11 @@ class ApplicationController < ActionController::Base
   def authenticate_user_if_not_in_admin
     authenticate_user! unless self.class.parent == RailsAdmin
   end
+
+  private
+
+    def set_current
+      User.current = current_user
+    end
 
 end
