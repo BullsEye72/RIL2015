@@ -1,3 +1,5 @@
+puts "Création des utilisateurs..." # ==================
+
 # Admin default
 Admin.create!(
   email:                  'admin@admin.com',
@@ -42,6 +44,9 @@ conceptor = User.new(
 )
 conceptor.add_role :conceptor
 conceptor.save!
+
+puts "[OK]"
+puts "Création des tables de données statiques..." # ==================
 
 # PaymentStates
 [
@@ -111,7 +116,18 @@ conceptor.save!
   { name: 'kg',  regex: '(?<= )([kK][gG])', unit_category_id: 4 }
 ].each {|u| Unit.create! u }
 
+# Ranges (Fictives car non définies dans la spec.)
+[
+  { name: 'Deluxe Plus',   description: 'Le top du top!' },
+  { name: 'Deluxe',   description: 'Le haut de gamme' },
+  { name: 'Premium',   description: 'Standard avec des plus' },
+  { name: 'Standard',   description: 'Le standard' },
+  { name: 'Eco',   description: 'Economique' }
+].each {|r| ModuleRange.create! r }
+
+puts "[OK]"
 # =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
+puts "Création des tables de données fictives..."
 
 # Customers & Projects
 10.times do
@@ -130,6 +146,8 @@ conceptor.save!
       customer:     Customer.last
   )
 end
+
+puts "Customers & Projets : OK"
 
 # Suppliers & Articles
 30.times do
@@ -181,6 +199,8 @@ Supplier.all.each do |supplier|
   end
 end
 
+puts "Articles, Suppliers & Links : OK"
+
 #Quelques devis bidons
 10.times do
   a=Quote.new(
@@ -208,7 +228,21 @@ end
                       order: Order.last,
                       quantity: rand(1..10))
   end
-
 end
 
+puts "Quotes, Orders & Links : OK"
 
+# Modules alétoires
+20.times do
+  #HouseModule.create!(supplier: ModuleRange.order("RANDOM()").first, name: Faker::Commerce.product_name, default: true, drawing: Drawing.order("RANDOM()").first)
+  Drawing.create!(thumbnail_path: "Not Available yet", file_path: "Not Available yet", internal_reference: Faker::Lorem.characters(rand(5..10)).upcase)
+  HouseModule.create!(module_range: ModuleRange.order("RANDOM()").first,
+                      name: Faker::Commerce.product_name,
+                      description: "Description ...", 
+                      default: [true,false].sample,
+                      drawing: Drawing.order("RANDOM()").last)
+end
+
+puts "Modules & Drawings : OK"
+
+puts "Seed : OK ! Enjoy..."

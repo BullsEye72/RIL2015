@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305103336) do
+ActiveRecord::Schema.define(version: 20170314190028) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -87,12 +87,12 @@ ActiveRecord::Schema.define(version: 20170305103336) do
   end
 
   create_table "construction_states_quotes", id: false, force: :cascade do |t|
-    t.integer "construction_states_id"
-    t.integer "quotes_id"
+    t.integer "construction_state_id"
+    t.integer "quote_id"
   end
 
-  add_index "construction_states_quotes", ["construction_states_id"], name: "index_construction_states_quotes_on_construction_states_id"
-  add_index "construction_states_quotes", ["quotes_id"], name: "index_construction_states_quotes_on_quotes_id"
+  add_index "construction_states_quotes", ["construction_state_id"], name: "index_construction_states_quotes_on_construction_state_id"
+  add_index "construction_states_quotes", ["quote_id"], name: "index_construction_states_quotes_on_quote_id"
 
   create_table "contents", force: :cascade do |t|
     t.string   "code",       null: false
@@ -113,6 +113,24 @@ ActiveRecord::Schema.define(version: 20170305103336) do
     t.datetime "deleted_at"
   end
 
+  create_table "drawing_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "drawing_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "drawing_types", ["drawing_type_id"], name: "index_drawing_types_on_drawing_type_id"
+
+  create_table "drawings", force: :cascade do |t|
+    t.string   "thumbnail_path"
+    t.string   "file_path"
+    t.integer  "drawing_type"
+    t.string   "internal_reference"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -125,6 +143,21 @@ ActiveRecord::Schema.define(version: 20170305103336) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "house_modules", force: :cascade do |t|
+    t.integer  "module_range_id"
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "default"
+    t.integer  "layout_id"
+    t.integer  "drawing_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "house_modules", ["drawing_id"], name: "index_house_modules_on_drawing_id"
+  add_index "house_modules", ["layout_id"], name: "index_house_modules_on_layout_id"
+  add_index "house_modules", ["module_range_id"], name: "index_house_modules_on_module_range_id"
 
   create_table "margins", force: :cascade do |t|
     t.string   "name"
@@ -140,6 +173,13 @@ ActiveRecord::Schema.define(version: 20170305103336) do
 
   add_index "margins_quotes", ["margins_id"], name: "index_margins_quotes_on_margins_id"
   add_index "margins_quotes", ["quotes_id"], name: "index_margins_quotes_on_quotes_id"
+
+  create_table "module_ranges", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "articles_supplier_id"
@@ -221,6 +261,14 @@ ActiveRecord::Schema.define(version: 20170305103336) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quote_states_quotes", id: false, force: :cascade do |t|
+    t.integer "quote_id"
+    t.integer "quote_state_id"
+  end
+
+  add_index "quote_states_quotes", ["quote_id"], name: "index_quote_states_quotes_on_quote_id"
+  add_index "quote_states_quotes", ["quote_state_id"], name: "index_quote_states_quotes_on_quote_state_id"
+
   create_table "quotes", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
@@ -231,14 +279,6 @@ ActiveRecord::Schema.define(version: 20170305103336) do
 
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
   add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
-
-  create_table "quotes_quote_states", id: false, force: :cascade do |t|
-    t.integer "quotes_id"
-    t.integer "quote_states_id"
-  end
-
-  add_index "quotes_quote_states", ["quote_states_id"], name: "index_quotes_quote_states_on_quote_states_id"
-  add_index "quotes_quote_states", ["quotes_id"], name: "index_quotes_quote_states_on_quotes_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

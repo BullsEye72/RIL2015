@@ -29,6 +29,8 @@
 
 class User < ActiveRecord::Base
 
+  cattr_accessor :current
+
   default_scope { where(:deleted_at => nil) }
 
   has_many :quotes
