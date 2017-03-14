@@ -12,18 +12,14 @@
           <%= f.input :name, input_html: { disabled: disabled } %>
           <%= f.input :description, input_html: { disabled: disabled } %>
           <%= f.association :module_range, label: "Gamme", input_html: { disabled: disabled } %>
-          <%= f.input :default, label: "Module par defaut", input_html: { disabled: disabled } %>
+          
+          <%= f.input :default, as: :boolean, label: "Module par defaut", input_html: { disabled: disabled } %>
+          
           <%#= f.association :layout, input_html: { disabled: disabled } %>
           <%= f.association :drawing, label: "Coupe de principe", input_html: { disabled: disabled } %>
         </div>
         
-        <div>
-          <h3>Définition du module :</h3>
-          
-          <% (1..8).each do |i| %>
-            <%= f.input :name, :collection => Article.all.order("name"), label: "(#{i})" %>
-          <% end %>
-        </div>
+
     
         <div class="form-actions">
           <% if action == :new %>

@@ -83,6 +83,6 @@ class HouseModulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def house_module_params
-      params.require(:house_module).permit(:range_id, :name, :default, :layout_id, :drawing_id)
+      params.require(:house_module).permit(:range_id, :name, :default, :layout_id, :drawing_id, :description, :module_range_id)
     end
 end
