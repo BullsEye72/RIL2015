@@ -35,12 +35,16 @@ class HouseModulesController < ApplicationController
   # GET /house_modules/1/edit
   def edit
     add_breadcrumb "Editer " + @house_module.name
-    @articles_modules = @house_module.articles_modules.all
+    @articles_modules = @house_module.articles_modules.order(drawing_position: :asc)
   end
 
   # POST /house_modules
   # POST /house_modules.json
   def create
+
+    # lire couples positions articles
+    # créer modules_articles
+
     @house_module = HouseModule.new(house_module_params)
     #byebug
     respond_to do |format|
@@ -57,6 +61,10 @@ class HouseModulesController < ApplicationController
   # PATCH/PUT /house_modules/1
   # PATCH/PUT /house_modules/1.json
   def update
+
+    # lire couples positions articles
+    # créer modules_articles
+
     respond_to do |format|
       if @house_module.update(house_module_params)
         format.html { redirect_to @house_module, notice: 'House module was successfully updated.' }
