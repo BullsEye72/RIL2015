@@ -23,5 +23,7 @@ class HouseModule < ActiveRecord::Base
   belongs_to :module_range
   #belongs_to :layout
   belongs_to :drawing
-  has_many :article
+  
+  has_many :articles_modules
+  has_many :articles, through: :articles_modules
 end

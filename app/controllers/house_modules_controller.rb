@@ -3,7 +3,7 @@ class HouseModulesController < ApplicationController
   add_breadcrumb "Modules", :house_modules_path
   
   before_action :set_house_module, only: [:show, :edit, :update, :destroy]
-
+@articles_new = Article.all.order("name")
   # GET /house_modules
   # GET /house_modules.json
   def index
@@ -14,25 +14,28 @@ class HouseModulesController < ApplicationController
     #@articles = @articles.where('reference LIKE ?', '%'+params[:ref]+'%') if !params[:ref].blank?
     
     @house_modules = @house_modules.page(params[:page])
-    
+    @articles_new = Article.all.order("name")
   end
 
   # GET /house_modules/1
   # GET /house_modules/1.json
   def show
     add_breadcrumb @house_module.name
-    #@suppliers=Article.find(@house_module.id).suppliers ------- Articles du module
+    @articles_modules = @house_module.articles
   end
 
   # GET /house_modules/new
   def new
     @house_module = HouseModule.new
+    @articles_module = @house_module.articles_modules.all
+    
     add_breadcrumb "Nouveau module"
   end
 
   # GET /house_modules/1/edit
   def edit
     add_breadcrumb "Editer " + @house_module.name
+    @articles_modules = @house_module.articles_modules.all
   end
 
   # POST /house_modules
