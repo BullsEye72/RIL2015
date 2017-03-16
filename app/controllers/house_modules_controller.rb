@@ -8,7 +8,7 @@ class HouseModulesController < ApplicationController
   # GET /house_modules.json
   def index
     @house_modules = HouseModule.all.order("id DESC")
-    
+
     #save for futur filter
     #@articles = @articles.where('name LIKE ?', '%'+params[:nom]+'%') if !params[:nom].blank?
     #@articles = @articles.where('reference LIKE ?', '%'+params[:ref]+'%') if !params[:ref].blank?
@@ -41,14 +41,17 @@ class HouseModulesController < ApplicationController
   # POST /house_modules
   # POST /house_modules.json
   def create
-
-    # lire couples positions articles
-    # créer modules_articles
-
     @house_module = HouseModule.new(house_module_params)
-    #byebug
     respond_to do |format|
       if @house_module.save
+        position=1
+        params[:house_module][:article_ids].split(',').each do |article_id|
+          ArticlesModule.create!(
+              house_module: @house_module,
+              article_id: article_id,
+              drawing_position: position+=1
+          )
+        end
         format.html { redirect_to @house_module, notice: 'House module was successfully created.' }
         format.json { render :show, status: :created, location: @house_module }
       else
