@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">Derniers fournisseurs</h2>
+    <h2 class="panel-title">Derniers modules</h2>
   </div>
   
   <div class="panel-body">
@@ -8,20 +8,20 @@
       <thead>
         <tr>
           <th><%= 'Nom' %></th>
-          <th><%= 'Nb. produits' %></th>
+          <th><%= 'Gamme' %></th>
           <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @last_supplier.each do |supplier| %>
+        <% @last_modules.each do |hm| %>
           <tr>
-            <td><%= supplier.name %></td>
-            <td><%= count_article_in_supplier(supplier.id) %></td>
+            <td><%= hm.name %></td>
+            <td><%= hm.module_range.nil? ? 'Aucun' : hm.module_range.name %></td>
             <td class="text-right">
             <%= link_to(
               raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-              supplier
+              hm
               )
             %>
           </tr>

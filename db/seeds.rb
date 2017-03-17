@@ -241,6 +241,12 @@ puts "Quotes, Orders & Links : OK"
                       description: "Description ...", 
                       default: [true,false].sample,
                       drawing: Drawing.order("RANDOM()").last)
+                      
+  [*1..8].sample.times do |i|
+    ArticlesModule.create!(house_module: HouseModule.last,
+                          article: Article.order("RANDOM()").last,
+                          drawing_position: i+1)
+  end
 end
 
 puts "Modules & Drawings : OK"

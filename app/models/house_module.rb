@@ -23,4 +23,20 @@ class HouseModule < ActiveRecord::Base
   belongs_to :module_range
   #belongs_to :layout
   belongs_to :drawing
+  
+  has_many :articles_modules
+  has_many :articles, through: :articles_modules
+
+  def add_articles_modules(article_ids)
+    articles_modules.each {|am| am.destroy}
+    position=1
+    article_ids.each do |article_id|
+      ArticlesModule.create!(
+          house_module: self,
+          article_id: article_id,
+          drawing_position: position+=1
+      )
+    end
+  end
+
 end

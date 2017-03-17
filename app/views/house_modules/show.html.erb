@@ -22,7 +22,49 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render 'form', action: :show %>
+    <%= simple_form_for(@house_module, wrapper: :horizontal_form) do |f| %>
+        <%= f.error_notification %>
+        <div class="row">
+          <div class="col-md-3">
+            <img src="<%= image_url('wall_module') %>" class="img-responsive" alt="">
+          </div>
+
+          <div class="col-md-8 form-horizontal">
+            <div class="form-inputs">
+              <%= f.input :name, input_html: {disabled: true} %>
+              <%= f.input :description, input_html: {disabled: true} %>
+              <%= f.association :module_range, label: "Gamme", input_html: {disabled: true} %>
+              <%= f.input :default, as: :select, label: "Module par defaut", input_html: {disabled: true} %>
+              <%= f.association :drawing, label: "Coupe de principe", input_html: {disabled: true} %>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-8 col-md-offset-3">
+            <h3>Articles associés au module :</h3>
+            <div class="form-horizontal">
+              <div class="form-inputs">
+                <% @articles_modules.each do |am| %>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Article n°<%= am.drawing_position %></label>
+                    <div class="col-sm-9">
+                      <p class="form-control-static"><%= am.article.name %></p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= link_to('Retour', articles_path, class: 'btn btn-default pull-right') %>
+        </div>
+
+    <% end %>
     <a href="<%= edit_house_module_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
       Editer
