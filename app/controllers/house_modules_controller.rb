@@ -21,7 +21,7 @@ class HouseModulesController < ApplicationController
   # GET /house_modules/1.json
   def show
     add_breadcrumb @house_module.name
-    @articles_modules = @house_module.articles
+    @articles_modules = @house_module.articles_modules.order(drawing_position: :asc)
   end
 
   # GET /house_modules/new
@@ -44,14 +44,7 @@ class HouseModulesController < ApplicationController
     @house_module = HouseModule.new(house_module_params)
     respond_to do |format|
       if @house_module.save
-        position=1
-        params[:house_module][:article_ids].split(',').each do |article_id|
-          ArticlesModule.create!(
-              house_module: @house_module,
-              article_id: article_id,
-              drawing_position: position+=1
-          )
-        end
+        @house_module.add_articles_modules(params[:house_module][:article_ids].split(','))
         format.html { redirect_to @house_module, notice: 'House module was successfully created.' }
         format.json { render :show, status: :created, location: @house_module }
       else
@@ -64,12 +57,9 @@ class HouseModulesController < ApplicationController
   # PATCH/PUT /house_modules/1
   # PATCH/PUT /house_modules/1.json
   def update
-
-    # lire couples positions articles
-    # créer modules_articles
-
     respond_to do |format|
       if @house_module.update(house_module_params)
+        @house_module.add_articles_modules(params[:house_module][:article_ids].split(','))
         format.html { redirect_to @house_module, notice: 'House module was successfully updated.' }
         format.json { render :show, status: :ok, location: @house_module }
       else
