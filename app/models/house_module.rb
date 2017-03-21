@@ -29,7 +29,7 @@ class HouseModule < ActiveRecord::Base
 
   def add_articles_modules(article_ids)
     articles_modules.each {|am| am.destroy}
-    position=1
+    position=0
     article_ids.each do |article_id|
       ArticlesModule.create!(
           house_module: self,

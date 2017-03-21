@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <%= f.input :article_ids, as: :hidden%>
+    <%= f.input :article_ids, as: :hidden, input_html: {value: @articles_modules.pluck(:id).join(', ') } %>
     <div class="form-actions">
       <% submit_label = (action == :new ? 'Créer' : 'Mettre à jour') %>
       <%= f.submit submit_label  %>
@@ -112,7 +112,8 @@
           addSelect(<%= am.article.id %>);
         <% end %>
       <% end %>
-      valuesTab = $('#house_module_article_ids').val().split(' ')
+      valuesTab = $('#house_module_article_ids').val().split(' ');
+
     <% end %>
 
 </script>
