@@ -29,6 +29,12 @@ class Ability
       can [:show], [Quote,Project]
     end
 
+    #Compta
+    if user.has_role? :compta
+      can :manage, Payment
+      can :show, Quote
+    end
+
   end
 
 end

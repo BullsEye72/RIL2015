@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # RESSOURCES
   resources :commercials, path: 'commerciaux'
   resources :projects,    path: 'projets'
-  resources :payments,    path: 'paiement'
+  resources :payments#,    path: 'paiement'
   resources :purchases,   path: 'achats'
   resources :suppliers,   path: 'fournisseurs'
   resources :customers,   path: 'clients'
