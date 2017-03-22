@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314101057) do
+ActiveRecord::Schema.define(version: 20170314190028) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -98,12 +98,12 @@ ActiveRecord::Schema.define(version: 20170314101057) do
   end
 
   create_table "construction_states_quotes", id: false, force: :cascade do |t|
-    t.integer "construction_states_id"
-    t.integer "quotes_id"
+    t.integer "construction_state_id"
+    t.integer "quote_id"
   end
 
-  add_index "construction_states_quotes", ["construction_states_id"], name: "index_construction_states_quotes_on_construction_states_id"
-  add_index "construction_states_quotes", ["quotes_id"], name: "index_construction_states_quotes_on_quotes_id"
+  add_index "construction_states_quotes", ["construction_state_id"], name: "index_construction_states_quotes_on_construction_state_id"
+  add_index "construction_states_quotes", ["quote_id"], name: "index_construction_states_quotes_on_quote_id"
 
   create_table "contents", force: :cascade do |t|
     t.string   "code",       null: false
@@ -272,6 +272,14 @@ ActiveRecord::Schema.define(version: 20170314101057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quote_states_quotes", id: false, force: :cascade do |t|
+    t.integer "quote_id"
+    t.integer "quote_state_id"
+  end
+
+  add_index "quote_states_quotes", ["quote_id"], name: "index_quote_states_quotes_on_quote_id"
+  add_index "quote_states_quotes", ["quote_state_id"], name: "index_quote_states_quotes_on_quote_state_id"
+
   create_table "quotes", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
@@ -282,14 +290,6 @@ ActiveRecord::Schema.define(version: 20170314101057) do
 
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
   add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
-
-  create_table "quotes_quote_states", id: false, force: :cascade do |t|
-    t.integer "quotes_id"
-    t.integer "quote_states_id"
-  end
-
-  add_index "quotes_quote_states", ["quote_states_id"], name: "index_quotes_quote_states_on_quote_states_id"
-  add_index "quotes_quote_states", ["quotes_id"], name: "index_quotes_quote_states_on_quotes_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

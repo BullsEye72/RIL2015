@@ -1,37 +1,122 @@
-<%= simple_form_for(@house_module,  wrapper: :horizontal_form) do |f| %> 
-  <%= f.error_notification %>
-  <div class="row">
-    
-    <div class="col-md-3">
-      <div class="container">
-        <p>Coupe : <%= @house_module.drawing.file_path %></p>                  
-        <img src="<%= image_url(@house_module.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
+<%= simple_form_for(@house_module, wrapper: :horizontal_form) do |f| %>
+    <%= f.error_notification %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="container">
+          <p>Coupe : <%= @house_module.drawing.file_path %></p>                  
+          <img src="<%= image_url(@house_module.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
+        </div>
+      </div>
+
+      <div class="col-md-8 form-horizontal">
+        <div class="form-inputs">
+          <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.association :module_range, label: 'Gamme' %>
+          <%= f.input :default, as: :select, label: 'Module par defaut' %>
+          <%= f.association :drawing, label: 'Coupe de principe' %>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-3">
+        <h3>Associer des articles :</h3>
+        <div class="form-horizontal">
+          <div class="form-inputs">
+            <div id="articles-container"></div>
+          </div>
+        </div>
+        <a href="#"
+           class="btn btn-primary pull-right"
+           id="add-article-btn">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+        <a href="#"
+           class="btn btn-danger pull-right"
+           id="rm-article-btn">
+          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </a>
       </div>
     </div>
-    
-    <div class="col-md-8 form-horizontal">
-      <div class="form-inputs">
-        <% disabled = (action == :show) ? true : false %>
-        <%= f.input :name, input_html: { disabled: disabled } %>
-        <%= f.input :description, input_html: { disabled: disabled } %>
-        <%= f.association :module_range, label: "Gamme", input_html: { disabled: disabled } %>
-        <%= f.input :default, as: :select, label: "Module par defaut", input_html: { disabled: disabled } %>
-        <%#= f.association :layout, input_html: { disabled: disabled } %>
-        <%= f.association :drawing, label: "Coupe de principe", input_html: { disabled: disabled } %>
-      </div>
-    </div>
-    <div class="col-md-2"></div>
-  </div>
 
-  <div class="row">
-    
-
-    <div class="col-md-12">
-      <h3>Articles associés au module :</h3>
-      
-      
-      
+    <%= f.input :article_ids, as: :hidden, input_html: {value: @articles_modules.pluck(:id).join(', ') } %>
+    <div class="form-actions">
+      <% submit_label = (action == :new ? 'Créer' : 'Mettre à jour') %>
+      <%= f.submit submit_label  %>
+      <%= link_to('Retour', house_modules_path, class: 'btn btn-default pull-right') %>
     </div>
-    
-  </div>
+
 <% end %>
+
+
+<script>
+    var position = 0;
+    var valuesTab = [];
+
+    function updateHidden() {
+        $('#house_module_article_ids').val(valuesTab);
+    }
+
+    function addValueToValuesTab() {
+        var $select = $(this);
+        var value = $select.val();
+        var index = $select.parent().parent().index();
+        console.log('value: '+value+', index :'+index);
+        valuesTab[index]=value;
+        updateHidden();
+    }
+
+    function addSelect(select) {
+        position++;
+        $selectContainer.append(displaySelect(position));
+        if (select != 0 ) {
+            $('#article_select_'+position+' option:first-child').prop('selected', false);
+            $('#article_select_'+position+' option:eq('+select+')').prop('selected', true);
+        }
+        $selectContainer.find('.article-select').last().find('select').on('change', addValueToValuesTab);
+    }
+
+    function removeLastSelect() {
+        $selectContainer.find('.article-select').last().remove();
+        valuesTab.pop();
+        updateHidden();
+    }
+
+    function displaySelect(position) {
+        return '<div class="form-group article-select">' +
+            '           <label class="col-sm-3 control-label" for="article_select_'+position+'">Article n°'+position+'</label>' +
+            '             <div class="col-sm-9">' +
+            '               <select class="form-control" name="article_select_'+position+'" id="article_select_'+position+'">' +
+            '                 <option disabled value selected> -- choisir un article -- </option>' +
+            <% Article.all.each do |a| %>
+            '                   <option value="<%= a.id %>"><%= a.name %></option>' +
+            <% end %>
+            '               </select>' +
+            '             </div>' +
+            '           </div>';
+    }
+
+    var $selectContainer = $('#articles-container');
+    $('#add-article-btn').on('click', function(e) {
+        e.preventDefault();
+        addSelect(0);
+    });
+    $('#rm-article-btn').on('click', function(e) {
+        e.preventDefault();
+        position--;
+        removeLastSelect();
+    });
+
+    <% unless @articles_modules.nil? %>
+      <% @articles_modules.each do |am| %>
+        <% if am.article %>
+          addSelect(<%= am.article.id %>);
+        <% end %>
+      <% end %>
+      valuesTab = $('#house_module_article_ids').val().split(' ');
+
+    <% end %>
+
+</script>

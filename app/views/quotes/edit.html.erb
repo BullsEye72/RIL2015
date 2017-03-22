@@ -3,6 +3,28 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render 'form', action: :edit %>
-  </div>
+    <%= simple_form_for(@quote, wrapper: :horizontal_form) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :project_id, as: :hidden %>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="quote_quote_states">Statut du devis</label>
+          <div class="col-sm-9">
+            <%= f.collection_select :quote_state_ids, QuoteState.all, :id, :name, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="quote_quote_states">Statut du devis</label>
+          <div class="col-sm-9">
+            <%= f.collection_select :construction_state_ids, ConstructionState.all, :id, :name, class: 'form-control' %>
+          </div>
+        </div>
+        <%= f.submit 'Mettre à jour' %>
+
+      </div>
+      <div class="form-actions">
+        <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
+      </div>
+    <% end %>
+    </div>
 </div>

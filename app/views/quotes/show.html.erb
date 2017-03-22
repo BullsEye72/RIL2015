@@ -22,7 +22,48 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render 'form', action: :show %>
+    <%= simple_form_for(@quote,  wrapper: :horizontal_form) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-horizontal">
+          <div class="form-inputs">
+            <%= f.association :project,
+                              label: t('project').titleize,
+                              selected: params[:project],
+                              input_html: { disabled: true } %>
+          </div>
+          <div class="form-inputs">
+            <% state = @quote.quote_states.last %>
+            <%= f.input :user,
+                        label: 'Commercial',
+                        as: :fake,
+                        input_html: {
+                            disabled: true,
+                            value: (@quote.user.display_fullname if @quote.user.present?)
+                        }
+            %>
+            <%= f.input :state,
+                        label: 'État du devis',
+                        as: :fake,
+                        input_html: {
+                            disabled: true,
+                            value: @quote.quote_states.last.name
+                        }
+            %>
+            <% construction_state = @quote.construction_states.last %>
+            <%= f.input :construction_state,
+                        label: 'Avancement des travaux',
+                        as: :fake,
+                        input_html: {
+                            disabled: true,
+                            value: construction_state ? construction_state.name : 'Non commencé'
+                        }
+            %>
+          </div>
+          <div class="form-actions">
+            <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
+          </div>
+        </div>
+    <% end %>
     <a href="<%= edit_quote_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
       Editer

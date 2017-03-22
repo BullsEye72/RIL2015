@@ -50,6 +50,17 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="col-sm-3 control-label" for="article_fournisseur">Fournisseurs *</label>
+          <div class="col-sm-9">
+            <input class="form-control"
+                   aria-required="true"
+                   type="text"
+                   id="article_value_added_tax_id"
+                   value="<%= @article.suppliers.pluck(:name).join(', ') %>"
+                   disabled>
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-sm-3 control-label" for="article_reference">Reference *</label>
           <div class="col-sm-9">
             <input class="form-control"
@@ -72,7 +83,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label" for="article_unit_category">Unit category</label>
+          <label class="col-sm-3 control-label" for="article_unit_category">Categorie d'unité</label>
           <div class="col-sm-9">
             <input class="form-control"
                    aria-required="true"

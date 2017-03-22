@@ -18,8 +18,8 @@
       <tbody>
         <% @quotes.each do |quote| %>
           <tr>
-                <td><%= "#{quote.project.id} |  #{quote.project.customer.fullname}" %></td>
-                <td><%= quote.user.display_fullname %></td>
+                <td><%= "#{quote.project.id} |  #{quote.project.customer.fullname if quote.project.customer.present? }" %></td>
+                <td><%= quote.user.display_fullname if quote.user.present? %></td>
                 <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),

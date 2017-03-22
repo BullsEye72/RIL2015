@@ -8,7 +8,7 @@ class HouseModulesController < ApplicationController
   # GET /house_modules.json
   def index
     @house_modules = HouseModule.all.order("id DESC")
-    
+
     #save for futur filter
     #@articles = @articles.where('name LIKE ?', '%'+params[:nom]+'%') if !params[:nom].blank?
     #@articles = @articles.where('reference LIKE ?', '%'+params[:ref]+'%') if !params[:ref].blank?
@@ -21,7 +21,7 @@ class HouseModulesController < ApplicationController
   # GET /house_modules/1.json
   def show
     add_breadcrumb @house_module.name
-    @articles_modules = @house_module.articles
+    @articles_modules = @house_module.articles_modules.order(drawing_position: :asc)
   end
 
   # GET /house_modules/new
@@ -35,16 +35,16 @@ class HouseModulesController < ApplicationController
   # GET /house_modules/1/edit
   def edit
     add_breadcrumb "Editer " + @house_module.name
-    @articles_modules = @house_module.articles_modules.all
+    @articles_modules = @house_module.articles_modules.order(drawing_position: :asc)
   end
 
   # POST /house_modules
   # POST /house_modules.json
   def create
     @house_module = HouseModule.new(house_module_params)
-    #byebug
     respond_to do |format|
       if @house_module.save
+        @house_module.add_articles_modules(params[:house_module][:article_ids].split(','))
         format.html { redirect_to @house_module, notice: 'House module was successfully created.' }
         format.json { render :show, status: :created, location: @house_module }
       else
@@ -59,6 +59,7 @@ class HouseModulesController < ApplicationController
   def update
     respond_to do |format|
       if @house_module.update(house_module_params)
+        @house_module.add_articles_modules(params[:house_module][:article_ids].split(','))
         format.html { redirect_to @house_module, notice: 'House module was successfully updated.' }
         format.json { render :show, status: :ok, location: @house_module }
       else

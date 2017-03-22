@@ -95,7 +95,8 @@ class ArticlesController < ApplicationController
                                       :article_group_id,
                                       :value_added_tax_id,
                                       :reference,
-                                      :description #,
+                                      :description,
+                                      supplier_ids: []
                                       #articles_units_attributes: [:unit_id, :value]
       )
 
