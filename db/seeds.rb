@@ -232,15 +232,36 @@ end
 
 puts "Quotes, Orders & Links : OK"
 
+# Drawing
+['maison_1.jpg', 'maison_2.jpg', 'maison_3.jpg',
+'maison_4.jpg', 'maison_5.jpg'].each do |d|
+  Drawing.create!(
+    thumbnail_path: "Not Available yet",
+    file_path: d,
+    drawing_type: 1,
+    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+    )
+end
+
+['cloison_bois_1.jpg', 'cloison_bois_2.jpg', 'cloison_bois_3.jpg',
+'cloison_bois_4.jpg', 'plancher_dalle_1.jpg', 'plancher_dalle_2.jpg',
+'toit_1.png','toit_2.png'].each do |d|
+  Drawing.create!(
+    thumbnail_path: "Not Available yet",
+    file_path: d,
+    drawing_type: 0,
+    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+    )
+end
+
 # Modules alétoires
 20.times do
   #HouseModule.create!(supplier: ModuleRange.order("RANDOM()").first, name: Faker::Commerce.product_name, default: true, drawing: Drawing.order("RANDOM()").first)
-  Drawing.create!(thumbnail_path: "Not Available yet", file_path: "Not Available yet", internal_reference: Faker::Lorem.characters(rand(5..10)).upcase)
   HouseModule.create!(module_range: ModuleRange.order("RANDOM()").first,
                       name: Faker::Commerce.product_name,
                       description: "Description ...", 
                       default: [true,false].sample,
-                      drawing: Drawing.order("RANDOM()").last)
+                      drawing: Drawing.where(drawing_type: 0).order("RANDOM()").last)
                       
   [*1..8].sample.times do |i|
     ArticlesModule.create!(house_module: HouseModule.last,

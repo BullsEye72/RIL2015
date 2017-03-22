@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Ajout de nouveaux documents</h2>
+  </div>
+  
+  <div class="panel-body">
+    <form>
+      <div class="form-group">
+        <label for="nom">Nom du document</label>
+        <input type="text" class="form-control" id="nom" aria-describedby="nomHelp" placeholder="Entrez un nom">
+        <small id="nomHelp" class="form-text text-muted">Veuillez choisir un nom court et le plus explicite possible</small>
+      </div>
+      <div class="form-group">
+        <label for="descriptif">Description</label>
+        <textarea class="form-control" id="descriptif" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1">Type de document</label>
+        <select class="form-control" id="exampleSelect1">
+          <option>CCTP</option>
+          <option>Fiche technique</option>
+          <option>Murs extérieurs</option>
+          <option>Cloisons intérieures</option>
+          <option>Plancher sur dalle</option>
+          <option>Plancher porteur</option>
+          <option>Fermes de charpente</option>
+          <option>Couverture (toit)</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputFile">Selection de fichier</label>
+        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">Attention a la taille du fichier (max. 20mo) et la taille des images.</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+  </div>
+</div>

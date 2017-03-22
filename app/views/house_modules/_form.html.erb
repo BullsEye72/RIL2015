@@ -1,8 +1,12 @@
 <%= simple_form_for(@house_module,  wrapper: :horizontal_form) do |f| %> 
   <%= f.error_notification %>
   <div class="row">
+    
     <div class="col-md-3">
-      <img src="<%= image_url('wall_module') %>" class="img-responsive" alt="">
+      <div class="container">
+        <p>Coupe : <%= @house_module.drawing.file_path %></p>                  
+        <img src="<%= image_url(@house_module.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
+      </div>
     </div>
     
     <div class="col-md-8 form-horizontal">
@@ -25,9 +29,7 @@
     <div class="col-md-12">
       <h3>Articles associés au module :</h3>
       
-      Select boxes here
       
-      <%= f.association :articles, label: "Test" %>
       
     </div>
     
