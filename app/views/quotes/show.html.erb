@@ -38,7 +38,7 @@
                         as: :fake,
                         input_html: {
                             disabled: true,
-                            value: @quote.user.display_fullname
+                            value: (@quote.user.display_fullname if @quote.user.present?)
                         }
             %>
             <%= f.input :state,
