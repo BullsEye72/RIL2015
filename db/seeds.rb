@@ -1,4 +1,4 @@
-puts "Création des utilisateurs..." # ==================
+print "Création des utilisateurs..." # ==================
 
 # Admin default
 Admin.create!(
@@ -46,7 +46,7 @@ conceptor.add_role :conceptor
 conceptor.save!
 
 puts "[OK]"
-puts "Création des tables de données statiques..." # ==================
+print "Création des tables de données statiques..." # ==================
 
 # PaymentStates
 [
@@ -127,7 +127,7 @@ puts "Création des tables de données statiques..." # ==================
 
 puts "[OK]"
 # =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
-puts "Création des tables de données fictives..."
+puts "Création des tables de données fictives :"
 
 # Customers & Projects
 10.times do
