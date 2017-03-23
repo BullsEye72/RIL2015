@@ -1,62 +1,54 @@
-<% provide(:title, "Modules") %>
+<% provide(:title, t(:product).titleize) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= 'Listing modules' %></h2>
+    <h2 class="panel-title"><%= t 'Listing products' %></h2>
   </div>
   <div class="panel-body">
-    
     <table>
       <thead>
         <tr>
               <th><%= 'Nom' %></th>
-              <th><%= 'Gamme' %></th>
-              <th><%= 'Description' %></th>
+              <th><%= 'Descriptif' %></th>
+              <th><%= 'Ref. CCTP' %></th>
               <th><%= 'Par Defaut' %></th>
-              <th><%= 'Prix' %></th>
               <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @house_modules.each do |hm| %>
+        <% @products.each do |product| %>
           <tr>
-            <td><%= hm.name %></td>
-            <td><%= hm.module_range.nil? ? 'Aucun' : hm.module_range.name %></td>
-            <td><%= hm.description %></td>
-            <td><%= hm.default ? 'x' : '' %></td>
-            <td><%= number_to_currency(hm.module_price, locale: :fr) %></td>
-            <td class="text-right">
+              <td><%= product.name %></td>
+              <td><%= product.descriptif %></td>
+              <td><%= product.cctp_reference %></td>
+              <td><%= product.default ? 'x' : '' %></td>
+              <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                hm
+                product
               ) %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_house_module_path(hm)
+                edit_product_path(product)
               ) %>
               |
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                hm,
+                product,
                 method: :delete, data: { confirm: 'Êtes vous certain ?' }
               ) %>
+
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <% if @house_modules.total_pages > 1 %>
-      <nav aria-label="Page navigation" class="text-center">
-        <%= paginate @house_modules, window: 1, outer_window: 1 %>
-      </nav>
-    <% end %>
 
     <br>
 
-    <%= link_to "Nouveau module", new_house_module_path, class: 'btn btn-default' %>
+    <%= link_to "Nouveau #{t('product').downcase}", new_product_path, class: 'btn btn-default' %>
   </div>
-
 </div>

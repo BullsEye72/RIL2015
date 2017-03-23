@@ -8,6 +8,7 @@ class Ability
       can :index, :commercial
       can :manage, Project
       can :manage, Quote
+      can :manage, Product
       can :show, [Order,Article,Supplier,HouseModule]
     end
 
@@ -26,6 +27,7 @@ class Ability
       can :manage, Article
       can :manage, Supplier
       can :manage, HouseModule
+      can :manage, Product
       can [:show], [Quote,Project]
     end
 

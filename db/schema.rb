@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314190028) do
+ActiveRecord::Schema.define(version: 20170323133701) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -192,6 +192,16 @@ ActiveRecord::Schema.define(version: 20170314190028) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "modules_products", force: :cascade do |t|
+    t.integer  "house_module_id"
+    t.integer  "product_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "modules_products", ["house_module_id"], name: "index_modules_products_on_house_module_id"
+  add_index "modules_products", ["product_id"], name: "index_modules_products_on_product_id"
+
   create_table "order_items", force: :cascade do |t|
     t.integer  "articles_supplier_id"
     t.integer  "order_id"
@@ -255,6 +265,22 @@ ActiveRecord::Schema.define(version: 20170314190028) do
 
   add_index "payments", ["payment_state_id"], name: "index_payments_on_payment_state_id"
   add_index "payments", ["quote_id"], name: "index_payments_on_quote_id"
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "default"
+    t.string   "descriptif"
+    t.string   "cctp_reference"
+    t.integer  "drawing_id"
+    t.integer  "quote_id"
+    t.integer  "modules_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "products", ["drawing_id"], name: "index_products_on_drawing_id"
+  add_index "products", ["modules_id"], name: "index_products_on_modules_id"
+  add_index "products", ["quote_id"], name: "index_products_on_quote_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "description"

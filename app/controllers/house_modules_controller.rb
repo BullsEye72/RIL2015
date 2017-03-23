@@ -3,7 +3,7 @@ class HouseModulesController < ApplicationController
   add_breadcrumb "Modules", :house_modules_path
   
   before_action :set_house_module, only: [:show, :edit, :update, :destroy]
-@articles_new = Article.all.order("name")
+  @articles_new = Article.all.order("name")
   # GET /house_modules
   # GET /house_modules.json
   def index

@@ -149,6 +149,9 @@ end
 
 puts "Customers & Projets : OK"
 
+art_first_part = ['Vis à', 'Plaque de', 'Brique en', 'Ardoise en', 'Plinthe', 'Joint à', 'Rivet à']
+art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 'plâtre', 'PVC']
+
 # Suppliers & Articles
 30.times do
   # Suppliers
@@ -162,7 +165,8 @@ puts "Customers & Projets : OK"
   # Articles
   rand(10..20).times do
     Article.create!(
-      name: Faker::Commerce.product_name,
+      #name: Faker::Commerce.product_name,
+      name: "#{art_first_part.sample} #{art_second_part.sample}",
       value_added_tax_id: 1,
       reference: Faker::Code.asin,
       description: Faker::Lorem.paragraph(3),
@@ -255,10 +259,14 @@ end
 end
 
 # Modules alétoires
+mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
+mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
+
 20.times do
   #HouseModule.create!(supplier: ModuleRange.order("RANDOM()").first, name: Faker::Commerce.product_name, default: true, drawing: Drawing.order("RANDOM()").first)
   HouseModule.create!(module_range: ModuleRange.order("RANDOM()").first,
-                      name: Faker::Commerce.product_name,
+                      #name: Faker::Commerce.product_name,
+                      name: "#{mod_first_part.sample} #{mod_second_part.sample} #{[*1..3].sample}",
                       description: "Description ...", 
                       default: [true,false].sample,
                       drawing: Drawing.where(drawing_type: 0).order("RANDOM()").last)
@@ -271,5 +279,24 @@ end
 end
 
 puts "Modules & Drawings : OK"
+
+# Modules alétoires
+mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
+mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
+
+Quote.all.each_with_index do |q,i|
+  Product.create!(name: "Produit #{i}",
+                  descriptif: "Description du produit ...", 
+                  default: [true,false].sample,
+                  cctp_reference: Faker::Lorem.characters(rand(5..10)).upcase,
+                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
+                  quote: q)
+                      
+  [*1..8].sample.times do
+    ModulesProduct.create!(product: Product.last, house_module: HouseModule.order("RANDOM()").last)
+  end
+end
+
+puts "Products & Drawings : OK"
 
 puts "Seed : OK ! Enjoy..."
