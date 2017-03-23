@@ -1,4 +1,4 @@
-<% provide(:title, t(:house_module).titleize ) %>
+<% provide(:title, t(:product).titleize ) %>
 <% provide(:subtitle, 'Création') %>
 
 
@@ -13,7 +13,7 @@
         Êtes vous certain de vouloir effacer cet élément ?
       </div>
       <div class="modal-footer">
-        <%= link_to 'Effacer',  @house_module,  method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Effacer',  @product,  method: :delete, class: 'btn btn-danger' %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
       </div>
     </div>
@@ -22,14 +22,14 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= simple_form_for(@house_module, wrapper: :horizontal_form) do |f| %>
+    <%= simple_form_for(@product, wrapper: :horizontal_form) do |f| %>
         <%= f.error_notification %>
         <div class="row">
           <div class="col-md-3">
-            <% unless @house_module.drawing.nil? %>
+            <% unless @product.drawing.nil? %>
               <div class="container">
-                <p>Coupe : <%= @house_module.drawing.file_path %></p>                  
-                <img src="<%= image_url(@house_module.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
+                <p>Coupe : <%= @product.drawing.file_path %></p>                  
+                <img src="<%= image_url(@product.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
               </div>
             <% end %>
           </div>
@@ -37,8 +37,8 @@
           <div class="col-md-8 form-horizontal">
             <div class="form-inputs">
               <%= f.input :name, input_html: {disabled: true} %>
-              <%= f.input :description, input_html: {disabled: true} %>
-              <%= f.association :module_range, label: "Gamme", input_html: {disabled: true} %>
+              <%= f.input :descriptif, input_html: {disabled: true} %>
+              <%= f.input :cctp_reference, input_html: {disabled: true} %>
               <%= f.input :default, as: :select, label: "Module par defaut", input_html: {disabled: true} %>
               <%= f.association :drawing, label: "Coupe de principe", input_html: {disabled: true} %>
             </div>
@@ -52,11 +52,11 @@
             <h3>Articles associés au module :</h3>
             <div class="form-horizontal">
               <div class="form-inputs">
-                <% @articles_modules.each do |am| %>
+                <% @modules_product.each do |mp| %>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Article n°<%= am.drawing_position %></label>
+                    <label class="col-sm-3 control-label">Module <%= mp.house_module.id %></label>
                     <div class="col-sm-9">
-                      <p class="form-control-static"><%= am.article.name %></p>
+                      <p class="form-control-static"><%= mp.house_module.name %></p>
                     </div>
                   </div>
                 <% end %>
@@ -66,11 +66,11 @@
         </div>
 
         <div class="form-actions">
-          <%= link_to('Retour', house_module_path, class: 'btn btn-default pull-right') %>
+          <%= link_to('Retour', product_path, class: 'btn btn-default pull-right') %>
         </div>
 
     <% end %>
-    <a href="<%= edit_house_module_path %>" class="btn btn-primary">
+    <a href="<%= edit_product_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
       Editer
     </a>

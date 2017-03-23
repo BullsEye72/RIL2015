@@ -38,5 +38,14 @@ class HouseModule < ActiveRecord::Base
       )
     end
   end
+  
+  def module_price
+    price = 0
+    self.articles.each do |a|
+      price += a.articles_suppliers.order('price').first.price
+    end
+    
+    return price
+  end
 
 end

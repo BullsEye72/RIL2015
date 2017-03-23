@@ -29,8 +29,7 @@ Rails.application.routes.draw do
   resources :units
   resources :conceptions, path: 'be'
   resources :house_modules, path: 'modules'
-
-
+  resources :products, path: 'produits'
 
   get '/order/:order/item/new', to: 'order_items#new', as: 'new_order_item_supplier'
 

@@ -16,7 +16,7 @@ class Drawing < ActiveRecord::Base
     
     
     def to_label
-        "Plan n°: #{id}"
+        "#{file_path}"
     end
     
 end
