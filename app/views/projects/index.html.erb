@@ -37,6 +37,7 @@
           <th>Num. projet</th>
           <th>Nom client</th>
           <th>Description</th>
+          <th>Nb. de devis</th>
           <th></th>
         </tr>
 
@@ -46,6 +47,7 @@
             <td><%= project.id %></td>
             <td><%= project.customer.fullname %></td>
             <td><%= truncate(project.description) %></td>
+            <td><%= project.quotes.count %></td>
             <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),

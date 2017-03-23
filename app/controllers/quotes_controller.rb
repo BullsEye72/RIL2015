@@ -7,13 +7,16 @@ class QuotesController < ApplicationController
   # GET /quotes
   # GET /quotes.json
   def index
-    @quotes = Quote.page(params[:page])
+    @quotes = Quote.order('updated_at DESC')
+    @quotes = @quotes.page(params[:page])
   end
 
   # GET /quotes/1
   # GET /quotes/1.json
   def show
     add_breadcrumb "Devis n°" + @quote.id.to_s
+
+    @product=Product.find_by(quote: @quote.id)
   end
 
   # GET /quotes/new

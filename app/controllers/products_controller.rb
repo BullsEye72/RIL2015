@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   def show
     add_breadcrumb @product.name
     @modules_product = @product.modules_products.all
+    @quotes = @product.quotes
   end
 
   # GET /products/new

@@ -84,14 +84,13 @@ print "Création des tables de données statiques..." # ==================
 ].each {|cs| ArticleGroup.create! cs }
 
 # QuoteStates
-%w(
- brouillon
-  accepté
-  en\ attente
-  refusé
-  en\ commande
-  transfert\ en\ facturation
-).each { |qs| QuoteState.create! name: qs}
+['brouillon',
+  'accepté',
+  'en attente',
+  'refusé',
+  'en commande',
+  'transfert en facturation'
+].each { |qs| QuoteState.create! name: qs}
 
 # Catégories d'unités
 [
@@ -145,6 +144,13 @@ puts "Création des tables de données fictives :"
       description:    'Projet test',
       customer:     Customer.last
   )
+  
+  # Devis
+  Quote.create!(
+      project: Project.last,
+      user: User.order("RANDOM()").first
+  )
+
 end
 
 puts "Customers & Projets : OK"
@@ -205,23 +211,6 @@ end
 
 puts "Articles, Suppliers & Links : OK"
 
-#Quelques devis bidons
-10.times do
-  a=Quote.new(
-      project: Project.order("RANDOM()").first,
-      user: User.order("RANDOM()").first
-  )
-
-  loop_cnt=0
-  while !a.validate
-    loop_cnt+=1
-    break if loop_cnt>10
-    
-    a=Quote.new(project: Project.order("RANDOM()").first, user: User.order("RANDOM()").first)
-  end
-  a.save if a.validate
-end
-
 # Commandes bidons
 20.times do
   Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
@@ -234,7 +223,7 @@ end
   end
 end
 
-puts "Quotes, Orders & Links : OK"
+puts "Orders & Links : OK"
 
 # Drawing
 ['maison_1.jpg', 'maison_2.jpg', 'maison_3.jpg',

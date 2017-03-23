@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Produits correspondants
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th><%= 'Nom' %></th>
+          <th><%= 'Descriptif' %></th>
+          <th><%= 'Ref. CCTP' %></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+            <td><%= "#{@product.id} |  #{@product.name}" %></td>
+            <td><%= truncate(@product.descriptif) %></td>
+            <td><%= @product.cctp_reference %></td>
+            <td class="text-right">
+              <%= link_to(
+                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                @product
+                )
+              %>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <%#= link_to 'Ajouter un devis au projet', new_quote_path(project: @project), class: 'btn btn-primary' %>
+  </div>
+</div>

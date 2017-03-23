@@ -16,12 +16,13 @@
 #
 
 class Quote < ActiveRecord::Base
-  before_create :set_quote
+  before_create :set_quote_on_create
 
   default_scope { where(deleted_at: nil) }
   
   belongs_to :project
   belongs_to :user
+  
   has_and_belongs_to_many :construction_states
   has_and_belongs_to_many :quote_states
   
@@ -34,8 +35,12 @@ class Quote < ActiveRecord::Base
 
   private
 
-    def set_quote
-      self.user = User.current
+    def set_quote_on_create
+      if User.current.nil?
+        self.user = User.find_by(email: "commercial@madera.com") unless self.user.nil?
+      else
+        self.user = User.current
+      end
       self.quote_states<< QuoteState.find_by_name(:brouillon)
     end
 

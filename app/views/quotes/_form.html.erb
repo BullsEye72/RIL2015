@@ -8,7 +8,7 @@
                         label: t('project').titleize,
                         selected: params[:project],
                         input_html: { disabled: disabled } %>
-      <%#= f.association :user, label: t('user').titleize, input_html: { disabled: disabled } %>
+      <%= f.association :user, label: t('user').titleize, input_html: { disabled: disabled } %>
     </div>
 
     <div class="form-actions">
