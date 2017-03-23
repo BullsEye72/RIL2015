@@ -256,6 +256,9 @@ fr:
         lastname: Nom
         phone_number: Téléphone
         fax_number: Fax
+        quote: Devis
+        payment: paiement
+        payment_state: État du paiement
   payment: paiement
   payment state: état du paiement
   payment date: date du paiement
@@ -287,4 +290,5 @@ fr:
   price: prix
   house_module: module
   drawing: plan de coupe
+  payment: paiement
   product: produit

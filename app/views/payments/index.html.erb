@@ -1,18 +1,18 @@
-<% provide(:title, t('Payment')) %>
+<% provide(:title, t('payment')) %>
 <% provide(:subtitle, 'Liste') %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= t 'Listing Payments' %></h2>
+    <h2 class="panel-title"><%= t 'listing payments' %></h2>
   </div>
   <div class="panel-body">
     <table>
       <thead>
         <tr>
-              <th><%= t 'Quote' %></th>
-              <th><%= t 'Payment' %></th>
-              <th><%= t 'Payment date' %></th>
-              <th><%= t 'Payment state' %></th>
+              <th><%= t 'quote' %></th>
+              <th><%= t 'payment' %></th>
+              <th><%= t 'payment date' %></th>
+              <th><%= t 'payment state' %></th>
               <th></th>
         </tr>
       </thead>
@@ -20,8 +20,8 @@
       <tbody>
         <% @payments.each do |payment| %>
           <tr>
-                <td><%= payment.quote.id %></td>
-                <td><%= payment.payment %></td>
+                <td><%= link_to(payment.quote.to_label, quote_path(payment.quote)) %></td>
+                <td><%= payment.payment %> €</td>
                 <td><%= format_date(payment.updated_at) %></td>
                 <td><%= payment.payment_state.name %></td>
                 <td class="text-right">

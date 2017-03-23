@@ -1,4 +1,7 @@
 class PaymentsController < ApplicationController
+  load_and_authorize_resource
+  add_breadcrumb 'Paiement', :payments_path
+
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   # GET /payments

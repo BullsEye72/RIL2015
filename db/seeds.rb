@@ -25,6 +25,16 @@ commercial = User.new(
 commercial.add_role :commercial
 commercial.save!
 
+# Compta
+compta = User.new(
+    email:                  'compta@madera.com',
+    password:               'compta88',
+    password_confirmation:  'compta88',
+    lastname:               'Service Comptabilité'
+)
+compta.add_role :compta
+compta.save!
+
 # Achats
 purchaser = User.new(
     email:                  'achat@madera.com',

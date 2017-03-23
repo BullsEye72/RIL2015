@@ -3,10 +3,8 @@
   <div class="row">
     <div class="col-md-3">
       <% unless @house_module.drawing.nil? %>
-        <div class="container">
-          <p>Coupe : <%= @house_module.drawing.file_path %></p>                  
+          <p>Coupe : <%= @house_module.drawing.file_path %></p>
           <img src="<%= image_url(@house_module.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
-        </div>
       <% end %>
     </div>
 
