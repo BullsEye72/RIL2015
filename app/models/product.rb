@@ -20,8 +20,7 @@
 
 class Product < ActiveRecord::Base
   belongs_to :drawing
-  belongs_to :quote
-  
+  has_many :quotes
   has_many :modules_products
   has_many :house_modules, through: :modules_products
 

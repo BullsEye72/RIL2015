@@ -25,10 +25,10 @@ class Quote < ActiveRecord::Base
   
   belongs_to :project
   belongs_to :user
+  belongs_to :product
   has_and_belongs_to_many :construction_states
   has_and_belongs_to_many :quote_states
-  belongs_to :product
-  
+
   # validates_presence_of :user
   validates :project_id, presence: true, uniqueness: {scope: :user_id}
   
