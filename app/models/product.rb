@@ -24,7 +24,15 @@ class Product < ActiveRecord::Base
   belongs_to :drawing
   belongs_to :quote
   
-  
   has_many :modules_products
-  has_many :modules, through: :modules_products
+  has_many :house_modules, through: :modules_products
+
+  def product_price
+    price = 0
+    self.house_modules.each do |hm|
+      price += hm.module_price
+    end
+    
+    return price
+  end
 end
