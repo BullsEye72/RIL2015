@@ -42,7 +42,7 @@ class HouseModule < ActiveRecord::Base
   def module_price
     price = 0
     self.articles.each do |a|
-      price += a.articles_suppliers.order('price').first.price
+      price += a.lowest_price
     end
     
     return price

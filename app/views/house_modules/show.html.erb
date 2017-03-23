@@ -62,6 +62,8 @@
                 <% end %>
               </div>
             </div>
+            <h4>Prix Total des articles (€ HT)</h4>
+            <p><%= number_to_currency(@house_module.module_price, locale: :fr) %></p>
           </div>
         </div>
 

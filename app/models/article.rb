@@ -41,4 +41,7 @@ class Article < ActiveRecord::Base
                         :article_group#,
                         # :suppliers
 
+  def lowest_price
+    self.articles_suppliers.order('price').first.price
+  end
 end

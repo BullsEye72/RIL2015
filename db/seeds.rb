@@ -196,7 +196,7 @@ Supplier.all.each do |supplier|
       supplier_id: supplier.id,
       article_id: rand(Article.all.count),
       supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
-      price: rand(0.5..3000.0).round(2)
+      price: rand(0.5..500.0).round(2)
     )
   
     a.save if a.validate
@@ -258,7 +258,7 @@ end
     )
 end
 
-# Modules alétoires
+# Modules aléatoires
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 
@@ -280,7 +280,7 @@ end
 
 puts "Modules & Drawings : OK"
 
-# Modules alétoires
+# Produits aléatoires
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 
@@ -292,7 +292,7 @@ Quote.all.each_with_index do |q,i|
                   drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
                   quote: q)
                       
-  [*1..8].sample.times do
+  [*10..50].sample.times do
     ModulesProduct.create!(product: Product.last, house_module: HouseModule.order("RANDOM()").last)
   end
 end
