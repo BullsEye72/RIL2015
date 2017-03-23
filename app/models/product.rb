@@ -8,7 +8,6 @@
 #  descriptif     :string
 #  cctp_reference :string
 #  drawing_id     :integer
-#  quote_id       :integer
 #  modules_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -17,7 +16,6 @@
 #
 #  index_products_on_drawing_id  (drawing_id)
 #  index_products_on_modules_id  (modules_id)
-#  index_products_on_quote_id    (quote_id)
 #
 
 class Product < ActiveRecord::Base

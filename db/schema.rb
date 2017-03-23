@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323133701) do
+ActiveRecord::Schema.define(version: 20170323221608) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -272,7 +272,6 @@ ActiveRecord::Schema.define(version: 20170323133701) do
     t.string   "descriptif"
     t.string   "cctp_reference"
     t.integer  "drawing_id"
-    t.integer  "quote_id"
     t.integer  "modules_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -280,7 +279,6 @@ ActiveRecord::Schema.define(version: 20170323133701) do
 
   add_index "products", ["drawing_id"], name: "index_products_on_drawing_id"
   add_index "products", ["modules_id"], name: "index_products_on_modules_id"
-  add_index "products", ["quote_id"], name: "index_products_on_quote_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "description"
@@ -309,11 +307,14 @@ ActiveRecord::Schema.define(version: 20170323133701) do
   create_table "quotes", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.datetime "deleted_at"
+    t.boolean  "draft?",     default: true
+    t.integer  "product_id"
   end
 
+  add_index "quotes", ["product_id"], name: "index_quotes_on_product_id"
   add_index "quotes", ["project_id"], name: "index_quotes_on_project_id"
   add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
 
