@@ -16,7 +16,7 @@ class QuotesController < ApplicationController
   def show
     add_breadcrumb "Devis n°" + @quote.id.to_s
 
-    @product=Product.find_by(quote: @quote.id)
+    @product=@quote.product
   end
 
   # GET /quotes/new

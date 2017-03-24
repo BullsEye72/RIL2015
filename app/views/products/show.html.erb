@@ -49,14 +49,24 @@
 
         <div class="row">
           <div class="col-md-8 col-md-offset-3">
-            <h3>Articles associés au module :</h3>
-            <div class="form-horizontal">
+            <h3>Articles associés au module :
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseModules" aria-expanded="false" aria-controls="collapseModules">
+                Afficher
+              </button>
+            </h3>
+
+            <div class="collapse form-horizontal" id="collapseModules">
               <div class="form-inputs">
                 <% @modules_product.each do |mp| %>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Module <%= mp.house_module.id %></label>
+                    <label class="col-sm-3 control-label">                                    <%= link_to(
+                      raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                      mp.product
+                    ) %>
+                      Module <%= mp.house_module.id %></label>
                     <div class="col-sm-9">
                       <p class="form-control-static"><%= mp.house_module.name %></p>
+
                     </div>
                   </div>
                 <% end %>

@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def format_date date
-    date.strftime('%d-%m-%Y')
+    date.strftime('%d/%m/%Y - %H:%M')
   end
 
   def monetize num

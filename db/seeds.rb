@@ -135,35 +135,30 @@ print "Création des tables de données statiques..." # ==================
 ].each {|r| ModuleRange.create! r }
 
 puts "[OK]"
-# =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
-puts "Création des tables de données fictives :"
 
-# Customers & Projects
-10.times do
-  # Customers
-  Customer.create!(
-      firstname:    Faker::Name.first_name,
-      lastname:     Faker::Name.last_name,
-      address:      "#{Faker::Address.street_address},
-                     #{Faker::Address.postcode} #{Faker::Address.city}",
-      phone_number: "0#{Faker::Number.number(9)}"
-  )
-  
-  # Projects
-  Project.create!(
-      description:    'Projet test',
-      customer:     Customer.last
-  )
-  
-  # Devis
-  Quote.create!(
-      project: Project.last,
-      user: User.order("RANDOM()").first
-  )
-
+# Drawing
+['maison_1.jpg', 'maison_2.jpg', 'maison_3.jpg',
+'maison_4.jpg', 'maison_5.jpg'].each do |d|
+  Drawing.create!(
+    thumbnail_path: "Not Available yet",
+    file_path: d,
+    drawing_type: 1,
+    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+    )
 end
 
-puts "Customers & Projets : OK"
+['cloison_bois_1.jpg', 'cloison_bois_2.jpg', 'cloison_bois_3.jpg',
+'cloison_bois_4.jpg', 'plancher_dalle_1.jpg', 'plancher_dalle_2.jpg',
+'toit_1.png','toit_2.png'].each do |d|
+  Drawing.create!(
+    thumbnail_path: "Not Available yet",
+    file_path: d,
+    drawing_type: 0,
+    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+    )
+end
+# =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
+puts "Création des tables de données fictives :"
 
 art_first_part = ['Vis à', 'Plaque de', 'Brique en', 'Ardoise en', 'Plinthe', 'Joint à', 'Rivet à']
 art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 'plâtre', 'PVC']
@@ -221,42 +216,6 @@ end
 
 puts "Articles, Suppliers & Links : OK"
 
-# Commandes bidons
-20.times do
-  Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
-
-#   Items bidons
-  rand(5..30).times do
-    OrderItem.create!(articles_supplier: ArticlesSupplier.order("RANDOM()").first,
-                      order: Order.last,
-                      quantity: rand(1..10))
-  end
-end
-
-puts "Orders & Links : OK"
-
-# Drawing
-['maison_1.jpg', 'maison_2.jpg', 'maison_3.jpg',
-'maison_4.jpg', 'maison_5.jpg'].each do |d|
-  Drawing.create!(
-    thumbnail_path: "Not Available yet",
-    file_path: d,
-    drawing_type: 1,
-    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
-    )
-end
-
-['cloison_bois_1.jpg', 'cloison_bois_2.jpg', 'cloison_bois_3.jpg',
-'cloison_bois_4.jpg', 'plancher_dalle_1.jpg', 'plancher_dalle_2.jpg',
-'toit_1.png','toit_2.png'].each do |d|
-  Drawing.create!(
-    thumbnail_path: "Not Available yet",
-    file_path: d,
-    drawing_type: 0,
-    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
-    )
-end
-
 # Modules aléatoires
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
@@ -283,13 +242,12 @@ puts "Modules & Drawings : OK"
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 
-Quote.all.each_with_index do |q,i|
+10.times do |i|
   Product.create!(name: "Produit #{i}",
                   descriptif: "Description du produit ...", 
                   default: [true,false].sample,
                   cctp_reference: Faker::Lorem.characters(rand(5..10)).upcase,
-                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
-                  quote: q)
+                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last)
                       
   [*10..50].sample.times do
     ModulesProduct.create!(product: Product.last, house_module: HouseModule.order("RANDOM()").last)
@@ -297,5 +255,47 @@ Quote.all.each_with_index do |q,i|
 end
 
 puts "Products & Drawings : OK"
+
+# Customers & Projects
+10.times do
+  # Customers
+  Customer.create!(
+      firstname:    Faker::Name.first_name,
+      lastname:     Faker::Name.last_name,
+      address:      "#{Faker::Address.street_address},
+                     #{Faker::Address.postcode} #{Faker::Address.city}",
+      phone_number: "0#{Faker::Number.number(9)}"
+  )
+  
+  # Projects
+  Project.create!(
+      description:    'Projet test',
+      customer:     Customer.last
+  )
+  
+  # Devis
+  Quote.create!(
+      project: Project.last,
+      user: User.order("RANDOM()").first,
+      product: Product.where(default: true).order("RANDOM()").first
+  )
+
+end
+
+puts "Customers & Projets : OK"
+
+# Commandes bidons
+20.times do
+  Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
+
+#   Items bidons
+  rand(5..30).times do
+    OrderItem.create!(articles_supplier: ArticlesSupplier.order("RANDOM()").first,
+                      order: Order.last,
+                      quantity: rand(1..10))
+  end
+end
+
+puts "Orders & Links : OK"
 
 puts "Seed : OK ! Enjoy..."
