@@ -7,17 +7,21 @@
     <table>
           <thead>
             <tr>
-              <th>Date</th>
               <th>Num. projet</th>
+              <th>Date</th>
               <th>Nom client</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
           <% @last_projects.each do |p| %>
             <tr>
+              <td><%= p.id %></td>
               <td><%= format_date(p.created_at) %></td>
-              <td><%= link_to p.id, project_path(p.id) %></td>
               <td><%= p.customer.fullname %></td>
+              <td class="text-right">
+                <%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), p) %>
+              </td>
             </tr>
           <% end %>
           </tbody>

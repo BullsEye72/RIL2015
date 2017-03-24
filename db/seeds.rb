@@ -1,5 +1,5 @@
 print "Création des utilisateurs..." # ==================
-
+    
 # Admin default
 Admin.create!(
   email:                  'admin@admin.com',

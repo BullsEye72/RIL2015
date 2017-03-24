@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :cctp_reference
       t.references :drawing, index: true, foreign_key: true
       t.references :quote, index: true, foreign_key: true
-      t.references :modules, index: true, foreign_key: true
+      t.references :house_module, index: true, foreign_key: true
 
       t.timestamps null: false
     end
