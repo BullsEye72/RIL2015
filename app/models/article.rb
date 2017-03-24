@@ -44,4 +44,10 @@ class Article < ActiveRecord::Base
   def lowest_price
     self.articles_suppliers.order('price').first.price
   end
+  
+  def lowest_price_w_vat
+    price = self.articles_suppliers.order('price').first.price
+    price = price + ( price * (self.value_added_tax.value / 100) )
+    return price
+  end
 end

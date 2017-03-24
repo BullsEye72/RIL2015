@@ -23,7 +23,7 @@
           <tr>
             <td><%= hm.name %></td>
             <td><%= hm.module_range.nil? ? 'Aucun' : hm.module_range.name %></td>
-            <td><%= hm.description %></td>
+            <td><%= truncate(hm.description) %></td>
             <td><%= hm.default ? 'x' : '' %></td>
             <td class="text-right">
               <%= link_to(

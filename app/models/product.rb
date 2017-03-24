@@ -26,10 +26,13 @@ class Product < ActiveRecord::Base
 
   def product_price
     price = 0
-    self.house_modules.each do |hm|
-      price += hm.module_price
-    end
-    
+    self.house_modules.each{|hm| price += hm.module_price}
+    return price
+  end
+  
+  def product_price_w_vat
+    price = 0
+    self.house_modules.each{|hm| price += hm.module_price_w_vat}
     return price
   end
 end

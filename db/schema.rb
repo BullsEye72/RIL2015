@@ -160,14 +160,12 @@ ActiveRecord::Schema.define(version: 20170323221608) do
     t.string   "name"
     t.string   "description"
     t.boolean  "default"
-    t.integer  "layout_id"
     t.integer  "drawing_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
   add_index "house_modules", ["drawing_id"], name: "index_house_modules_on_drawing_id"
-  add_index "house_modules", ["layout_id"], name: "index_house_modules_on_layout_id"
   add_index "house_modules", ["module_range_id"], name: "index_house_modules_on_module_range_id"
 
   create_table "margins", force: :cascade do |t|

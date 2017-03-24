@@ -17,6 +17,7 @@ class QuotesController < ApplicationController
     add_breadcrumb "Devis n°" + @quote.id.to_s
 
     @product=@quote.product
+    @modules = @product.house_modules
   end
 
   # GET /quotes/new
@@ -27,6 +28,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes/1/edit
   def edit
+    add_breadcrumb "Editer devis n°#{@quote.id}"
   end
 
   # POST /quotes

@@ -7,7 +7,6 @@
 #  name            :string
 #  description     :string
 #  default         :boolean
-#  layout_id       :integer
 #  drawing_id      :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -15,7 +14,6 @@
 # Indexes
 #
 #  index_house_modules_on_drawing_id       (drawing_id)
-#  index_house_modules_on_layout_id        (layout_id)
 #  index_house_modules_on_module_range_id  (module_range_id)
 #
 
@@ -41,10 +39,13 @@ class HouseModule < ActiveRecord::Base
   
   def module_price
     price = 0
-    self.articles.each do |a|
-      price += a.lowest_price
-    end
-    
+    self.articles.each{|a| price += a.lowest_price}
+    return price
+  end
+  
+  def module_price_w_vat
+    price = 0
+    self.articles.each{|a| price += a.lowest_price_w_vat}
     return price
   end
 
