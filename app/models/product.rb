@@ -2,20 +2,20 @@
 #
 # Table name: products
 #
-#  id             :integer          not null, primary key
-#  name           :string
-#  default        :boolean
-#  descriptif     :string
-#  cctp_reference :string
-#  drawing_id     :integer
-#  modules_id     :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string
+#  default         :boolean
+#  descriptif      :string
+#  cctp_reference  :string
+#  drawing_id      :integer
+#  house_module_id :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
-#  index_products_on_drawing_id  (drawing_id)
-#  index_products_on_modules_id  (modules_id)
+#  index_products_on_drawing_id       (drawing_id)
+#  index_products_on_house_module_id  (house_module_id)
 #
 
 class Product < ActiveRecord::Base

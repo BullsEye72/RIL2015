@@ -34,6 +34,7 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
+    binding.pry
     @quote = Quote.new(quote_params)
 
     respond_to do |format|
@@ -79,6 +80,6 @@ class QuotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:project_id, :user_id, :quote_state_ids, :construction_state_ids)
+      params.require(:quote).permit(:project_id, :product_id, :quote_state_ids, :construction_state_ids)
     end
 end

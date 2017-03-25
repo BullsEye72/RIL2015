@@ -1,0 +1,60 @@
+<%= simple_form_for(@product, wrapper: :horizontal_form) do |f| %>
+    <%= f.error_notification %>
+    <div class="row">
+      <div class="col-md-3">
+        <% unless @product.drawing.nil? %>
+            <div class="container">
+              <p>Coupe : <%= @product.drawing.file_path %></p>
+              <img src="<%= image_url(@product.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
+            </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-8 form-horizontal">
+        <div class="form-inputs">
+          <%= f.input :name, input_html: {disabled: true} %>
+          <%= f.input :descriptif, input_html: {disabled: true} %>
+          <%= f.input :cctp_reference, input_html: {disabled: true} %>
+          <%= f.input :default, as: :select, label: "Module par defaut", input_html: {disabled: true} %>
+          <%= f.association :drawing, label: "Coupe de principe", input_html: {disabled: true} %>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-3">
+        <h3>Articles associés au module :
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseModules" aria-expanded="false" aria-controls="collapseModules">
+            Afficher
+          </button>
+        </h3>
+
+        <div class="collapse form-horizontal" id="collapseModules">
+          <div class="form-inputs">
+            <% @modules_product.each do |mp| %>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">                                    <%= link_to(
+                                                                                                    raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                                                                                                    mp.product
+                                                                                                ) %>
+                    Module <%= mp.house_module.id %></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static"><%= mp.house_module.name %></p>
+
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        <h4>Prix Total des modules (€ HT)</h4>
+        <p><%= number_to_currency(@product.product_price, locale: :fr) %></p>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to('Retour', product_path, class: 'btn btn-default pull-right') %>
+    </div>
+
+<% end %>

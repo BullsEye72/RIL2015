@@ -270,13 +270,13 @@ ActiveRecord::Schema.define(version: 20170323221608) do
     t.string   "descriptif"
     t.string   "cctp_reference"
     t.integer  "drawing_id"
-    t.integer  "modules_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "house_module_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "products", ["drawing_id"], name: "index_products_on_drawing_id"
-  add_index "products", ["modules_id"], name: "index_products_on_modules_id"
+  add_index "products", ["house_module_id"], name: "index_products_on_house_module_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "description"

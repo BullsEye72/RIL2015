@@ -3,6 +3,34 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render 'form', action: :new %>
+    <%= simple_form_for(@quote,  wrapper: :horizontal_form) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-horizontal">
+          <div class="form-inputs">
+            <%= f.association :project,
+                              label: t('project').titleize,
+                              selected: params[:project] %>
+            <%= f.association :product,
+                              prompt: 'Selectionner un produit' %>
+          </div>
+          <div id="product-show">
+
+          </div>
+
+          <div class="form-actions">
+                <%= f.submit 'Créer' %>
+            <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
+          </div>
+        </div>
+    <% end %>
   </div>
 </div>
+<script>
+  $('#quote_product_id').on('change', function(){
+      console.log('id '+this.value);
+      $.ajax({
+          url: '<%= products_path%>/'+this.value,
+          dataType: 'script'
+      });
+  })
+</script>
