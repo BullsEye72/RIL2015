@@ -23,6 +23,7 @@ class QuotesController < ApplicationController
   # GET /quotes/new
   def new
     @quote = Quote.new
+    @default_products = Product.all #Product.where(default: true)
     add_breadcrumb "Nouveau Devis"
   end
 
@@ -34,7 +35,6 @@ class QuotesController < ApplicationController
   # POST /quotes
   # POST /quotes.json
   def create
-    binding.pry
     @quote = Quote.new(quote_params)
 
     respond_to do |format|

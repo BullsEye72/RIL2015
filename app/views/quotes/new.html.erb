@@ -11,14 +11,16 @@
                               label: t('project').titleize,
                               selected: params[:project] %>
             <%= f.association :product,
-                              prompt: 'Selectionner un produit' %>
+                              collection: @default_products,
+                              selected: params[:select_product],
+                              include_blank: false %>
           </div>
-          <div id="product-show">
-
-          </div>
-
+          <hr>
+          <div id="product-show"></div>
+          <hr>
           <div class="form-actions">
-                <%= f.submit 'Créer' %>
+            <%= f.submit 'Créer avec ce produit' %>
+            <a href="#" class="btn btn-default" id="new-product">Créer un nouveau produit à partir de celui ci</a>
             <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
           </div>
         </div>
@@ -26,11 +28,26 @@
   </div>
 </div>
 <script>
-  $('#quote_product_id').on('change', function(){
-      console.log('id '+this.value);
+
+  var $productSelect = $('#quote_product_id');
+
+  // Show du product
+  function loadProductShow() {
+      var selectId = $productSelect.val();
+      console.log('Charge le produit '+selectId)
       $.ajax({
-          url: '<%= products_path%>/'+this.value,
+          url: '<%= products_path%>/'+selectId,
           dataType: 'script'
       });
+  }
+  $productSelect.on('change', loadProductShow);
+  loadProductShow();
+
+  // Création d'une copie du product selectionner
+  $('#new-product').on('click', function(e){
+      e.preventDefault();
+      var selectId = $productSelect.val();
+      document.location = '<%= new_product_path %>?product_model_id='+selectId;
   })
+
 </script>

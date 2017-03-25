@@ -3,19 +3,22 @@
   <div class="row">
     <div class="col-md-3">
       <% unless @product.drawing.nil? %>
-        <div class="container">
-          <p>Coupe : <%= @product.drawing.file_path %></p>                  
+        <figure>
           <img src="<%= image_url(@product.drawing.file_path) %>" class="img-responsive" alt="coupe de principe" width="300">
-        </div>
+          <figcaption>Coupe : <%= @product.drawing.file_path %></figcaption>
+        </figure>
       <% end %>
     </div>
 
     <div class="col-md-8 form-horizontal">
       <div class="form-inputs">
+        <%= hidden_field :redirect, :address, value: @redirect_url %>
         <%= f.input :name %>
         <%= f.input :descriptif %>
-        <%= f.input :cctp_reference %>
-        <%= f.input :default, as: :select, label: 'Module par defaut' %>
+        <% if current_user.has_role? :conceptor %>
+          <%= f.input :cctp_reference %>
+          <%= f.input :default, as: :select, label: 'Module par defaut' %>
+        <% end %>
         <%= f.association :drawing, collection: Drawing.where(drawing_type: 1), label: 'Coupe de principe' %>
       </div>
     </div>
@@ -48,7 +51,7 @@
   <div class="form-actions">
     <% submit_label = (action == :new ? 'Créer' : 'Mettre à jour') %>
     <%= f.submit submit_label  %>
-    <%= link_to('Retour', products_path, class: 'btn btn-default pull-right') %>
+    <%= link_to('Retour', :back, class: 'btn btn-default pull-right') %>
   </div>
 
 <% end %>
