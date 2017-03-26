@@ -1,25 +1,76 @@
-<%= simple_form_for(@quote,  wrapper: :horizontal_form) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-horizontal">
-    <div class="form-inputs">
-      <% disabled = (action == :show) ? true : false %>
-      
-      <%= f.association :project,
-                        label: t('project').titleize,
-                        selected: params[:project],
-                        input_html: { disabled: disabled } %>
-      <%= f.association :user, label: t('user').titleize, input_html: { disabled: disabled } %>
-      <%= f.input :product %>
-    </div>
-
-    <div class="form-actions">
-      <% if action == :new %>
-          <%= f.submit 'Créer' %>
-      <% end %>
-      <% if action == :edit %>
-          <%= f.submit 'Mettre à jour' %>
-      <% end %>
-      <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= simple_form_for(@quote,  wrapper: :horizontal_form) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-horizontal">
+          <div class="form-inputs">
+            <% if action == :new %>
+                <%= f.association :project,
+                                  label: t('project').titleize,
+                                  selected: params[:project] %>
+            <% end %>
+            <% if action == :edit %>
+                <%= f.input :projet,
+                            as: :fake,
+                            disabled: true,
+                            input_html: {value: @quote.project.to_label } %>
+            <% end %>
+            <% if action == :edit %>
+                <%= f.input 'Avancement du chantier',
+                            as: :fake,
+                            disabled: true,
+                            input_html: {
+                                value: @quote.construction_states.empty? ? 'Non commencé' : @quote.construction_states.last.name
+                            } %>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="quote_quote_states">Statut du devis</label>
+                  <div class="col-sm-9">
+                    <%= f.collection_select :quote_state_ids, QuoteState.all, :id, :name, class: 'form-control' %>
+                  </div>
+                </div>
+            <% end %>
+            <%= f.association :product,
+                              collection: Product.draft_or_default,
+                              selected: @quote.product.present? ? @quote.product.id : params[:select_product] ,
+                              include_blank: false %>
+          </div>
+          <hr>
+          <div id="product-show"></div>
+          <hr>
+          <div class="form-actions">
+            <%
+              btn_label = 'ok'
+              btn_label = 'Mettre à jour le devis' if action == :edit
+              btn_label = 'Créer avec ce produit' if action == :new
+            %>
+            <%= f.submit btn_label %>
+            <a href="#" class="btn btn-default" id="new-product">Créer un nouveau produit à partir de celui ci</a>
+            <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
+          </div>
+        </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+
+<script>
+    var $productSelect = $('#quote_product_id');
+
+    // Show du product
+    function loadProductShow() {
+        var selectId = $productSelect.val();
+        console.log('Charge le produit '+selectId)
+        $.ajax({
+            url: '<%= products_path%>/'+selectId,
+            dataType: 'script'
+        });
+    }
+    $productSelect.on('change', loadProductShow);
+    loadProductShow();
+
+    // Création d'une copie du product selectionner
+    $('#new-product').on('click', function(e){
+        e.preventDefault();
+        var selectId = $productSelect.val();
+        document.location = '<%= new_product_path %>?product_model_id='+selectId;
+    })
+</script>

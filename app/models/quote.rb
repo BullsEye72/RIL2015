@@ -30,7 +30,7 @@ class Quote < ActiveRecord::Base
   has_and_belongs_to_many :quote_states
 
   # validates_presence_of :user
-  validates :project_id, presence: true, uniqueness: {scope: :user_id}
+  #validates :project_id, presence: true, uniqueness: {scope: :user_id}
   
   def to_label
     "Devis n°#{id}"
