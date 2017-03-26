@@ -19,12 +19,15 @@
 
       <tbody>
         <% @products.each do |product| %>
+          <% td_class = 'danger' if product.product_state == ProductState.find_by_name('invalide') %>
+          <% td_class = 'warning' if product.product_state == ProductState.find_by_name('brouillon') %>
+          <% td_class = 'info' if product.product_state == ProductState.find_by_name('defaut') %>
           <tr>
-              <td><%= product.name %></td>
-              <td><%= product.descriptif %></td>
-              <td><%= product.cctp_reference %></td>
-              <td><%= product.product_state.name if product.product_state %></td>
-              <td class="text-right">
+              <td class="<%= td_class %>"><%= product.name %></td>
+              <td class="<%= td_class %>"><%= product.descriptif %></td>
+              <td class="<%= td_class %>"><%= product.cctp_reference %></td>
+              <td class="<%= td_class %>"><%= product.product_state.name if product.product_state %></td>
+              <td class="text-right <%= td_class %>">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
                 product

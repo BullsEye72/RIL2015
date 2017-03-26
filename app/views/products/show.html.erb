@@ -1,5 +1,5 @@
 <% provide(:title, t(:product).titleize ) %>
-<% provide(:subtitle, 'Création') %>
+<% provide(:subtitle, 'Affichage') %>
 
 
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="Effacer">
@@ -24,7 +24,7 @@
   <div class="panel-body">
     <%= render 'product_show' %>
     <div class="form-actions">
-      <%= link_to('Retour', products_path, class: 'btn btn-default pull-right') %>
+      <%= link_to('Retour', :back, class: 'btn btn-default pull-right') %>
     </div>
     <a href="<%= edit_product_path %>" class="btn btn-primary">
       <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
