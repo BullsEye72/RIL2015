@@ -226,7 +226,7 @@ mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
                       #name: Faker::Commerce.product_name,
                       name: "#{mod_first_part.sample} #{mod_second_part.sample} #{[*1..3].sample}",
                       description: "Description ...", 
-                      default: [true,false].sample,
+                      default: true,
                       drawing: Drawing.where(drawing_type: 0).order("RANDOM()").last)
                       
   [*1..8].sample.times do |i|
