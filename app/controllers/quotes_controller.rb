@@ -68,7 +68,7 @@ class QuotesController < ApplicationController
   # PATCH/PUT /quotes/1.json
   def update
     if params.key?(:status)
-        @quote.quote_states<<QuoteState.find_by_name('accepté') if params[:status][:accept]
+        @quote.update(quote_states: @quote.quote_states<<QuoteState.find_by_name('accepté')) if params[:status][:accept]
         @quote.quote_states<<QuoteState.find_by_name('refusé') if params[:status][:decline]
         redirect_to @quote, notice: "L'état du devis à été mis à jour"
     else

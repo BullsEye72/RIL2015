@@ -20,6 +20,7 @@
 
 class Quote < ActiveRecord::Base
   before_create :set_quote_on_create
+  before_update :update_construction_state
   before_destroy :check_if_draft
 
   default_scope { where(deleted_at: nil) }
@@ -46,6 +47,12 @@ class Quote < ActiveRecord::Base
         self.user = User.current
       end
       self.quote_states<< QuoteState.find_by_name(:brouillon)
+    end
+
+    def update_construction_state
+      if quote_states.last == QuoteState.find_by_name('accepté')
+        construction_states<<ConstructionState.find_by_name('Devis signé')
+      end
     end
 
     def check_if_draft
