@@ -97,9 +97,7 @@ class QuotesController < ApplicationController
                              order: q,
                               quantity: 1) # hmpf
           end
-          
         end
-                          
       end
         
     else
