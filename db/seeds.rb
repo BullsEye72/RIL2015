@@ -274,19 +274,19 @@ print 'Customers & Projets...'
 end
 puts '[OK]'
 
-print 'Orders & Links...'
-# Commandes bidons
-20.times do
-  Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
-
-#   Items bidons
-  rand(5..30).times do
-    OrderItem.create!(articles_supplier: ArticlesSupplier.order("RANDOM()").first,
-                      order: Order.last,
-                      quantity: rand(1..10))
-  end
-end
-puts '[OK]'
+#print 'Orders & Links...'
+## Commandes bidons    <<========== DESACTIVÉ POUR LAISSER LES DEVIS EN GENERER
+#20.times do
+#  Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
+#
+##   Items bidons
+#  rand(5..30).times do
+#    OrderItem.create!(articles_supplier: ArticlesSupplier.order("RANDOM()").first,
+#                      order: Order.last,
+#                      quantity: rand(1..10))
+#  end
+#end
+#puts '[OK]'
 
 
 puts "Seed : OK ! Enjoy..."
