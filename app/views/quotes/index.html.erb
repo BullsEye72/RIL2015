@@ -25,25 +25,18 @@
                 <td><%= number_to_currency(quote.product.product_price, locale: :fr) %></td>
                 <td><%= quote.updated_at.strftime("%m/%d/%y - %H:%M") %></td>
                 <td class="text-right">
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
-                quote
-              )
-              %>
-              |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
-                edit_quote_path(quote)
-              )
-              %>
-              |
-              <%= link_to(
-                raw('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>'),
-                quote,
-                method: :delete, data: { confirm: 'Êtes vous certain ?' }
-              ) %>
-
-            </td>
+                  <%= link_to(
+                    raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+                    quote
+                  )
+                  %>
+                  |
+                  <%= link_to(
+                    raw('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>'),
+                    edit_quote_path(quote)
+                  )
+                  %>
+                </td>
           </tr>
         <% end %>
       </tbody>

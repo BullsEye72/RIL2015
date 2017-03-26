@@ -87,10 +87,11 @@ class QuotesController < ApplicationController
   # DELETE /quotes/1
   # DELETE /quotes/1.json
   def destroy
-    @quote.destroy
     respond_to do |format|
-      format.html { redirect_to quotes_url, notice: 'Quote was successfully destroyed.' }
-      format.json { head :no_content }
+      if @quote.destroy
+        format.html { redirect_to quotes_url, notice: 'Quote was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

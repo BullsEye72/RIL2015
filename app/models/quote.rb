@@ -20,6 +20,7 @@
 
 class Quote < ActiveRecord::Base
   before_create :set_quote_on_create
+  before_destroy :check_if_draft
 
   default_scope { where(deleted_at: nil) }
   
@@ -45,6 +46,12 @@ class Quote < ActiveRecord::Base
         self.user = User.current
       end
       self.quote_states<< QuoteState.find_by_name(:brouillon)
+    end
+
+    def check_if_draft
+      return true if self.quote_states.last != QuoteState.find_by_name(:brouillon)
+      errors.add(:quote_states, 'Seul les devis à l\'état de brouillon sont effacable')
+      false
     end
 
 end
