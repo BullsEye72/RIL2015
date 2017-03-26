@@ -17,7 +17,7 @@
         <%= f.input :descriptif %>
         <% if current_user.has_role? :conceptor %>
           <%= f.input :cctp_reference %>
-          <%= f.input :default, as: :select, label: 'Module par defaut' %>
+          <%= f.input :product_state, as: :select, label: 'Module par defaut' %>
         <% end %>
         <%= f.association :drawing, collection: Drawing.where(drawing_type: 1), label: 'Coupe de principe' %>
       </div>

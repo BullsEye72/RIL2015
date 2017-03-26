@@ -12,7 +12,7 @@
               <th><%= 'Nom' %></th>
               <th><%= 'Descriptif' %></th>
               <th><%= 'Ref. CCTP' %></th>
-              <th><%= 'Par Defaut' %></th>
+              <th><%= 'État' %></th>
               <th></th>
         </tr>
       </thead>
@@ -23,7 +23,7 @@
               <td><%= product.name %></td>
               <td><%= product.descriptif %></td>
               <td><%= product.cctp_reference %></td>
-              <td><%= product.default ? 'x' : '' %></td>
+              <td><%= product.product_state.name %></td>
               <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),

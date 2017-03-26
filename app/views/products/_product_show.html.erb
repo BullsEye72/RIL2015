@@ -25,9 +25,9 @@
         </div>
       </div>
       <div class="form-group select optional quote_product">
-        <label class="col-sm-2 control-label">Défaut</label>
+        <label class="col-sm-2 control-label">État</label>
         <div class="col-sm-10">
-          <%= text_field_tag :default, @product.default ? 'Oui' : 'Non', disabled: true %>
+          <%= text_field_tag :status, @product.product_state.name, disabled: true %>
         </div>
       </div>
       <div class="form-group select optional quote_product">

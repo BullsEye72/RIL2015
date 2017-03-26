@@ -103,8 +103,8 @@ class ProductsController < ApplicationController
                                       :name,
                                       :descriptif,
                                       :cctp_reference,
-                                      :default,
                                       :drawing_id,
+                                      :product_state_id,
                                       :house_module_ids)
 
 

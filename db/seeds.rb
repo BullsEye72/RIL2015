@@ -102,6 +102,15 @@ print "Création des tables de données statiques..." # ==================
   'transfert en facturation'
 ].each { |qs| QuoteState.create! name: qs}
 
+# ProductStates
+%w(
+brouillon
+invalide
+normal
+defaut
+).each { |ps| ProductState.create! name: ps}
+
+
 # Catégories d'unités
 [
   { name: 'Longueur ' },
@@ -242,12 +251,14 @@ puts "Modules & Drawings : OK"
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 
+default_product_state = ProductState.find_by_name('defaut');
 10.times do |i|
   Product.create!(name: "Produit #{i}",
                   descriptif: "Description du produit ...", 
-                  default: [true,false].sample,
                   cctp_reference: Faker::Lorem.characters(rand(5..10)).upcase,
-                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last)
+                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
+                  product_state: default_product_state
+  )
                       
   [*10..50].sample.times do
     ModulesProduct.create!(product: Product.last, house_module: HouseModule.order("RANDOM()").last)
@@ -277,7 +288,7 @@ puts "Products & Drawings : OK"
   Quote.create!(
       project: Project.last,
       user: User.order("RANDOM()").first,
-      product: Product.where(default: true).order("RANDOM()").first
+      product: Product.where(product_states: default_product_state).order("RANDOM()").first
   )
 
 end
