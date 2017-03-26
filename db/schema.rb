@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323221608) do
+ActiveRecord::Schema.define(version: 20170326091336) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -264,19 +264,25 @@ ActiveRecord::Schema.define(version: 20170323221608) do
   add_index "payments", ["payment_state_id"], name: "index_payments_on_payment_state_id"
   add_index "payments", ["quote_id"], name: "index_payments_on_quote_id"
 
+  create_table "product_states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "default"
     t.string   "descriptif"
     t.string   "cctp_reference"
     t.integer  "drawing_id"
-    t.integer  "modules_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "house_module_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "product_state_id"
   end
 
   add_index "products", ["drawing_id"], name: "index_products_on_drawing_id"
-  add_index "products", ["modules_id"], name: "index_products_on_modules_id"
+  add_index "products", ["house_module_id"], name: "index_products_on_house_module_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "description"

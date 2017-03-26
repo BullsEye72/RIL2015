@@ -1,5 +1,4 @@
-print "Création des utilisateurs..." # ==================
-    
+print 'Création des utilisateurs...'
 # Admin default
 Admin.create!(
   email:                  'admin@admin.com',
@@ -54,17 +53,16 @@ conceptor = User.new(
 )
 conceptor.add_role :conceptor
 conceptor.save!
+puts '[OK]'
 
-puts "[OK]"
-print "Création des tables de données statiques..." # ==================
 
+print 'Création des tables de données statiques...'
 # PaymentStates
 [
   'A facturer',
   'Facturé',
   'Payé'
 ].each {|ps| PaymentState.create!(name:  ps) }
-
 # ConstructionStates
 [
     { name: 'Devis signé', value: 0.03},
@@ -76,13 +74,19 @@ print "Création des tables de données statiques..." # ==================
     { name: 'Travaux achevés', value: 0.95},
     { name: 'Clef remises', value: 1},
 ].each {|cs| ConstructionState.create! cs }
-
+# QuoteStates
+['brouillon',
+ 'en attente',                # Après l'edition, le devis n'est plus modifiable jusqu'a ce que le client accepte ou refuse
+ 'refusé',
+ 'accepté'
+ #'en commande',              # Inutile : si accepter -> commande automatique
+ #'transfert en facturation'  # Inutile : si accepter -> commande automatique donc transfert en facturation auto
+].each { |qs| QuoteState.create! name: qs}
 # VAT
 [
   { name: 'Taux normal', value: 20.0},
   { name: 'Taux réduit', value: 5.5}
 ].each {|cs| ValueAddedTax.create! cs }
-
 # Article_Groups
 [
   { name: 'Montants', description: 'Montants en bois pour la structure, nommés lisses ou contrefort' , article_group_id: nil},
@@ -93,15 +97,13 @@ print "Création des tables de données statiques..." # ==================
   { name: 'Couverture', description: '' , article_group_id: nil}
 ].each {|cs| ArticleGroup.create! cs }
 
-# QuoteStates
-['brouillon',
-  'accepté',
-  'en attente',
-  'refusé',
-  'en commande',
-  'transfert en facturation'
-].each { |qs| QuoteState.create! name: qs}
-
+# ProductStates
+%w(
+brouillon
+invalide
+normal
+defaut
+).each { |ps| ProductState.create! name: ps}
 # Catégories d'unités
 [
   { name: 'Longueur ' },
@@ -111,7 +113,6 @@ print "Création des tables de données statiques..." # ==================
   { name: 'Volume' },
   { name: 'Autre' }
 ].each {|u| UnitCategory.create! u }
-
 # Unités
 [
   { name: 'U',   regex: '(?<= )[uU]',       unit_category_id: 2 },
@@ -124,7 +125,6 @@ print "Création des tables de données statiques..." # ==================
   { name: 'g',   regex: '(?<= )[gG]',       unit_category_id: 4 },
   { name: 'kg',  regex: '(?<= )([kK][gG])', unit_category_id: 4 }
 ].each {|u| Unit.create! u }
-
 # Ranges (Fictives car non définies dans la spec.)
 [
   { name: 'Deluxe Plus',   description: 'Le top du top!' },
@@ -133,36 +133,33 @@ print "Création des tables de données statiques..." # ==================
   { name: 'Standard',   description: 'Le standard' },
   { name: 'Eco',   description: 'Economique' }
 ].each {|r| ModuleRange.create! r }
-
-puts "[OK]"
-
 # Drawing
 ['maison_1.jpg', 'maison_2.jpg', 'maison_3.jpg',
-'maison_4.jpg', 'maison_5.jpg'].each do |d|
+ 'maison_4.jpg', 'maison_5.jpg'].each do |d|
   Drawing.create!(
-    thumbnail_path: "Not Available yet",
-    file_path: d,
-    drawing_type: 1,
-    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
-    )
+      thumbnail_path: "Not Available yet",
+      file_path: d,
+      drawing_type: 1,
+      internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+  )
 end
-
 ['cloison_bois_1.jpg', 'cloison_bois_2.jpg', 'cloison_bois_3.jpg',
-'cloison_bois_4.jpg', 'plancher_dalle_1.jpg', 'plancher_dalle_2.jpg',
-'toit_1.png','toit_2.png'].each do |d|
+ 'cloison_bois_4.jpg', 'plancher_dalle_1.jpg', 'plancher_dalle_2.jpg',
+ 'toit_1.png','toit_2.png'].each do |d|
   Drawing.create!(
-    thumbnail_path: "Not Available yet",
-    file_path: d,
-    drawing_type: 0,
-    internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
-    )
+      thumbnail_path: "Not Available yet",
+      file_path: d,
+      drawing_type: 0,
+      internal_reference: Faker::Lorem.characters(rand(5..10)).upcase
+  )
 end
-# =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
-puts "Création des tables de données fictives :"
+puts '[OK]'
 
+# =================== DONNEES FICTIVES POUR TESTER L'AFFICHAGE ==========================
+puts 'Création des tables de données fictives :'
+print 'Articles, Suppliers & Links...'
 art_first_part = ['Vis à', 'Plaque de', 'Brique en', 'Ardoise en', 'Plinthe', 'Joint à', 'Rivet à']
 art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 'plâtre', 'PVC']
-
 # Suppliers & Articles
 30.times do
   # Suppliers
@@ -172,7 +169,6 @@ art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 
       siret:      Faker::Company.swedish_organisation_number,
       fax_number: "0#{Faker::Number.number(9)}"
   )
-  
   # Articles
   rand(10..20).times do
     Article.create!(
@@ -183,14 +179,12 @@ art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 
       description: Faker::Lorem.paragraph(3),
       article_group: ArticleGroup.order('RANDOM()').first
     )
-    
     a=ArticlesUnit.new(
       article_id: Article.last.id,
       unit_id: Unit.order('RANDOM()').first.id,
       value: rand(1000)
       )
     a.save if a.validate
-    
     ArticlesSupplier.create!(
       supplier_id: Supplier.last.id,
       article_id: Article.last.id,
@@ -199,7 +193,6 @@ art_second_part = ['pierre', 'ardoise', 'bois', 'acier', 'aluminium', 'béton', 
     )
   end
 end
-
 #Ajout de liasons
 Supplier.all.each do |supplier|
   rand(5..10).times do
@@ -209,13 +202,12 @@ Supplier.all.each do |supplier|
       supplier_reference: Faker::Lorem.characters(rand(5..10)).upcase,
       price: rand(0.5..500.0).round(2)
     )
-  
     a.save if a.validate
   end
 end
+puts '[OK]'
 
-puts "Articles, Suppliers & Links : OK"
-
+print 'Modules & Drawings...'
 # Modules aléatoires
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
@@ -235,27 +227,29 @@ mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
                           drawing_position: i+1)
   end
 end
+puts '[OK]'
 
-puts "Modules & Drawings : OK"
-
+print 'Products & Drawings...'
 # Produits aléatoires
 mod_first_part = ['Mur', 'Dalle', 'Cloison', 'Toit', 'Plafond']
 mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 
+default_product_state = ProductState.find_by_name('defaut');
 10.times do |i|
   Product.create!(name: "Produit #{i}",
                   descriptif: "Description du produit ...", 
-                  default: [true,false].sample,
                   cctp_reference: Faker::Lorem.characters(rand(5..10)).upcase,
-                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last)
+                  drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
+                  product_state: default_product_state
+  )
                       
   [*10..50].sample.times do
     ModulesProduct.create!(product: Product.last, house_module: HouseModule.order("RANDOM()").last)
   end
 end
+puts '[OK]'
 
-puts "Products & Drawings : OK"
-
+print 'Customers & Projets...'
 # Customers & Projects
 10.times do
   # Customers
@@ -266,24 +260,21 @@ puts "Products & Drawings : OK"
                      #{Faker::Address.postcode} #{Faker::Address.city}",
       phone_number: "0#{Faker::Number.number(9)}"
   )
-  
   # Projects
   Project.create!(
       description:    'Projet test',
       customer:     Customer.last
   )
-  
   # Devis
   Quote.create!(
       project: Project.last,
-      user: User.order("RANDOM()").first,
-      product: Product.where(default: true).order("RANDOM()").first
+      product: Product.where(product_state: default_product_state).order("RANDOM()").first,
+      user: User.find_by_email('commercial@madera.com')
   )
-
 end
+puts '[OK]'
 
-puts "Customers & Projets : OK"
-
+print 'Orders & Links...'
 # Commandes bidons
 20.times do
   Order.create!(supplier: Supplier.order("RANDOM()").first, quote: Quote.order("RANDOM()").first)
@@ -295,7 +286,7 @@ puts "Customers & Projets : OK"
                       quantity: rand(1..10))
   end
 end
+puts '[OK]'
 
-puts "Orders & Links : OK"
 
 puts "Seed : OK ! Enjoy..."

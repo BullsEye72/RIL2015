@@ -41,3 +41,7 @@ table {
     @extend  .table-stripped !optional;
   }
 }
+
+.change-states-forms form {
+  display: inline;
+}

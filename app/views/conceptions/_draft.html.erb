@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Produits à l'état brouillon</h2>
+  </div>
+  
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% Product.draft.each do |dp| %>
+          <tr>
+            <td><%= dp.name %></td>
+            <td><%= dp.descriptif %></td>
+            <td class="text-right">
+            <%= link_to(
+              raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
+              dp
+              )
+            %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

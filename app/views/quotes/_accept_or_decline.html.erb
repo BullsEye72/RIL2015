@@ -1,0 +1,8 @@
+<%= simple_form_for(@quote) do |f| %>
+    <%= hidden_field :status, :accept, value: true %>
+    <%= f.submit 'Accepter le devis' %>
+<% end %>
+<%= simple_form_for(@quote) do |f| %>
+    <%= hidden_field :status, :decline, value: true %>
+    <%= f.submit 'Refuser le devis' %>
+<% end %>

@@ -60,18 +60,11 @@
             %>
           </div>
           <div class="form-actions">
-            <%= link_to('Retour', quotes_path, class: 'btn btn-default pull-right') %>
+            <%= link_to('Retour', :back, class: 'btn btn-default pull-right') %>
           </div>
         </div>
     <% end %>
-    <a href="<%= edit_quote_path %>" class="btn btn-primary">
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
-      Editer
-    </a>
-    <button class="btn-danger" data-toggle="modal" data-target="#delete">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
-      Supprimer
-    </button>
+    <%= quote_buttons(@quote) %>
   </div>
 </div>
 
