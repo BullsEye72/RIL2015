@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf/order' %>
+  </head>
+  <body id="pdf">
+
+    <header>
+
+      <div class="clearfix">
+
+        <div class="madera-details">
+          <%= wicked_pdf_image_tag 'main_app_logo' %>
+          <h2>Madera</h2>
+          <address>
+            Adresse
+            <div class="phone">00 00 00 00</div>
+            <div class="fax">00 00 00 00</div>
+            <div class="mail">achat@madera.com</div>
+          </address>
+        </div>
+
+        <div class="order-details">
+          <div class="form-group">
+            <label><h2>Devis n°</h2></label>
+            <input type="text" value="<%= @quote.id %>">
+          </div>
+          <div class="form-group">
+            <label><h2>Date </h2></label>
+            <input type="text" value="">
+          </div>
+          <h1>Devis</h1>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <div class="clearfix">
+
+        <div class="to">
+          <h3>Devis à l'attention de</h3>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" value="">
+          </div>
+          <div class="form-group">
+            <label>Tel</label>
+            <input type="text" value="">
+          </div>
+          <div class="form-group">
+            <label>Adresse</label>
+            <textarea></textarea>
+          </div>
+        </div>
+
+        <div class="shipping-details">
+          <h3>Coordonnées de livraison</h3>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text">
+          </div>
+          <div class="form-group">
+            <label>Tel</label>
+            <input type="text">
+          </div>
+          <div class="form-group">
+            <label>Adresse</label>
+            <textarea></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+    </header>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="qte">Qté</th>
+          <th class="ref">Référence</th>
+          <th class="description">Description</th>
+          <th class="price">Prix H.T.</th>
+          <th class="total">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="text-align: right"></td>
+          <td></td>
+        </tr>
+      </tfoot>
+
+    </table>
+
+  </body>
+</html>

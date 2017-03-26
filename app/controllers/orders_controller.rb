@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       format.pdf do
         # Une fois le pdf généré, la commande n'es plus éditable
         @order.update(effective?: true)
-        render pdf: 'file_name',
+        render pdf: "commande_#{@order.id}",
                show_as_html: params.key?('debug'),
                footer: {
                    right: 'p [page]/[topage]',

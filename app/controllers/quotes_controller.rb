@@ -15,9 +15,25 @@ class QuotesController < ApplicationController
   # GET /quotes/1.json
   def show
     add_breadcrumb "Devis n°" + @quote.id.to_s
-
-    @product=@quote.product
+    @product = @quote.product
     @modules = @product.house_modules
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        if @quote.quote_states.last == QuoteState.find_by_name('brouillon')
+          @quote.update(
+              quote_states: @quote.quote_states<< QuoteState.find_by_name('en attente')
+          )
+        end
+        render pdf: "commande_#{@quote.id}",
+               show_as_html: params.key?('debug'),
+               footer: {
+                   right: 'p [page]/[topage]',
+                   left: Time.now.strftime('%d-%m-%Y')
+               }
+      end
+    end
   end
 
   # GET /quotes/new
@@ -51,13 +67,19 @@ class QuotesController < ApplicationController
   # PATCH/PUT /quotes/1
   # PATCH/PUT /quotes/1.json
   def update
-    respond_to do |format|
-      if @quote.update(quote_params)
-        format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quote }
-      else
-        format.html { render :edit }
-        format.json { render json: @quote.errors, status: :unprocessable_entity }
+    if params.key?(:status)
+        @quote.quote_states<<QuoteState.find_by_name('accepté') if params[:status][:accept]
+        @quote.quote_states<<QuoteState.find_by_name('refusé') if params[:status][:decline]
+        redirect_to @quote, notice: "L'état du devis à été mis à jour"
+    else
+      respond_to do |format|
+        if @quote.update(quote_params)
+          format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
+          format.json { render :show, status: :ok, location: @quote }
+        else
+          format.html { render :edit }
+          format.json { render json: @quote.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
