@@ -19,11 +19,22 @@
 #
 
 class Product < ActiveRecord::Base
+  before_create :set_product_on_create
+
   belongs_to :drawing
   belongs_to :product_state
   has_many :quotes
   has_many :modules_products
   has_many :house_modules, through: :modules_products
+
+  scope :default, -> { where(product_state: ProductState.find_by_name('defaut'))}
+  scope :draft, -> { where(product_state: ProductState.find_by_name('brouillon'))}
+  scope :draft_or_default, -> {
+    where(product_state: [
+        ProductState.find_by_name('brouillon'),
+        ProductState.find_by_name('defaut'),
+    ])
+  }
 
   def product_price
     price = 0
@@ -36,4 +47,9 @@ class Product < ActiveRecord::Base
     self.house_modules.each{|hm| price += hm.module_price_w_vat}
     return price
   end
+
+  def set_product_on_create
+    self.product_state ||= ProductState.find_by_name('brouillon')
+  end
+
 end

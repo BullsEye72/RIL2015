@@ -23,7 +23,7 @@ class QuotesController < ApplicationController
   # GET /quotes/new
   def new
     @quote = Quote.new
-    @default_products = Product.all #Product.where(default: true)
+    @default_products = Product.draft_or_default
     add_breadcrumb "Nouveau Devis"
   end
 

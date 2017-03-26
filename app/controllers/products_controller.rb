@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @model_product = Product.where(id: params[:product_model_id], default: true).first if params.key?(:product_model_id)
+    @model_product = Product.draft_or_default.where(id: params[:product_model_id]).first if params.key?(:product_model_id)
     @product = Product.new
       if @model_product
       @product.attributes= {

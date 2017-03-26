@@ -23,7 +23,7 @@
               <td><%= product.name %></td>
               <td><%= product.descriptif %></td>
               <td><%= product.cctp_reference %></td>
-              <td><%= product.product_state.name %></td>
+              <td><%= product.product_state.name if product.product_state %></td>
               <td class="text-right">
               <%= link_to(
                 raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),
