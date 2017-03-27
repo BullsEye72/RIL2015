@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset='utf-8'/>
-    <%= wicked_pdf_stylesheet_link_tag 'pdf/order' %>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf/quote' %>
   </head>
   <body id="pdf">
 
@@ -17,90 +17,102 @@
             Adresse
             <div class="phone">00 00 00 00</div>
             <div class="fax">00 00 00 00</div>
-            <div class="mail">achat@madera.com</div>
+            <div class="siret">11111111111111111</div>
+            <div class="mail"><%= @quote.user.email %></div>
           </address>
         </div>
 
         <div class="order-details">
           <div class="form-group">
-            <label><h2>Devis n°</h2></label>
-            <input type="text" value="<%= @quote.id %>">
+            <label><h2>Date </h2></label>
+            <input
+              type="text"
+              value="<%= @quote.quote_states.last.created_at.strftime('%d/%m/%Y') %>"
+            >
           </div>
           <div class="form-group">
-            <label><h2>Date </h2></label>
-            <input type="text" value="">
+            <label><h2>Projet n°</h2></label>
+            <input type="text" value="<%= @quote.project.id %>">
           </div>
-          <h1>Devis</h1>
         </div>
-
       </div>
-
-      <hr>
 
       <div class="clearfix">
-
+        <hr>
+        <h1>Devis n°<%= @quote.id %></h1>
         <div class="to">
-          <h3>Devis à l'attention de</h3>
           <div class="form-group">
             <label>Nom</label>
-            <input type="text" value="">
+            <input type="text" value="<%= @quote.project.customer.fullname %>">
           </div>
           <div class="form-group">
             <label>Tel</label>
-            <input type="text" value="">
+            <input type="text" value="<%= @quote.project.customer.phone_number %>">
           </div>
           <div class="form-group">
             <label>Adresse</label>
-            <textarea></textarea>
+            <textarea><%= @quote.project.customer.address %></textarea>
           </div>
         </div>
-
-        <div class="shipping-details">
-          <h3>Coordonnées de livraison</h3>
-          <div class="form-group">
-            <label>Nom</label>
-            <input type="text">
-          </div>
-          <div class="form-group">
-            <label>Tel</label>
-            <input type="text">
-          </div>
-          <div class="form-group">
-            <label>Adresse</label>
-            <textarea></textarea>
-          </div>
-        </div>
-
       </div>
-
-      <hr>
-
     </header>
+    <hr>
+
+    <div class="spacer"></div>
 
     <table>
       <thead>
         <tr>
-          <th class="qte">Qté</th>
-          <th class="ref">Référence</th>
+          <th class="ref">Réf</th>
+          <th class="description">Nom</th>
           <th class="description">Description</th>
-          <th class="price">Prix H.T.</th>
-          <th class="total">Montant</th>
+          <th class="price">Prix HT</th>
+          <th class="total">Prix TTC</th>
         </tr>
       </thead>
       <tbody>
-
+        <% @quote.product.house_modules.each do |hm| %>
+          <tr>
+            <td>M<%= hm.id %></td>
+            <td><%= hm.name %></td>
+            <td><%= hm.description %></td>
+            <td style="text-align: right"><%= number_to_currency(hm.module_price, locale: :fr) %></td>
+            <td style="text-align: right"><%= number_to_currency(hm.module_price_w_vat, locale: :fr) %></td>
+          </tr>
+        <% end %>
       </tbody>
       <tfoot>
         <tr>
           <td></td>
           <td></td>
-          <td></td>
-          <td style="text-align: right"></td>
-          <td></td>
+          <td style="text-align: right">Total</td>
+          <td style="text-align: right"><%= number_to_currency(@quote.product.product_price, locale: :fr) %></td>
+          <td style="text-align: right"><%= number_to_currency(@quote.product.product_price_w_vat, locale: :fr) %></td>
         </tr>
       </tfoot>
 
     </table>
 
+    <div class="spacer"></div>
+
+    <div class="clearfix">
+      <hr>
+      <div class="validation-box">
+        <div class="form-group">
+          <label>Bon pour accord le </label>
+          <input type="text">
+        </div>
+        <div class="form-group">
+          <label>Signature </label>
+          <textarea></textarea>
+        </div>
+      </div>
+      <p class="down-payment">
+        A la validation du devis, un accompte de <%= number_to_percentage(@down_payment) %> vous sera demandé,<br>
+        soit <%= number_to_currency(@quote.product.product_price_w_vat * @down_payment, locale: :fr) %> TTC.
+      </p>
+    </div>
+    <hr>
   </body>
 </html>
+

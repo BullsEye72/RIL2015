@@ -26,11 +26,13 @@ class QuotesController < ApplicationController
               quote_states: @quote.quote_states<< QuoteState.find_by_name('en attente')
           )
         end
-        render pdf: "commande_#{@quote.id}",
+        @down_payment = ConstructionState.find_by_name('Devis signé').value * 100
+            render pdf: "commande_#{@quote.id}",
                show_as_html: params.key?('debug'),
                footer: {
-                   right: 'p [page]/[topage]',
-                   left: Time.now.strftime('%d-%m-%Y')
+                   right: 'page [page]/[topage]',
+                   center: "Devis n° #{@quote.id}",
+                   left: "Édité le #{Time.now.strftime('%d-%m-%Y')}"
                }
       end
     end
