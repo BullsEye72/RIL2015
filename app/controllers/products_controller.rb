@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
           cctp_reference: @model_product.cctp_reference,
           drawing_id: @model_product.drawing_id,
       }
-      #@modules_product = @model_product.modules_products.all
+      @modules_product = @model_product.modules_products.all
       @redirect_url = request.referer
       end
     add_breadcrumb "Nouveau produit"
@@ -47,7 +47,6 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
@@ -64,12 +63,13 @@ class ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-    respond_to do |format|
+    vrespond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }

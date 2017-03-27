@@ -8,7 +8,7 @@
       <%= f.association :value_added_tax, label: 'TVA', input_html: { disabled: disabled } %>
       <%= f.input :reference, input_html: { disabled: disabled } %>
       <%= f.input :description, input_html: { disabled: disabled } %>
-      <%= f.association :suppliers, label: 'Fournisseur' %>
+      <%= f.association :suppliers, collection: Supplier.order('name ASC'), label: 'Fournisseur' %>
       <%= f.input :unit_category,
                   as: :fake_select,
                   collection: UnitCategory.all,

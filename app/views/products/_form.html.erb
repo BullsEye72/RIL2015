@@ -65,7 +65,7 @@
     var valuesTab = [];
 
     function updateHidden() {
-        $('#house_module_article_ids').val(valuesTab);
+        $('#house_module_ids').val(valuesTab);
     }
 
     function addValueToValuesTab() {
@@ -117,14 +117,14 @@
         position--;
         removeLastSelect();
     });
-
+    
     <% unless @modules_product.nil? %>
       <% @modules_product.each do |am| %>
         <% if am.house_module %>
           addSelect(<%= am.house_module.id %>);
         <% end %>
       <% end %>
-      valuesTab = $('#house_module_article_ids').val().split(' ');
+      valuesTab = $('#house_module_ids').val().split(', ');
 
     <% end %>
 

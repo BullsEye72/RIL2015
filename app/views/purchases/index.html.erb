@@ -2,6 +2,13 @@
 <% provide(:subtitle, 'Accueil') %>
 
 <div class="row">
+  
+  <% if false %>
+  <div class="col-md-4">
+    <%= render 'lastquoteorders' %>
+  </div>
+  <% end %>
+  
   <div class="col-md-6">
     <%= render 'lastorders' %>
   </div>
@@ -10,9 +17,4 @@
     <%= render 'lastquotes' %>
   </div>
   
-  <% if false %>
-  <div class="col-md-4">
-    <%= render 'lastarticles' %>
-  </div>
-  <% end %>
 </div>

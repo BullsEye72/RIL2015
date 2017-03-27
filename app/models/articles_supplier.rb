@@ -26,7 +26,7 @@ class ArticlesSupplier < ActiveRecord::Base
   validates :supplier, presence: true, uniqueness: {scope: :article}
   validates :article_id, presence: true
   # validates_numericality_of :price, greater_than_or_equal_to: 0
-  validates_uniqueness_of :supplier_reference
+  # validates_uniqueness_of :supplier_reference
 
   def article_label
     "#{article.name} (#{supplier_reference})"
