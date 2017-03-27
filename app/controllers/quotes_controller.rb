@@ -68,9 +68,47 @@ class QuotesController < ApplicationController
   # PATCH/PUT /quotes/1.json
   def update
     if params.key?(:status)
+# <<<<<<< HEAD
         @quote.update(quote_states: @quote.quote_states<<QuoteState.find_by_name('accepté')) if params[:status][:accept]
         @quote.quote_states<<QuoteState.find_by_name('refusé') if params[:status][:decline]
         redirect_to @quote, notice: "L'état du devis à été mis à jour"
+=begin
+
+=======
+      @quote.quote_states << QuoteState.find_by_name('refusé') if params[:status][:decline]
+      redirect_to @quote, notice: "L'état du devis à été mis à jour"
+
+
+
+      # GENERATION DE COMMANDES
+      if params[:status][:accept]
+        listSuppliers = Hash.new
+        modules = @quote.product.house_modules
+        
+        modules.each do |m|
+          m.articles.each do |a|
+            
+            art = ArticlesSupplier.where(article: a.id).order(:price).first
+            listSuppliers[art.supplier] = [] if listSuppliers[art.supplier].nil?
+            listSuppliers[art.supplier] << art
+            
+          end
+        end
+        
+        listSuppliers.each do |supplier,artsup_array|
+          q = Order.create!(supplier: supplier, quote: @quote, effective?: true)  
+          
+          artsup_array.each do |art_sup|
+            OrderItem.create!(articles_supplier: art_sup,
+                             order: q,
+                              quantity: 1) # hmpf
+          end
+        end
+      end
+
+>>>>>>> anthony
+
+=end
     else
       respond_to do |format|
         if @quote.update(quote_params)

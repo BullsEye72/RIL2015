@@ -11,7 +11,8 @@
         <tr>
               <th><%= t('project').titleize %></th>
               <th><%= t('user').titleize %></th>
-              <th><%= 'Total HT' %></th>
+              <th><%= 'Etat du devis' %></th>
+              <th><%= 'Etat du chantier' %></th>
               <th><%= 'Mise à jour' %></th>
               <th></th>
         </tr>
@@ -22,8 +23,9 @@
           <tr>
                 <td><%= "#{quote.project.id} |  #{quote.project.customer.fullname if quote.project.customer.present? }" %></td>
                 <td><%= quote.user.display_fullname if quote.user.present? %></td>
-                <td><%= number_to_currency(quote.product.product_price, locale: :fr) %></td>
-                <td><%= quote.updated_at.strftime("%m/%d/%y - %H:%M") %></td>
+                <td><%= quote.quote_states.last.name %></td>
+                <td><%= quote.construction_states.last.name unless quote.construction_states.last.nil? %></td>
+                <td><%= format_date(quote.last_updated_at) %></td>
                 <td class="text-right">
                   <%= link_to(
                     raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'),

@@ -2,14 +2,17 @@
 #
 # Table name: house_modules
 #
-#  id              :integer          not null, primary key
-#  module_range_id :integer
-#  name            :string
-#  description     :string
-#  default         :boolean
-#  drawing_id      :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                 :integer          not null, primary key
+#  module_range_id    :integer
+#  name               :string
+#  description        :string
+#  default            :boolean
+#  drawing_id         :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  price              :decimal(, )
+#  lowest_price       :decimal(, )
+#  lowest_price_w_vat :decimal(, )
 #
 # Indexes
 #
@@ -38,15 +41,25 @@ class HouseModule < ActiveRecord::Base
   end
   
   def module_price
-    price = 0
-    self.articles.each{|a| price += a.lowest_price}
-    return price
+    if self.lowest_price.nil?
+      price = 0
+      self.articles.each{|a| price += a.lowest_price}
+      self.lowest_price = price
+      self.save
+    end
+    
+    return self.lowest_price
   end
   
   def module_price_w_vat
-    price = 0
-    self.articles.each{|a| price += a.lowest_price_w_vat}
-    return price
+    if self.lowest_price_w_vat.nil?
+      price = 0
+      self.articles.each{|a| price += a.lowest_price_w_vat}
+      self.lowest_price_w_vat = price
+      self.save
+    end
+    
+    return self.lowest_price_w_vat
   end
 
 end

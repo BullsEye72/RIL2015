@@ -37,6 +37,15 @@ class Quote < ActiveRecord::Base
   def to_label
     "Devis n°#{id}"
   end
+  
+  def last_updated_at
+      times = []
+      times << self.updated_at
+      times << self.quote_states.last.updated_at unless self.quote_states.last.nil?
+      times << self.construction_states.last.updated_at unless self.construction_states.last.nil?
+      
+      return times.max
+  end
 
   private
 

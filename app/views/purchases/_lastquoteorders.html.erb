@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">Dernieres commandes</h2>
+    <h2 class="panel-title"></h2>
   </div>
   
   <div class="panel-body">
@@ -15,7 +15,7 @@
       </thead>
 
       <tbody>
-        <% @last_orders.each do |lo| %>
+        <% Quote.last.@last_orders.each do |lo| %>
           <tr>
             <td><%= lo.id %></td>
             <td><%= format_date(lo.updated_at) %></td>
