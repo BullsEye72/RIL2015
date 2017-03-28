@@ -217,7 +217,7 @@ mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
   HouseModule.create!(module_range: ModuleRange.order("RANDOM()").first,
                       #name: Faker::Commerce.product_name,
                       name: "#{mod_first_part.sample} #{mod_second_part.sample} #{[*1..3].sample}",
-                      description: "Description ...", 
+                      description: Faker::Lorem.paragraph(1), 
                       default: true,
                       drawing: Drawing.where(drawing_type: 0).order("RANDOM()").last)
                       
@@ -237,7 +237,7 @@ mod_second_part = ['Nord', 'Est', 'Sud', 'Ouest']
 default_product_state = ProductState.find_by_name('defaut');
 10.times do |i|
   Product.create!(name: "Produit #{i}",
-                  descriptif: "Description du produit ...", 
+                  descriptif: Faker::Lorem.paragraph(1), 
                   cctp_reference: Faker::Lorem.characters(rand(5..10)).upcase,
                   drawing: Drawing.where(drawing_type: 1).order("RANDOM()").last,
                   product_state: default_product_state
