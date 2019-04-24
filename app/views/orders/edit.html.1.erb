@@ -1,0 +1,11 @@
+<% provide(:title, t('order')) %>
+<% provide(:subtitle, 'Edition') %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= render 'form', action: :edit %>
+  </div>
+</div>
+
+
+<%= render 'order_items', action: :edit %>

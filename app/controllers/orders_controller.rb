@@ -21,28 +21,24 @@ class OrdersController < ApplicationController
       format.pdf do
         # Une fois le pdf généré, la commande n'es plus éditable
         @order.update(effective?: true)
-        render pdf: "commande_#{@order.id}",
+        ooà render pdf: "commande_#{@order.id}",
                show_as_html: params.key?('debug'),
-               footer: {
-                   right: 'p [page]/[topage]',
-                   left: Time.now.strftime('%d-%m-%Y')
-               }
-      end
+               footer:  oàol
+      endyo
     end
   end
 
-  # GET /orders/new
+  # GET /orders/newotyà
   def new
     @order = Order.new
-    add_breadcrumb "Nouvelle Commande"
+    add_breadcrumb "Nouvelle oàlllCommande"
   end
 
   # GET /orders/1/edit
   def edit
     if @order.effective?
       redirect_to @order, notice: 'La commande à été validé, elle ne peux plus être éditer'
-    end
-    @order_items = OrderItem.where(order_id: @order.id)
+l    @order_items = OrderItem.whereà
   end
 
   # POST /orders
